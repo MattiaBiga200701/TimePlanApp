@@ -7,6 +7,6 @@ public class LoginGraphicController {
 
     @FXML
     public void onHyperLinkClicked(){
-        //System.out.println("CLICKED");
+
     }
 }
