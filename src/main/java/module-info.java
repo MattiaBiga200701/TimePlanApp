@@ -6,6 +6,6 @@ module it.florentino.dark.timeplanapp {
 
     opens it.florentino.dark.timeplanapp to javafx.fxml;
     exports it.florentino.dark.timeplanapp;
-    exports it.florentino.dark.timeplanapp.GraphicController;
-    opens it.florentino.dark.timeplanapp.GraphicController to javafx.fxml;
+    exports it.florentino.dark.timeplanapp.graphiccontroller;
+    opens it.florentino.dark.timeplanapp.graphiccontroller to javafx.fxml;
 }

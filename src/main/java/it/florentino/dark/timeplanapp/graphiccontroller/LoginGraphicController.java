@@ -1,4 +1,4 @@
-package it.florentino.dark.timeplanapp.GraphicController;
+package it.florentino.dark.timeplanapp.graphiccontroller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
