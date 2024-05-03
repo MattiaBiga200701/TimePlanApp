@@ -1,7 +1,10 @@
 #registerNowLink{
     -fx-underline: false;
     -fx-cursor: hand;
-    :hover{
-        -fx-underline: true;
-    }
 }
+
+#registerNowLink:hover{
+    -fx-underline: true;
+}
+
+

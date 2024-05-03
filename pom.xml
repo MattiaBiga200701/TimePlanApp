@@ -64,7 +64,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>it.florentino.dark.timeplanapp/it.florentino.dark.timeplanapp.HelloApplication
+                            <mainClass>it.florentino.dark.timeplanapp/it.florentino.dark.timeplanapp.Starter
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
