@@ -4,18 +4,18 @@ import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 
-public class ConnectionManager {
+public class ConnectionFactory {
 
     private static final String PROPERTIES_PATH = "it/florentino/dark/timeplanapp/persistenceProperties/timePlanDB.properties";
     private Connection connection;
 
-    private static ConnectionManager instance = null;
+    private static ConnectionFactory instance = null;
 
-    private ConnectionManager(){}
+    private ConnectionFactory(){}
 
-    public synchronized static ConnectionManager getInstance(){
+    public synchronized static ConnectionFactory getInstance(){
         if(instance == null){
-            ConnectionManager.instance = new ConnectionManager();
+            ConnectionFactory.instance = new ConnectionFactory();
         }
         return instance;
     }
