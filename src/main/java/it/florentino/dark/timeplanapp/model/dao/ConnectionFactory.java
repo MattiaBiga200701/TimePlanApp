@@ -9,16 +9,7 @@ public class ConnectionFactory {
     private static final String PROPERTIES_PATH = "it/florentino/dark/timeplanapp/persistenceProperties/timePlanDB.properties";
     private static Connection connection = null;
 
-    //private static ConnectionFactory instance = null;
-
     public  ConnectionFactory(){}
-
-    //public  static ConnectionFactory getInstance(){
-        //if(instance == null){
-           // ConnectionFactory.instance = new ConnectionFactory();
-       // }
-       // return instance;
-    //}
 
     private static String readProperties(String propertiesType) {
 
