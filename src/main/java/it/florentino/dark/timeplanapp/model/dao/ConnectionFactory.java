@@ -1,4 +1,4 @@
-package it.florentino.dark.timeplanapp.model.DAO;
+package it.florentino.dark.timeplanapp.model.dao;
 
 import java.io.*;
 import java.sql.*;
@@ -23,15 +23,15 @@ public class ConnectionFactory {
     private static String readProperties(String propertiesType) {
 
         Properties properties = null;
-        try {  //ANCORA DA GESTIRE
+        try( InputStream inputFile = new FileInputStream(PROPERTIES_PATH)) {  //ANCORA DA GESTIRE
 
-            InputStream inputFile = new FileInputStream(PROPERTIES_PATH);
             properties = new Properties();
             properties.load(inputFile);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return properties.getProperty(propertiesType);
 
     }
@@ -46,6 +46,7 @@ public class ConnectionFactory {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
         return instance.connection;
     }
