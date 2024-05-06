@@ -13,7 +13,7 @@ public class ConnectionManager {
 
     private ConnectionManager(){}
 
-    public static ConnectionManager getInstance(){
+    public synchronized static ConnectionManager getInstance(){
         if(instance == null){
             ConnectionManager.instance = new ConnectionManager();
         }
@@ -39,10 +39,10 @@ public class ConnectionManager {
     public Connection getConnection(){
         if(instance.connection == null) {
             try {  //DA GESTIRE
-                String connection_url = readProperties("CONNECTION_URL");
-                String connection_user = readProperties("CONNECTION_USER");
-                String connection_pass = readProperties("CONNECTION_PASS");
-                instance.connection = DriverManager.getConnection(connection_url, connection_user, connection_pass);
+                String connectionUrl = readProperties("CONNECTION_URL");
+                String connectionUser = readProperties("CONNECTION_USER");
+                String connectionPass = readProperties("CONNECTION_PASS");
+                instance.connection = DriverManager.getConnection(connectionUrl, connectionUser, connectionPass);
             } catch (Exception e) {
                 e.printStackTrace();
             }
