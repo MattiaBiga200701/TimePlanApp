@@ -7,18 +7,18 @@ import java.util.Properties;
 public class ConnectionFactory {
 
     private static final String PROPERTIES_PATH = "it/florentino/dark/timeplanapp/persistenceProperties/timePlanDB.properties";
-    private Connection connection;
+    private static Connection connection = null;
 
-    private static ConnectionFactory instance = null;
+    //private static ConnectionFactory instance = null;
 
-    private ConnectionFactory(){}
+    public  ConnectionFactory(){}
 
-    public  static ConnectionFactory getInstance(){
-        if(instance == null){
-            ConnectionFactory.instance = new ConnectionFactory();
-        }
-        return instance;
-    }
+    //public  static ConnectionFactory getInstance(){
+        //if(instance == null){
+           // ConnectionFactory.instance = new ConnectionFactory();
+       // }
+       // return instance;
+    //}
 
     private static String readProperties(String propertiesType) {
 
@@ -36,19 +36,19 @@ public class ConnectionFactory {
 
     }
 
-    public Connection getConnection(){
-        if(instance.connection == null) {
+    public static Connection getConnection(){
+        if(ConnectionFactory.connection == null) {
             try {  //DA GESTIRE
                 String connectionUrl = readProperties("CONNECTION_URL");
                 String connectionUser = readProperties("CONNECTION_USER");
                 String connectionPass = readProperties("CONNECTION_PASS");
-                instance.connection = DriverManager.getConnection(connectionUrl, connectionUser, connectionPass);
+                ConnectionFactory.connection = DriverManager.getConnection(connectionUrl, connectionUser, connectionPass);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        return instance.connection;
+        return ConnectionFactory.connection;
     }
 
 }
