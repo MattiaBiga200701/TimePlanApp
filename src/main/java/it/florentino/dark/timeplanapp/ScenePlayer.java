@@ -4,29 +4,41 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+
 
 public class ScenePlayer {
 
+    private static ScenePlayer instance = null;
     private Stage stage;
     private static int sceneWidth;
     private static int sceneHeight;
 
-    public ScenePlayer(Stage stage){
+    private ScenePlayer(Stage stage){
         ScenePlayer.setSceneHeight(1024);
         ScenePlayer.setSceneWidth(1440);
         this.setStage(stage);
-        this.stage.setResizable(false);
     }
 
-    public ScenePlayer(Stage stage, int width, int height){
+    public ScenePlayer(Stage stage, int width, int height){   //Da eliminare se non servirà
         this(stage);
         ScenePlayer.setSceneWidth(width);
         ScenePlayer.setSceneHeight(height);
     }
 
+    public static ScenePlayer getScenePlayerInstance(Stage stage){
+        if(ScenePlayer.instance == null){
+            ScenePlayer.instance = new ScenePlayer(stage);
+        }
+        return instance;
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
+        this.stage.setResizable(false);
+    }
+
+    public Stage getStage(){
+        return this.stage;
     }
 
     public static void setSceneHeight(int sceneHeight) {
@@ -42,17 +54,17 @@ public class ScenePlayer {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayer.class.getResource(fxmlPath));
             Scene scene = new Scene(fxmlLoader.load(), ScenePlayer.sceneWidth, ScenePlayer.sceneHeight);
+            Stage stage = instance.getStage();
             if(cssPath != null){
-                String cssURL = this.getClass().getResource(cssPath).toExternalForm();
+                String cssURL = ScenePlayer.class.getResource(cssPath).toExternalForm();
                 scene.getStylesheets().add(cssURL);
             }
-            this.stage.setScene(scene);
-            this.stage.show();
+            stage.setScene(scene);
+            stage.show();
 
         }catch(Exception e){
             e.printStackTrace();
         }
 
     }
-
 }

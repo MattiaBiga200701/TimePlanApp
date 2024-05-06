@@ -1,16 +1,14 @@
-#loginButton{
+#registerButton{
     -fx-cursor: hand;
 }
 
 
-#registerNowLink{
+#loginNowLink{
     -fx-underline: false;
     -fx-cursor: hand;
 }
 
 
-#registerNowLink:hover{
+#loginNowLink:hover{
     -fx-underline: true;
 }
-
-

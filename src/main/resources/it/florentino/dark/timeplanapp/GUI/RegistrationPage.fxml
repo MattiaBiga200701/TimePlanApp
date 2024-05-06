@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="566.0" spacing="4.0" AnchorPane.leftAnchor="437.0" AnchorPane.rightAnchor="437.0" AnchorPane.topAnchor="121.0">
+      <VBox prefHeight="200.0" prefWidth="566.0" spacing="4.0" AnchorPane.leftAnchor="437.0" AnchorPane.rightAnchor="437.0" AnchorPane.topAnchor="111.0">
          <children>
-            <Label alignment="CENTER" prefHeight="44.0" prefWidth="566.0" style="-fx-alignment: left;" text="Time Plan">
+            <Label alignment="CENTER" prefHeight="44.0" prefWidth="566.0" style="-fx-alignment: center;" text="Time Plan">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
@@ -105,7 +105,7 @@
                         </VBox>
                         <VBox spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="251.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Register Now">
+                              <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="251.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Register Now">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -118,7 +118,7 @@
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <Label accessibleRole="HYPERLINK" style="-fx-text-fill: #00897B;" text="Login Now" textFill="#00897b">
+                              <Label fx:id="loginNowLink" accessibleRole="HYPERLINK" onMouseClicked="#onHyperLinkClicked" style="-fx-text-fill: #00897B;" text="Login Now" textFill="#00897b">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
