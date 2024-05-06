@@ -54,13 +54,13 @@ public class ScenePlayer {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayer.class.getResource(fxmlPath));
             Scene scene = new Scene(fxmlLoader.load(), ScenePlayer.sceneWidth, ScenePlayer.sceneHeight);
-            Stage stage = instance.getStage();
+
             if(cssPath != null){
                 String cssURL = ScenePlayer.class.getResource(cssPath).toExternalForm();
                 scene.getStylesheets().add(cssURL);
             }
-            stage.setScene(scene);
-            stage.show();
+            instance.stage.setScene(scene);
+            instance.stage.show();
 
         }catch(Exception e){
             e.printStackTrace();
