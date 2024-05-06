@@ -13,7 +13,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){}
 
-    public synchronized static ConnectionFactory getInstance(){
+    public  static ConnectionFactory getInstance(){
         if(instance == null){
             ConnectionFactory.instance = new ConnectionFactory();
         }
