@@ -13,15 +13,15 @@ public class ConnectionManager {
 
     private ConnectionManager(){}
 
-    private static String readProperties(String propertiesType) throws IOException {
+    private static String readProperties(String propertiesType) throws IOException {  //METODO DA ELIMINARE
 
         String value;
         Properties properties;
-        InputStream inputFile = new FileInputStream(PROPERTIES_PATH);  //ANCORA DA GESTIRE
-        properties = new Properties();
-        properties.load(inputFile);
-        value = properties.getProperty(propertiesType);
-        inputFile.close();
+        try(InputStream inputFile = new FileInputStream(PROPERTIES_PATH)){  //ANCORA DA GESTIRE
+            properties = new Properties();
+            properties.load(inputFile);
+            value = properties.getProperty(propertiesType);
+        }
         return value;
 
     }
