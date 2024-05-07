@@ -1,9 +1,12 @@
 package it.florentino.dark.timeplanapp;
 
+import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
 
 
 public class ScenePlayer {
@@ -50,21 +53,22 @@ public class ScenePlayer {
         ScenePlayer.sceneWidth = sceneWidth;
     }
 
-    public void showScene(String fxmlPath, String cssPath){
+    public void showScene(String fxmlPath, String cssPath) throws SetSceneException{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayer.class.getResource(fxmlPath));
             Scene scene = new Scene(fxmlLoader.load(), ScenePlayer.sceneWidth, ScenePlayer.sceneHeight);
 
             if(cssPath != null){
-                String cssURL = ScenePlayer.class.getResource(cssPath).toExternalForm();
+                String cssURL = Objects.requireNonNull(ScenePlayer.class.getResource(cssPath)).toExternalForm();
                 scene.getStylesheets().add(cssURL);
             }
             instance.stage.setScene(scene);
             instance.stage.show();
-
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(IOException e){
+            // Throwable cause = e.getCause();
+            throw new SetSceneException("SetSceneException:" + e.getMessage());
         }
+
 
     }
 }
