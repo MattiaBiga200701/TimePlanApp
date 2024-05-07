@@ -12,8 +12,8 @@ public class Starter extends Application {
         try {
             ScenePlayer player = ScenePlayer.getScenePlayerInstance(stage);    //SINGLETON
             player.showScene("GUI/LoginPage.fxml", "StyleSheets/LoginStyle.css");
-        }catch(SetSceneException e){
-            throw new RuntimeException(e); //Gestione da terminale da cambiare
+        }catch(SetSceneException sE){
+            System.err.println(sE.getMessage()); //Gestione da terminale da cambiare
         }
     }
 

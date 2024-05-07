@@ -65,7 +65,6 @@ public class ScenePlayer {
             instance.stage.setScene(scene);
             instance.stage.show();
         }catch(IOException e){
-            // Throwable cause = e.getCause();
             throw new SetSceneException("SetSceneException:" + e.getMessage());
         }
 

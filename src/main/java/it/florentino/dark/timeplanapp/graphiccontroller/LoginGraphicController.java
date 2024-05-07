@@ -9,11 +9,11 @@ public class LoginGraphicController {
 
     ScenePlayer player = ScenePlayer.getScenePlayerInstance(null);
     @FXML
-    public void onHyperLinkClicked() throws RuntimeException {
+    public void onHyperLinkClicked() {
         try {
             player.showScene("GUI/RegistrationPage.fxml", "StyleSheets/RegistrationStyle.css");
         } catch(SetSceneException sE) {
-           throw new RuntimeException(sE); //Da gestire graficamente
+           System.err.println(sE.getMessage()); //Da gestire graficamente
         }
     }
 }
