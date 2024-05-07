@@ -21,6 +21,7 @@ public class ConnectionManager {
         properties = new Properties();
         properties.load(inputFile);
         value = properties.getProperty(propertiesType);
+        inputFile.close();
         return value;
 
     }
