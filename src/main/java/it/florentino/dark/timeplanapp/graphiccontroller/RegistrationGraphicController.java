@@ -8,7 +8,7 @@ public class RegistrationGraphicController {
 
     ScenePlayer player = ScenePlayer.getScenePlayerInstance(null);
     @FXML
-    public void onHyperLinkClicked() throws RuntimeException{
+    public void onHyperLinkClicked(){
         try {
             player.showScene("GUI/LoginPage.fxml", "StyleSheets/LoginStyle.css");
         }catch(SetSceneException sE){
