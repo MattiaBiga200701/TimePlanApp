@@ -38,7 +38,7 @@ public class ConnectionManager {
 
             } catch (IOException | SQLException e) {
 
-                throw new ConnectionException("ConnectionExcpetion" + e.getMessage(), e.getCause());
+                throw new ConnectionException("ConnectionExcpetion:" + e.getMessage(), e.getCause());
 
             }
 
