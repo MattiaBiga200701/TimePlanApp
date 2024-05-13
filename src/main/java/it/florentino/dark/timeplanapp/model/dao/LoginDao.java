@@ -15,9 +15,10 @@ public class LoginDao {
     public User loginProcedure(String username, String email, String password) throws ConnectionException {
         
         int role = 0;
+        CallableStatement cs = null;
         try {
             Connection conn = ConnectionManager.getConnection();
-            CallableStatement cs = conn.prepareCall("{call login(?,?,?,?)}");
+            cs = conn.prepareCall("{call login(?,?,?,?)}");
             cs.setString(1, username);
             cs.setString(2, email);
             cs.setString(3, password);
@@ -27,6 +28,14 @@ public class LoginDao {
             System.out.println(role);
         } catch(SQLException e) {
             e.printStackTrace();
+        } finally{
+            if(cs != null){
+                try{
+                    cs.close();
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
         }
 
         return  new User(username, email, password, Role.fromInt(role));
