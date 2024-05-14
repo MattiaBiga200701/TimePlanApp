@@ -30,7 +30,6 @@ public class LoginDao {
             cs.executeQuery();
             role = cs.getInt(3);
             email = cs.getString(4);
-            System.out.println("Role: " + role + "\tEmail: " + email);
         } catch(SQLException | ConnectionException e1) {
             firstException = e1;
         } finally{
@@ -54,7 +53,7 @@ public class LoginDao {
 
         return  new User(username, email, password, Role.fromInt(role));
     }
-
+    /**
     public static void main(String[] args ){
         LoginDao dao = new LoginDao();
         try {
@@ -63,6 +62,6 @@ public class LoginDao {
           e.printStackTrace();
         }
     }
-
+*/
 
 }
