@@ -20,7 +20,7 @@ public class LoginDao {
         CallableStatement cs = null;
         Exception firstException = null;
         Exception finallyException = null;
-        try {
+        try{
             Connection conn = ConnectionManager.getConnection();
             cs = conn.prepareCall("{call login(?,?,?,?)}");
             cs.setString(1, username);
@@ -53,7 +53,7 @@ public class LoginDao {
 
         return  new User(username, email, password, Role.fromInt(role));
     }
-    /**
+/**
     public static void main(String[] args ){
         LoginDao dao = new LoginDao();
         try {

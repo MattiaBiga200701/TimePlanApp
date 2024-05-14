@@ -16,6 +16,7 @@ public class LoginGraphicController {
 
     @FXML
     PasswordField password;
+
     @FXML
     Label errorLabel;
     ScenePlayer player = ScenePlayer.getScenePlayerInstance(null);
