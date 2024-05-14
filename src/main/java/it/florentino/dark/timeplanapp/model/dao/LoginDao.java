@@ -13,9 +13,10 @@ import java.sql.Types;
 public class LoginDao {
 
 
-    public User loginProcedure(String username, String email, String password) throws DAOException {
+    public User loginProcedure(String username, String password) throws DAOException {
         
         int role = 0;
+        String email = null;
         CallableStatement cs = null;
         Exception firstException = null;
         Exception finallyException = null;
@@ -23,11 +24,13 @@ public class LoginDao {
             Connection conn = ConnectionManager.getConnection();
             cs = conn.prepareCall("{call login(?,?,?,?)}");
             cs.setString(1, username);
-            cs.setString(2, email);
-            cs.setString(3, password);
-            cs.registerOutParameter(4, Types.NUMERIC);
+            cs.setString(2, password);
+            cs.registerOutParameter(3, Types.NUMERIC);
+            cs.registerOutParameter(4, Types.VARCHAR);
             cs.executeQuery();
-            role = cs.getInt(4);
+            role = cs.getInt(3);
+            email = cs.getString(4);
+            System.out.println("Role: " + role + "\tEmail: " + email);
         } catch(SQLException | ConnectionException e1) {
             firstException = e1;
         } finally{
@@ -51,15 +54,15 @@ public class LoginDao {
 
         return  new User(username, email, password, Role.fromInt(role));
     }
-/*
+
     public static void main(String[] args ){
         LoginDao dao = new LoginDao();
         try {
-            dao.loginProcedure("default", "ciao", "pippo");
+            dao.loginProcedure("default", "pippo");
         }catch (Exception e){
           e.printStackTrace();
         }
     }
 
- */
+
 }
