@@ -18,6 +18,7 @@ public class LoginDao {
         int role = 0;
         CallableStatement cs = null;
         Exception firstException = null;
+        Exception finallyException = null;
         try {
             Connection conn = ConnectionManager.getConnection();
             cs = conn.prepareCall("{call login(?,?,?,?)}");
@@ -34,17 +35,20 @@ public class LoginDao {
                 try{
                     cs.close();
                 }catch(SQLException e2){
-                    if(firstException != null) {
-                        firstException.addSuppressed(e2);   /* Aggiungo l'eccezione soppressa */
-                    } else {
-                        throw new DAOException("DAOLogin error: " + e2.getMessage());
-                    }
+                    finallyException = e2;
                 }
             }
         }
+
         if(firstException != null ){
+            if(finallyException != null) {
+                firstException.addSuppressed(finallyException);
+            }
             throw new DAOException("DAOLogin error: " + firstException.getMessage(), firstException.getCause()); //getCause forse da eliminare
+        }else if( finallyException != null){
+            throw new DAOException("DAOLogin error: " + finallyException.getMessage());
         }
+
         return  new User(username, email, password, Role.fromInt(role));
     }
 /*
