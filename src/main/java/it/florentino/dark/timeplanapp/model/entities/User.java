@@ -1,6 +1,6 @@
 package it.florentino.dark.timeplanapp.model.entities;
 
-import it.florentino.dark.timeplanapp.model.utils.Role;
+import it.florentino.dark.timeplanapp.utils.Role;
 
 public class User {
     private String username;
