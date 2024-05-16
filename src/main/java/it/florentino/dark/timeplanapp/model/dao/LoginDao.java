@@ -3,7 +3,7 @@ package it.florentino.dark.timeplanapp.model.dao;
 import it.florentino.dark.timeplanapp.exceptions.ConnectionException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.model.entities.User;
-import it.florentino.dark.timeplanapp.utils.Role;
+import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

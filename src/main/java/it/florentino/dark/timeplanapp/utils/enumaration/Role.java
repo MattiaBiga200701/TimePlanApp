@@ -1,4 +1,4 @@
-package it.florentino.dark.timeplanapp.utils;
+package it.florentino.dark.timeplanapp.utils.enumaration;
 
 public enum Role {
 
