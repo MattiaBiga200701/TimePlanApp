@@ -39,7 +39,7 @@ public class LoginGraphicController {
 
         LoginBean credentials = new LoginBean(user, pass);
         LoginController controller = new LoginController();
-
+        controller.authenticate(credentials);
 
     }
 }
