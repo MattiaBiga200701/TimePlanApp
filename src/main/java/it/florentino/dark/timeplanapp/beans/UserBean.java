@@ -53,8 +53,8 @@ public class UserBean {
     }
 
     private boolean isValidEmail(String email){
-        String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(emailPattern);
         if(email == null) return false;
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
