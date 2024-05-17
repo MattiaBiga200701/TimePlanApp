@@ -20,13 +20,16 @@ public class LoginController {
         LoginDao loginDao = new LoginDao();
         try {
             loginDao.loginProcedure(this.user);
+            if(this.user.getRole() == null){
+                throw new CredentialException();
+            }
             switch(this.user.getRole()){
                 case MANAGER -> System.out.println("Manager logged");
                 case EMPLOYEE -> System.out.println("Employee logged");
                 default -> throw new CredentialException();
             }
         }catch(DAOException e){
-            throw new ServiceException("DATA access error;", e.getCause());
+            throw new ServiceException();
         }
 
     }

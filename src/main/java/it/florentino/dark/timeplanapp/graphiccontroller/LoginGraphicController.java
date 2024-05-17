@@ -6,10 +6,13 @@ import it.florentino.dark.timeplanapp.beans.LoginBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
+
 
 
 public class LoginGraphicController {
@@ -51,5 +54,10 @@ public class LoginGraphicController {
 
     public void showError(String message){
         this.errorLabel.setText(message);
+        this.errorLabel.setVisible(true);
+        PauseTransition pause = new PauseTransition(Duration.seconds(20));
+        pause.setOnFinished(event -> errorLabel.setVisible(false));
+        pause.play();
+
     }
 }
