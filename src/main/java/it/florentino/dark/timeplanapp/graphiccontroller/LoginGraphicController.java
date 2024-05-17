@@ -55,7 +55,7 @@ public class LoginGraphicController {
     public void showError(String message){
         this.errorLabel.setText(message);
         this.errorLabel.setVisible(true);
-        PauseTransition pause = new PauseTransition(Duration.seconds(20));
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event -> errorLabel.setVisible(false));
         pause.play();
 
