@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 import it.florentino.dark.timeplanapp.ScenePlayer;
 import it.florentino.dark.timeplanapp.appcontroller.LoginController;
 import it.florentino.dark.timeplanapp.beans.LoginBean;
+import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -39,7 +40,11 @@ public class LoginGraphicController {
 
         LoginBean credentials = new LoginBean(user, pass);
         LoginController controller = new LoginController();
-        controller.authenticate(credentials);
+        try {
+            controller.authenticate(credentials);
+        }catch(ServiceException e){
+          e.printStackTrace();
+        }
 
     }
 }

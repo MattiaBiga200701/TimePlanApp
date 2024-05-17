@@ -13,7 +13,7 @@ import java.sql.Types;
 public class LoginDao {
 
 
-    public User loginProcedure(String username, String password) throws DAOException {
+    public User loginProcedure(User user) throws DAOException {
         
         int role = 0;
         String email = null;
@@ -23,8 +23,8 @@ public class LoginDao {
         try{
             Connection conn = ConnectionManager.getConnection();
             cs = conn.prepareCall("{call login(?,?,?,?)}");
-            cs.setString(1, username);
-            cs.setString(2, password);
+            cs.setString(1, user.getUsername());
+            cs.setString(2, user.getPassword());
             cs.registerOutParameter(3, Types.NUMERIC);
             cs.registerOutParameter(4, Types.VARCHAR);
             cs.executeQuery();
@@ -51,7 +51,10 @@ public class LoginDao {
             throw new DAOException("DAOLogin error: " + finallyException.getMessage());
         }
 
-        return  new User(username, email, password, Role.fromInt(role));
+        user.setEmail(email);
+        user.setRole(Role.fromInt(role));
+        return user;
+
     }
 /**
     public static void main(String[] args ){
