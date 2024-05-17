@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 import it.florentino.dark.timeplanapp.ScenePlayer;
 import it.florentino.dark.timeplanapp.appcontroller.LoginController;
 import it.florentino.dark.timeplanapp.beans.LoginBean;
+import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import javafx.fxml.FXML;
@@ -22,7 +23,7 @@ public class LoginGraphicController {
 
     @FXML
     private Label errorLabel;
-    private ScenePlayer player = ScenePlayer.getScenePlayerInstance(null);
+    private final ScenePlayer player = ScenePlayer.getScenePlayerInstance(null);
     @FXML
     public void onHyperLinkClicked() {
         try {
@@ -38,13 +39,17 @@ public class LoginGraphicController {
         String user = this.username.getText().trim();
         String pass = this.password.getText().trim();
 
-        LoginBean credentials = new LoginBean(user, pass);
+
         LoginController controller = new LoginController();
         try {
+            LoginBean credentials = new LoginBean(user, pass);
             controller.authenticate(credentials);
-        }catch(ServiceException e){
-          e.printStackTrace();
+        }catch(ServiceException | CredentialException e) {
+            this.showError(e.getMessage());
         }
+    }
 
+    public void showError(String message){
+        this.errorLabel.setText(message);
     }
 }

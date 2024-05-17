@@ -1,6 +1,8 @@
 package it.florentino.dark.timeplanapp.appcontroller;
 
 import it.florentino.dark.timeplanapp.beans.LoginBean;
+import it.florentino.dark.timeplanapp.beans.UserBean;
+import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.model.dao.LoginDao;
@@ -8,18 +10,23 @@ import it.florentino.dark.timeplanapp.model.entities.User;
 
 public class LoginController {
 
-    private User user;
+    private User user = null;
 
-    public void authenticate(LoginBean credentials) throws ServiceException{
+    public void authenticate(LoginBean credentials) throws ServiceException, CredentialException{
 
         String username = credentials.getUsername();
         String password = credentials.getPassword();
-        User user = new User(username, null, password, null);
+        this.user = new User(username, null, password, null);
         LoginDao loginDao = new LoginDao();
         try {
-            loginDao.loginProcedure(user);
+            loginDao.loginProcedure(this.user);
+            switch(this.user.getRole()){
+                case MANAGER -> System.out.println("Manager logged");
+                case EMPLOYEE -> System.out.println("Employee logged");
+                default -> throw new CredentialException();
+            }
         }catch(DAOException e){
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException("DATA access error;", e.getCause());
         }
 
     }
