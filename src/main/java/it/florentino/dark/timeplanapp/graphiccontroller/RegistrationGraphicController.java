@@ -12,7 +12,7 @@ public class RegistrationGraphicController {
         try {
             player.showScene("GUI/LoginPage.fxml", "StyleSheets/LoginStyle.css");
         }catch(SetSceneException sE){
-            System.err.println(sE.getMessage());
+            System.exit(-1);
         }
     }
 }
