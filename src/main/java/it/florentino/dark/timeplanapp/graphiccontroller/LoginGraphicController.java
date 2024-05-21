@@ -48,6 +48,13 @@ public class LoginGraphicController {
         try {
             LoginBean credentials = new LoginBean(user, pass);
             UserBean verifiedUser = controller.authenticate(credentials);
+
+            switch(verifiedUser.getRole()){
+                case MANAGER -> System.out.println("Manager logged");
+                case EMPLOYEE -> System.out.println("Employee logged");
+                default -> throw new CredentialException();
+            }
+
         }catch(ServiceException | CredentialException e) {
             this.showError(e.getMessage());
         }
