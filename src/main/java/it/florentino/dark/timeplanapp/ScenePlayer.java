@@ -37,6 +37,8 @@ public class ScenePlayer {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+        this.stage.setHeight(1024.0);
+        this.stage.setWidth(1440.0);
         this.stage.setResizable(false);
     }
 
