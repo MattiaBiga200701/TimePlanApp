@@ -7,16 +7,19 @@ import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.model.dao.LoginDao;
 import it.florentino.dark.timeplanapp.model.entities.User;
+import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 public class LoginController {
 
     private User user = null;
 
-    public void authenticate(LoginBean credentials) throws ServiceException, CredentialException{
+    public UserBean authenticate(LoginBean credentials) throws ServiceException, CredentialException{
 
         String username = credentials.getUsername();
         String password = credentials.getPassword();
-        this.user = new User(username, null, password, null);
+        String email;
+        Role role;
+        this.user = new User(username, null , password, null);
         LoginDao loginDao = new LoginDao();
         try {
             loginDao.loginProcedure(this.user);
@@ -31,6 +34,11 @@ public class LoginController {
         }catch(DAOException e){
             throw new ServiceException();
         }
+
+        email = this.user.getEmail();
+        role = this.user.getRole();
+
+        return new UserBean(username, email, password, role);
 
     }
 

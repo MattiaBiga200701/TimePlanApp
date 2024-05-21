@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 import it.florentino.dark.timeplanapp.ScenePlayer;
 import it.florentino.dark.timeplanapp.appcontroller.LoginController;
 import it.florentino.dark.timeplanapp.beans.LoginBean;
+import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
@@ -46,7 +47,7 @@ public class LoginGraphicController {
         LoginController controller = new LoginController();
         try {
             LoginBean credentials = new LoginBean(user, pass);
-            controller.authenticate(credentials);
+            UserBean verifiedUser = controller.authenticate(credentials);
         }catch(ServiceException | CredentialException e) {
             this.showError(e.getMessage());
         }
