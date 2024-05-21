@@ -13,7 +13,7 @@ public class Starter extends Application {
             ScenePlayer player = ScenePlayer.getScenePlayerInstance(stage);    //SINGLETON
             player.showScene("GUI/LoginPage.fxml", "StyleSheets/LoginStyle.css");
         }catch(SetSceneException sE){
-            System.err.println(sE.getMessage()); //Gestione da terminale da cambiare
+            System.exit(-1); //Gestione da terminale da cambiare
         }
     }
 

@@ -33,7 +33,7 @@ public class LoginGraphicController {
         try {
             this.player.showScene("GUI/RegistrationPage.fxml", "StyleSheets/RegistrationStyle.css");
         } catch(SetSceneException sE) {
-           System.err.println(sE.getMessage()); //Da gestire graficamente
+           System.exit(-1); //Da gestire graficamente
         }
     }
 
