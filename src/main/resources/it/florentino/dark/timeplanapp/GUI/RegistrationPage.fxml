@@ -46,7 +46,7 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <TextField prefHeight="49.0" prefWidth="240.0" promptText="Username" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
+                              <TextField fx:id="username" prefHeight="49.0" prefWidth="240.0" promptText="Username" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -63,7 +63,7 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <TextField prefHeight="49.0" prefWidth="240.0" promptText="E-mail" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
+                              <TextField fx:id="email" prefHeight="49.0" prefWidth="240.0" promptText="E-mail" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -80,7 +80,7 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <PasswordField prefHeight="48.0" prefWidth="240.0" promptText="Password" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
+                              <PasswordField fx:id="password" prefHeight="48.0" prefWidth="240.0" promptText="Password" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -97,7 +97,7 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <PasswordField prefHeight="48.0" prefWidth="240.0" promptText="Password" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
+                              <PasswordField fx:id="confirmPassword" prefHeight="48.0" prefWidth="240.0" promptText="Password" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -114,7 +114,7 @@
                         </CheckBox>
                         <VBox spacing="10.0">
                            <children>
-                              <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="251.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Register Now">
+                              <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="48.0" prefWidth="251.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Register Now">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
