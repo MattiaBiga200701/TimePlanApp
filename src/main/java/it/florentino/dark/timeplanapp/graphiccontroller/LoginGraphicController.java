@@ -1,6 +1,6 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
-import it.florentino.dark.timeplanapp.ScenePlayer;
+
 import it.florentino.dark.timeplanapp.appcontroller.LoginController;
 import it.florentino.dark.timeplanapp.beans.LoginBean;
 import it.florentino.dark.timeplanapp.beans.UserBean;
@@ -16,7 +16,7 @@ import javafx.util.Duration;
 
 
 
-public class LoginGraphicController {
+public class LoginGraphicController extends GraphicController {
 
 
     @FXML
@@ -27,11 +27,11 @@ public class LoginGraphicController {
 
     @FXML
     private Label errorLabel;
-    private final ScenePlayer player = ScenePlayer.getScenePlayerInstance(null);
+
     @FXML
     public void onHyperLinkClicked() {
         try {
-            this.player.showScene("GUI/RegistrationPage.fxml", "StyleSheets/RegistrationStyle.css");
+            this.getScenePlayer().showScene("GUI/RegistrationPage.fxml", "StyleSheets/RegistrationStyle.css");
         } catch(SetSceneException sE) {
            System.exit(-1); //Da gestire graficamente
         }
