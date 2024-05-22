@@ -7,6 +7,7 @@ import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class RegistrationGraphicController extends GraphicController {
@@ -20,6 +21,8 @@ public class RegistrationGraphicController extends GraphicController {
     private TextField password;
     @FXML
     private TextField confirmPassword;
+    @FXML
+    private Label errorLabel;
 
     @FXML
     public void onHyperLinkClicked(){
@@ -30,19 +33,21 @@ public class RegistrationGraphicController extends GraphicController {
         }
     }
     @FXML
-    public void onRegisterButtonClick(){
+    public void onRegisterButtonClick() {
         String user = this.username.getText();
-        String email = this.email.getText();
+        String emailString = this.email.getText();
         String pass = this.password.getText();
         String clonePass = this.confirmPassword.getText();
 
         RegistrationController controller = new RegistrationController();
-        try{
-            UserBean newUser = new UserBean(user, email, pass, Role.EMPLOYEE);
-        }catch(CredentialException e){
-            e.printStackTrace();
+        try {
+            UserBean newUser = new UserBean(user, emailString, pass, Role.EMPLOYEE);
+        } catch (CredentialException e) {
+            this.showError(e.getMessage());
         }
-
-
     }
+    public Label getErrorLabel(){
+            return this.errorLabel;
+    }
+
 }
