@@ -4,6 +4,7 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 import it.florentino.dark.timeplanapp.appcontroller.RegistrationController;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
+import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 import javafx.fxml.FXML;
@@ -39,17 +40,17 @@ public class RegistrationGraphicController extends GraphicController {
         String emailString = this.email.getText();
         String passwordString = this.password.getText();
         String retypedPassword = this.confirmPassword.getText();
-
+        UserBean newUser;
         RegistrationController controller = new RegistrationController();
         try {
 
             if( passwordString.equals(retypedPassword)) {
-                UserBean newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
+                newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
             }else{ throw new CredentialException("Passwords do not match"); }
+            controller.insertUser(newUser);
 
 
-
-        } catch (CredentialException e) {
+        } catch (CredentialException | ServiceException e) {
             this.showError(e.getMessage());
         }
     }

@@ -58,6 +58,46 @@ public class LoginDao {
         return user;
 
     }
+
+    public void registrationProcedure(User user) throws DAOException {
+
+        CallableStatement cs = null;
+        Exception firstException = null;
+        Exception finallyException = null;
+
+        try {
+
+            Connection conn = ConnectionManager.getConnection();
+            cs = conn.prepareCall("{call registration( ?, ?, ?, ?)}");
+            cs.setString(1, user.getUsername());
+            cs.setString(2, user.getEmail());
+            cs.setString(3, user.getPassword());
+            cs.setInt(4, user.getRole().getId());
+            cs.executeQuery();
+
+        } catch (SQLException | ConnectionException e1) {
+            firstException = e1;
+
+        }finally{
+            if(cs != null){
+                try{
+                    cs.close();
+                }catch(SQLException e2){
+                    finallyException = e2;
+                }
+            }
+        }
+
+        if(firstException != null ){
+            if(finallyException != null) {
+                firstException.addSuppressed(finallyException);
+            }
+            throw new DAOException("DAORegistration error: " + firstException.getMessage());
+        }else if( finallyException != null){
+            throw new DAOException("DAORegistration error: " + finallyException.getMessage());
+        }
+
+    }
 /**
     public static void main(String[] args ){
         LoginDao dao = new LoginDao();
