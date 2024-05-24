@@ -23,7 +23,7 @@ public class LoginController {
         LoginDao loginDao = new LoginDao();
         try {
 
-            loginDao.loginProcedure(this.getUser());
+            this.setUser(loginDao.loginProcedure(this.getUser()));
 
             if(this.getUser().getRole() == null){
                 throw new CredentialException();
