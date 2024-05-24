@@ -48,6 +48,7 @@ public class RegistrationGraphicController extends GraphicController {
                 newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
             }else{ throw new CredentialException("Passwords do not match"); }
             controller.insertUser(newUser);
+            System.out.println("User written");
 
 
         } catch (CredentialException | ServiceException e) {

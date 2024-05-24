@@ -135,6 +135,14 @@
                                     <Insets left="80.0" />
                                  </padding>
                               </Label>
+                              <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="253.0" textFill="CRIMSON">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="64.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
