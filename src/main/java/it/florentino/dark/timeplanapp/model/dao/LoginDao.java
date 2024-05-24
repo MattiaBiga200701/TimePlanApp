@@ -21,6 +21,7 @@ public class LoginDao {
         Exception firstException = null;
         Exception finallyException = null;
         try{
+
             Connection conn = ConnectionManager.getConnection();
             cs = conn.prepareCall("{call login(?,?,?,?)}");
             cs.setString(1, user.getUsername());
@@ -30,6 +31,7 @@ public class LoginDao {
             cs.executeQuery();
             role = cs.getInt(3);
             email = cs.getString(4);
+
         } catch(SQLException | ConnectionException e1) {
             firstException = e1;
         } finally{

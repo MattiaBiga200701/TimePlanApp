@@ -48,6 +48,10 @@ public class UserBean {
         }
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public String getEmail(){
         return this.email;
     }
