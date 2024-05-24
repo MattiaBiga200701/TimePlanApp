@@ -19,13 +19,13 @@ public class LoginController {
         String password = credentials.getPassword();
         String email;
         Role role;
-        this.user = new User(username, null , password, null);
+        this.setUser(new User(username, null , password, null));
         LoginDao loginDao = new LoginDao();
         try {
 
-            loginDao.loginProcedure(this.user);
+            loginDao.loginProcedure(this.getUser());
 
-            if(this.user.getRole() == null){
+            if(this.getUser().getRole() == null){
                 throw new CredentialException();
             }
 
@@ -34,11 +34,18 @@ public class LoginController {
             throw new ServiceException();
         }
 
-        email = this.user.getEmail();
-        role = this.user.getRole();
+        email = this.getUser().getEmail();
+        role = this.getUser().getRole();
 
         return new UserBean(username, email, password, role);
 
     }
 
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
 }
