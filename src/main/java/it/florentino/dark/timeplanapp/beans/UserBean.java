@@ -19,17 +19,25 @@ public class UserBean {
         this.setRole(role);
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String username) throws CredentialException {
+        if(username != null) {
+            this.username = username;
+        }else throw new CredentialException("Invalid username;");
     }
 
     public String getUsername() {
         return this.username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws CredentialException {
+
+        if(this.isValidPassword(password)) {
+            this.password = password;
+        }else{
+            throw new CredentialException("Invalid password (must be at least 8 characters long)");
+        }
     }
+
 
     public void setEmail(String email) throws CredentialException {
 
@@ -50,6 +58,10 @@ public class UserBean {
 
     public Role getRole(){
         return this.role;
+    }
+
+    private boolean isValidPassword(String password){
+        return (password != null && password.length() >= 8);
     }
 
     private boolean isValidEmail(String email){

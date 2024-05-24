@@ -34,14 +34,20 @@ public class RegistrationGraphicController extends GraphicController {
     }
     @FXML
     public void onRegisterButtonClick() {
+
         String user = this.username.getText();
         String emailString = this.email.getText();
         String pass = this.password.getText();
-        String clonePass = this.confirmPassword.getText();
+        String retypedPass = this.confirmPassword.getText();
 
         RegistrationController controller = new RegistrationController();
         try {
-            UserBean newUser = new UserBean(user, emailString, pass, Role.EMPLOYEE);
+
+            if( pass.equals(retypedPass)) {
+                UserBean newUser = new UserBean(user, emailString, pass, Role.EMPLOYEE);
+            }else{ throw new CredentialException("Passwords do not match"); }
+
+
         } catch (CredentialException e) {
             this.showError(e.getMessage());
         }
