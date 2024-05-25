@@ -20,9 +20,9 @@ public class LoginController {
         String email;
         Role role;
         this.setUser(new User(username, null , password, null));
-        LoginDao loginDao = new LoginDao();
-        try {
 
+        try {
+            LoginDao loginDao = new LoginDao();
             this.setUser(loginDao.loginProcedure(this.getUser()));
 
             if(this.getUser().getRole() == null){

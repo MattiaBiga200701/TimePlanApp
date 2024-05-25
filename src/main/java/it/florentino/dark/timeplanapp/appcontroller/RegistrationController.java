@@ -19,8 +19,9 @@ public class RegistrationController {
         Role role = newUser.getRole();
 
         this.setUser(new User(username , email, password, role));
-        LoginDao loginDao = new LoginDao();
+
         try{
+            LoginDao loginDao = new LoginDao();
             loginDao.registrationProcedure(this.getUser());
         }catch(DAOException e){
             throw new ServiceException();
