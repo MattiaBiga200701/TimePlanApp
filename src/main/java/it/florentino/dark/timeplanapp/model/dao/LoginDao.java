@@ -25,13 +25,10 @@ public class LoginDao {
     }
     public User loginProcedure(User user) throws DAOException {
         
-        int role = 0;
-        String email = null;
+        int role;
+        String email;
 
-        Exception firstException = null;
-        Exception finallyException = null;
         try{
-
 
             this.cs = this.conn.prepareCall("{call login(?,?,?,?)}");
             this.cs.setString(1, user.getUsername());
@@ -41,27 +38,12 @@ public class LoginDao {
             this.cs.executeQuery();
             role = this.cs.getInt(3);
             email = this.cs.getString(4);
+            this.cs.close();
 
-        } catch(SQLException e1) {
-            firstException = e1;
-        } finally{
-            if(this.cs != null){
-                try{
-                    this.cs.close();
-                }catch(SQLException e2){
-                    finallyException = e2;
-                }
-            }
+        } catch(SQLException e) {
+            throw new DAOException(e.getMessage());
         }
 
-        if(firstException != null ){
-            if(finallyException != null) {
-                firstException.addSuppressed(finallyException);
-            }
-            throw new DAOException("DAOLogin error: " + firstException.getMessage(), firstException.getCause()); //getCause forse da eliminare
-        }else if( finallyException != null){
-            throw new DAOException("DAOLogin error: " + finallyException.getMessage());
-        }
 
         user.setEmail(email);
         user.setRole(Role.fromInt(role));
@@ -71,11 +53,7 @@ public class LoginDao {
 
     public void registrationProcedure(User user) throws DAOException {
 
-        Exception firstException = null;
-        Exception finallyException = null;
-
         try {
-
 
             this.cs = this.conn.prepareCall("{call registration( ?, ?, ?, ?)}");
             this.cs.setString(1, user.getUsername());
@@ -83,27 +61,10 @@ public class LoginDao {
             this.cs.setString(3, user.getPassword());
             this.cs.setInt(4, user.getRole().getId());
             this.cs.executeQuery();
+            this.cs.close();
 
-        } catch (SQLException e1) {
-            firstException = e1;
-
-        }finally{
-            if(this.cs != null){
-                try{
-                    this.cs.close();
-                }catch(SQLException e2){
-                    finallyException = e2;
-                }
-            }
-        }
-
-        if(firstException != null ){
-            if(finallyException != null) {
-                firstException.addSuppressed(finallyException);
-            }
-            throw new DAOException("DAORegistration error: " + firstException.getMessage());
-        }else if( finallyException != null){
-            throw new DAOException("DAORegistration error: " + finallyException.getMessage());
+        } catch (SQLException e) {
+           throw new DAOException(e.getMessage());
         }
 
     }
