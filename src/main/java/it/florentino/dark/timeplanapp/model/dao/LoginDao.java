@@ -17,8 +17,9 @@ public class LoginDao {
 
     public LoginDao() throws DAOException{
         try {
+
             this.conn = ConnectionManager.getConnection();
-            this.cs = null;
+
         }catch(ConnectionException e){
             throw new DAOException(e.getMessage());
         }
@@ -69,15 +70,6 @@ public class LoginDao {
 
     }
 
-/**
-    public static void main(String[] args ){
-        LoginDao dao = new LoginDao();
-        try {
-            dao.loginProcedure("default", "pippo");
-        }catch (Exception e){
-          e.printStackTrace();
-        }
-    }
-*/
+
 
 }

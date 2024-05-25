@@ -21,7 +21,7 @@
             </Label>
             <TilePane alignment="CENTER" prefHeight="640.0" prefWidth="566.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0, 137, 123, 0.9), 10, 0.5, 3, 3);">
                <children>
-                  <VBox alignment="CENTER" focusTraversable="true" prefHeight="608.0" prefWidth="240.0" spacing="25.0">
+                  <VBox alignment="CENTER" focusTraversable="true" prefHeight="419.0" prefWidth="240.0" spacing="24.0">
                      <children>
                         <VBox>
                            <children>
@@ -92,13 +92,10 @@
                                     <Insets left="74.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="errorLabel" style="-fx-text-fill: #dc143c;" textFill="RED">
+                              <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="240.0" textFill="CRIMSON">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                                 <padding>
-                                    <Insets left="57.0" />
-                                 </padding>
                               </Label>
                            </children>
                         </VBox>

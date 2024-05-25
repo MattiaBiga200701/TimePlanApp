@@ -127,21 +127,15 @@
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="loginNowLink" accessibleRole="HYPERLINK" onMouseClicked="#onHyperLinkClicked" style="-fx-text-fill: #00897B;" text="Login Now" textFill="#00897b">
+                              <Label fx:id="loginNowLink" accessibleRole="HYPERLINK" alignment="CENTER" onMouseClicked="#onHyperLinkClicked" prefHeight="26.0" prefWidth="243.0" style="-fx-text-fill: #00897B;" text="Login Now" textFill="#00897b">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                                 <padding>
-                                    <Insets left="80.0" />
-                                 </padding>
                               </Label>
-                              <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="253.0" textFill="CRIMSON">
+                              <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="253.0" textFill="CRIMSON" wrapText="true">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                                 <padding>
-                                    <Insets left="64.0" />
-                                 </padding>
                               </Label>
                            </children>
                         </VBox>

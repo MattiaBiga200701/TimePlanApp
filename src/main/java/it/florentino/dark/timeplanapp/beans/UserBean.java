@@ -34,7 +34,7 @@ public class UserBean {
         if(this.isValidPassword(password)) {
             this.password = password;
         }else{
-            throw new CredentialException("Invalid password (must be at least 8 characters long)");
+            throw new CredentialException("Invalid Password");
         }
     }
 
