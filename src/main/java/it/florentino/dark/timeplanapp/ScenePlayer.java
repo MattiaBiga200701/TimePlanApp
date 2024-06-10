@@ -2,6 +2,7 @@ package it.florentino.dark.timeplanapp;
 
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -13,20 +14,11 @@ public class ScenePlayer {
 
     private static ScenePlayer instance = null;
     private Stage stage;
-    private static int sceneWidth;
-    private static int sceneHeight;
 
     private ScenePlayer(Stage stage){
-        ScenePlayer.setSceneHeight(1024);
-        ScenePlayer.setSceneWidth(1440);
         this.setStage(stage);
     }
 
-    public ScenePlayer(Stage stage, int width, int height){   //Da eliminare se non servirà
-        this(stage);
-        ScenePlayer.setSceneWidth(width);
-        ScenePlayer.setSceneHeight(height);
-    }
 
     public static ScenePlayer getScenePlayerInstance(Stage stage){
         if(ScenePlayer.instance == null){
@@ -38,7 +30,6 @@ public class ScenePlayer {
     public void setStage(Stage stage) {
         this.stage = stage;
         this.stage.setHeight(1024.0);
-
         this.stage.setWidth(1440.0);
         this.stage.setResizable(false);
     }
@@ -47,30 +38,16 @@ public class ScenePlayer {
         return this.stage;
     }
 
-    public static void setSceneHeight(int sceneHeight) {
-        ScenePlayer.sceneHeight = sceneHeight;
-    }
 
 
-    public static void setSceneWidth(int sceneWidth) {
-        ScenePlayer.sceneWidth = sceneWidth;
-    }
-
-    public void showScene(String fxmlPath, String cssPath) throws SetSceneException{
+    public void showScene(String fxmlPath) throws SetSceneException{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayer.class.getResource(fxmlPath));
-            Scene scene = new Scene(fxmlLoader.load(), ScenePlayer.sceneWidth, ScenePlayer.sceneHeight);
-
-            if(cssPath != null){
-                String cssURL = Objects.requireNonNull(ScenePlayer.class.getResource(cssPath)).toExternalForm();
-                scene.getStylesheets().add(cssURL);
-            }
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
             instance.stage.setScene(scene);
-            instance.stage.show();
         }catch(IOException e){
             throw new SetSceneException("SetSceneException:" + e.getMessage());
         }
-
-
     }
 }

@@ -28,7 +28,7 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     public void onHyperLinkClicked(){
         try {
-            this.getScenePlayer().showScene("GUI/LoginPage.fxml", "StyleSheets/LoginStyle.css");
+            this.getScenePlayer().showScene("GUI/LoginPage.fxml");
         }catch(SetSceneException sE){
             System.exit(-1);
         }
