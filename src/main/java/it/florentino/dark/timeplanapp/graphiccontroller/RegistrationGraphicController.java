@@ -27,6 +27,8 @@ public class RegistrationGraphicController extends GraphicController {
     private Label errorLabel;
     @FXML
     private CheckBox checkRole;
+    @FXML
+    private Label idLabel;
 
     private UserBean newUser;
 
@@ -41,35 +43,38 @@ public class RegistrationGraphicController extends GraphicController {
 
     @FXML
     public void onNextButtonClick(){
+
         String usernameString = this.username.getText();
         String emailString = this.email.getText();
         String passwordString = this.password.getText();
         String retypedPassword = this.confirmPassword.getText();
-        int control = 0;
+
         try {
 
             if(!(passwordString.equals(retypedPassword))) throw new CredentialException("Passwords do not match");
 
             if(checkRole.isSelected()) {
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
+                this.getScenePlayer().showScene("GUI/RegistrationPage2Man.fxml");
             }else{
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
+                this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml");
             }
 
         } catch (CredentialException e) {
             this.showError(e.getMessage());
-            control = 1;
-        }
-
-        if(control == 0) {
-            try {
-                this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml");
-            } catch (SetSceneException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (SetSceneException e) {
+            throw new RuntimeException(e);
         }
 
     }
+
+    @FXML
+    public void onGenerateButtonClick(){}
+
+    @FXML
+    public  void onVerifyButtonClick(){}
+
     @FXML
     public void onRegisterButtonClick() {
 

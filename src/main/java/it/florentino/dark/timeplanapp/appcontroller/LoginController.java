@@ -18,6 +18,7 @@ public class LoginController {
         String username = credentials.getUsername();
         String password = credentials.getPassword();
         String email;
+        int managerID;
         Role role;
         this.setUser(new User(username, null , password, null));
 
@@ -36,8 +37,10 @@ public class LoginController {
 
         email = this.getUser().getEmail();
         role = this.getUser().getRole();
+        managerID = this.getUser().getManagerID();
+        System.out.println("managerID"+ managerID);
 
-        return new UserBean(username, email, password, role);
+        return new UserBean(username, email, password, role, managerID);
 
     }
 

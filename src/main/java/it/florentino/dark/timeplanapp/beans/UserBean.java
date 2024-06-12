@@ -12,7 +12,14 @@ public class UserBean {
     private String password;
     private Role role;
 
-    public UserBean(String username, String email, String password, Role role) throws CredentialException{
+    private int managerID;
+
+    public UserBean(String username, String email, String password, Role role, int managerID) throws CredentialException{
+        this(username, email, password, role);
+        this.setManagerID(managerID);
+    }
+
+    public UserBean(String username, String email, String password, Role role) throws CredentialException {
         this.setUsername(username);
         this.setEmail(email);
         this.setPassword(password);
@@ -56,6 +63,11 @@ public class UserBean {
         return this.email;
     }
 
+    private void setManagerID(int managerID){
+        this.managerID = managerID;
+    }
+    public int getManagerID() { return this.managerID; }
+
     public void setRole(Role role){
         this.role = role;
     }
@@ -74,5 +86,9 @@ public class UserBean {
         if(email == null) return false;
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    private boolean isValidManagerID(int managerID){
+        return (managerID >= 1 && managerID <= 1000000);
     }
 }

@@ -17,8 +17,9 @@ public class RegistrationController {
         String email = newUser.getEmail();
         String password = newUser.getPassword();
         Role role = newUser.getRole();
+        int managerID = newUser.getManagerID();
 
-        this.setUser(new User(username , email, password, role));
+        this.setUser(new User(username , email, password, role, managerID));
 
         try{
             LoginDao loginDao = new LoginDao();

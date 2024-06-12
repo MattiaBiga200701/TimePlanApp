@@ -9,6 +9,13 @@ public class User {
 
     private Role role;
 
+    private int managerID;
+
+    public User(String username, String email, String password, Role role, int managerID){
+        this(username,email,password,role);
+        this.setManagerID(managerID);
+    }
+
     public User(String username, String email, String password, Role role){
         this.setUsername(username);
         this.setEmail(email);
@@ -31,6 +38,11 @@ public class User {
     public void setRole(Role role){
         this.role = role;
     }
+
+    public void setManagerID(int managerID){
+        this.managerID = managerID;
+    }
+    public int getManagerID(){ return this.managerID; }
 
     public String getUsername() {
         return this.username;

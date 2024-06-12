@@ -28,18 +28,22 @@ public class LoginDao {
         
         int role;
         String email;
+        int managerID;
 
         try{
 
-            this.cs = this.conn.prepareCall("{call login(?,?,?,?)}");
+            this.cs = this.conn.prepareCall("{call login(?,?,?,?,?)}");
             this.cs.setString(1, user.getUsername());
             this.cs.setString(2, user.getPassword());
             this.cs.registerOutParameter(3, Types.NUMERIC);
             this.cs.registerOutParameter(4, Types.VARCHAR);
+            this.cs.registerOutParameter(5, Types.NUMERIC);
             this.cs.executeQuery();
             role = this.cs.getInt(3);
             email = this.cs.getString(4);
+            managerID = this.cs.getInt(5);
             this.cs.close();
+
 
         } catch(SQLException e) {
             throw new DAOException(e.getMessage());
@@ -48,6 +52,7 @@ public class LoginDao {
 
         user.setEmail(email);
         user.setRole(Role.fromInt(role));
+        user.setManagerID(managerID);
         return user;
 
     }
@@ -56,11 +61,12 @@ public class LoginDao {
 
         try {
 
-            this.cs = this.conn.prepareCall("{call registration( ?, ?, ?, ?)}");
+            this.cs = this.conn.prepareCall("{call registration( ?, ?, ?, ?, ?)}");
             this.cs.setString(1, user.getUsername());
             this.cs.setString(2, user.getEmail());
             this.cs.setString(3, user.getPassword());
             this.cs.setInt(4, user.getRole().getId());
+            this.cs.setInt(5, user.getManagerID());
             this.cs.executeQuery();
             this.cs.close();
 

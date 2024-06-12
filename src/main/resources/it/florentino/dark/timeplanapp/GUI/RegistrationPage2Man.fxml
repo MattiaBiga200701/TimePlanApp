@@ -3,13 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" stylesheets="@../StyleSheets/RegistrationStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController">
    <children>
@@ -36,37 +34,10 @@
                               </Label>
                            </children>
                         </VBox>
-                        <VBox prefHeight="95.0" prefWidth="240.0" />
-                        <VBox layoutX="10.0" layoutY="49.0" prefHeight="79.0" prefWidth="240.0">
-                           <children>
-                              <Label style="-fx-font-size: 24px;" text="Insert Manager ID">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="3.0" />
-                                 </padding>
-                              </Label>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <TextField prefHeight="49.0" prefWidth="161.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </TextField>
-                                    <Region prefHeight="50.0" prefWidth="10.0" />
-                                    <Button fx:id="verifyButton" mnemonicParsing="false" onAction="#onVerifyButtonClick" prefHeight="50.0" prefWidth="78.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="verify">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
+                        <VBox prefHeight="117.0" prefWidth="240.0" />
                         <VBox spacing="10.0">
                            <children>
-                              <Label style="-fx-font-size: 24px;" text="Manager name">
+                              <Label style="-fx-font-size: 24px;" text="Manager ID">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -74,7 +45,7 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <Label prefHeight="49.0" prefWidth="240.0" style="-fx-font-size: 24px; -fx-border-color: rgba(0, 137, 123, 0.7); -fx-border-width: 1px;">
+                              <Label fx:id="idLabel" prefHeight="49.0" prefWidth="240.0" style="-fx-font-size: 24px; -fx-border-color: rgba(0, 137, 123, 0.7); -fx-border-width: 1px;">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -82,7 +53,12 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <VBox prefHeight="92.0" prefWidth="240.0" />
+                              <Button fx:id="generateButton" mnemonicParsing="false" onAction="#onGenerateButtonClick" prefHeight="48.0" prefWidth="126.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Generate">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <VBox prefHeight="100.0" prefWidth="240.0" />
                               <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="48.0" prefWidth="251.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Register Now">
                                  <font>
                                     <Font size="24.0" />
