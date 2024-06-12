@@ -2,6 +2,7 @@ package it.florentino.dark.timeplanapp.model.dao;
 
 import it.florentino.dark.timeplanapp.exceptions.ConnectionException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
+import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
@@ -57,18 +58,24 @@ public class LoginDao {
 
     }
 
-    public void registrationProcedure(User user) throws DAOException {
+    public void registrationProcedure(User user) throws DAOException, NotUniqueEmailException {
 
+        int status;
         try {
 
-            this.cs = this.conn.prepareCall("{call registration( ?, ?, ?, ?, ?)}");
+            this.cs = this.conn.prepareCall("{call registration( ?, ?, ?, ?, ?, ?)}");
             this.cs.setString(1, user.getUsername());
             this.cs.setString(2, user.getEmail());
             this.cs.setString(3, user.getPassword());
             this.cs.setInt(4, user.getRole().getId());
             this.cs.setInt(5, user.getManagerID());
+            this.cs.registerOutParameter(6, Types.NUMERIC);
             this.cs.executeQuery();
+            status = this.cs.getInt(6);
             this.cs.close();
+            if(status == 1){
+                throw new NotUniqueEmailException();
+            }
 
         } catch (SQLException e) {
            throw new DAOException(e.getMessage());
