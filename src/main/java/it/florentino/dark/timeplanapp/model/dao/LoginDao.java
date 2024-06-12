@@ -83,6 +83,37 @@ public class LoginDao {
 
     }
 
+    public User getManagerAssociatedTo(User user) throws DAOException{
+
+        String username;
+        String email;
+        String password;
+        int role, managerID;
+
+        try{
+
+            this.cs = this.conn.prepareCall("{call managerAssociated(?, ?, ?, ?, ?, ?)}");
+            this.cs.setInt(1, user.getManagerID());
+            this.cs.registerOutParameter(2, Types.VARCHAR);
+            this.cs.registerOutParameter(3, Types.VARCHAR);
+            this.cs.registerOutParameter(4, Types.VARCHAR);
+            this.cs.registerOutParameter(5, Types.NUMERIC);
+            this.cs.registerOutParameter(6, Types.NUMERIC);
+            this.cs.executeQuery();
+            username = this.cs.getString(2);
+            email = this.cs.getString(3);
+            password = this.cs.getString(4);
+            role = this.cs .getInt(5);
+            managerID = this.cs.getInt(6);
+
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }
+
+        return new User(username, email, password, Role.fromInt(role), managerID);
+
+    }
+
 
 
 }

@@ -31,7 +31,27 @@ public class RegistrationController {
 
     }
 
+    public UserBean checkManagerID(UserBean user) throws ServiceException{
 
+        String username = user.getUsername();
+        String email = user.getEmail();
+        String password = user.getPassword();
+        Role role = user.getRole();
+        int managerID = user.getManagerID();
+
+        this.setUser(new User(username , email, password, role, managerID));
+
+        try{
+            LoginDao loginDao = new LoginDao();
+            User managerAssociated = loginDao.getManagerAssociatedTo(this.getUser());
+        }catch(DAOException e ){
+            throw new ServiceException();
+        }
+
+        return new UserBean();
+
+
+    }
 
     public void setUser(User user){
         this.user = user;
