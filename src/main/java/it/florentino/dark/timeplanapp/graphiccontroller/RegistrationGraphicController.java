@@ -30,8 +30,11 @@ public class RegistrationGraphicController extends GraphicController {
     private CheckBox checkRole;
     @FXML
     private Label idLabel;
+    @FXML
+    private TextField idField;
 
     private UserBean newUser;
+    RegistrationController controller;
 
     @FXML
     public void onHyperLinkClicked(){
@@ -67,7 +70,7 @@ public class RegistrationGraphicController extends GraphicController {
         } catch (SetSceneException e) {
             throw new RuntimeException(e);
         }
-
+        this.controller = new RegistrationController();
     }
 
     @FXML
@@ -75,16 +78,26 @@ public class RegistrationGraphicController extends GraphicController {
 
     @FXML
     public  void onVerifyButtonClick(){
+        String managerIdStr = this.idField.getText();
+        try {
+
+            if (!(managerIdStr.matches("\\d+"))){ throw new CredentialException("ManagerID not valid"); }
+            int managerID = Integer.parseInt(this.idField.getText());
+            this.newUser.setManagerID(managerID);
+
+        }catch(CredentialException e){
+            this.showError(e.getMessage());
+        }
+
 
     }
 
     @FXML
     public void onRegisterButtonClick() {
 
-        RegistrationController controller = new RegistrationController();
         try {
 
-            controller.insertUser(this.newUser);
+            this.controller.insertUser(this.newUser);
             System.out.println("User written");
 
         } catch (ServiceException e) {

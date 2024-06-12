@@ -63,8 +63,12 @@ public class UserBean {
         return this.email;
     }
 
-    private void setManagerID(int managerID){
-        this.managerID = managerID;
+    public void setManagerID(int managerID) throws CredentialException{
+        if(this.isValidManagerID(managerID)) {
+            this.managerID = managerID;
+        }else{
+            throw new CredentialException("ManagerID not valid");
+        }
     }
     public int getManagerID() { return this.managerID; }
 
