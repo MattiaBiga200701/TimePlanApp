@@ -38,7 +38,7 @@ public class LoginController {
         email = this.getUser().getEmail();
         role = this.getUser().getRole();
         managerID = this.getUser().getManagerID();
-        System.out.println("managerID"+ managerID);
+
 
         return new UserBean(username, email, password, role, managerID);
 
