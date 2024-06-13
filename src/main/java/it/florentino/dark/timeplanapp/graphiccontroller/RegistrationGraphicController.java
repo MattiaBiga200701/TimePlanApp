@@ -58,11 +58,11 @@ public class RegistrationGraphicController extends GraphicController {
             if(!(passwordString.equals(retypedPassword))) throw new CredentialException("Passwords do not match");
 
             if(checkRole.isSelected()) {
-                this.newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
+                newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
                 this.getScenePlayer().showScene("GUI/RegistrationPage2Man.fxml");
             }else{
-                this.newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
-                System.out.println(this.newUser);
+                newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
+                System.out.println(newUser);
                 this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml");
             }
 
@@ -71,7 +71,7 @@ public class RegistrationGraphicController extends GraphicController {
         } catch (SetSceneException e) {
             throw new RuntimeException(e);
         }
-        this.controller = new RegistrationController();
+        controller = new RegistrationController();
     }
 
     @FXML
@@ -80,7 +80,7 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     public  void onVerifyButtonClick(){    //EMployee
 
-        System.out.println(this.newUser);
+        System.out.println(newUser);
         UserBean managerAssociated = null;
         String managerIdStr = this.idField.getText();
 
@@ -88,8 +88,8 @@ public class RegistrationGraphicController extends GraphicController {
 
             if (!(managerIdStr.matches("\\d+"))){ throw new CredentialException("ManagerID not valid"); }
             int managerID = Integer.parseInt(this.idField.getText());
-            this.newUser.setManagerID(managerID);
-            managerAssociated = this.controller.checkManagerID(this.newUser);
+            newUser.setManagerID(managerID);
+            managerAssociated = controller.checkManagerID(newUser);
 
         }catch(CredentialException | ServiceException e){
             this.showError(e.getMessage());
@@ -108,7 +108,7 @@ public class RegistrationGraphicController extends GraphicController {
 
         try {
 
-            this.controller.insertUser(this.newUser);
+            controller.insertUser(newUser);
             System.out.println("User written");
 
         } catch (ServiceException e) {
