@@ -93,18 +93,22 @@ public class LoginDao {
         try{
 
             this.cs = this.conn.prepareCall("{call managerAssociated(?, ?, ?, ?, ?, ?)}");
+            System.out.println("DIO CANE");
             this.cs.setInt(1, user.getManagerID());
             this.cs.registerOutParameter(2, Types.VARCHAR);
             this.cs.registerOutParameter(3, Types.VARCHAR);
             this.cs.registerOutParameter(4, Types.VARCHAR);
             this.cs.registerOutParameter(5, Types.NUMERIC);
             this.cs.registerOutParameter(6, Types.NUMERIC);
+            System.out.println("DIO CANE");
             this.cs.executeQuery();
+            System.out.println("DIO CANE");
             username = this.cs.getString(2);
             email = this.cs.getString(3);
             password = this.cs.getString(4);
             role = this.cs .getInt(5);
             managerID = this.cs.getInt(6);
+            System.out.println("DIO CANE");
 
         }catch(SQLException e){
             throw new DAOException(e.getMessage());

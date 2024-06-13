@@ -66,7 +66,7 @@
                         </VBox>
                         <VBox spacing="10.0">
                            <children>
-                              <Label style="-fx-font-size: 24px;" text="Manager name">
+                              <Label style="-fx-font-size: 24px;" text="Manager email">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -74,7 +74,7 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <Label prefHeight="49.0" prefWidth="240.0" style="-fx-font-size: 24px; -fx-border-color: rgba(0, 137, 123, 0.7); -fx-border-width: 1px;">
+                              <Label fx:id="managerEmailLabel" prefHeight="49.0" prefWidth="240.0" style="-fx-font-size: 24px; -fx-border-color: rgba(0, 137, 123, 0.7); -fx-border-width: 1px;">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

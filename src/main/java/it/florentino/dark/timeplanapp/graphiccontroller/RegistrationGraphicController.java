@@ -29,12 +29,12 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     private CheckBox checkRole;
     @FXML
-    private Label idLabel;
+    private Label managerEmailLabel;
     @FXML
     private TextField idField;
 
-    private UserBean newUser;
-    RegistrationController controller;
+    private static UserBean newUser;
+    private static RegistrationController controller;
 
     @FXML
     public void onHyperLinkClicked(){
@@ -62,6 +62,7 @@ public class RegistrationGraphicController extends GraphicController {
                 this.getScenePlayer().showScene("GUI/RegistrationPage2Man.fxml");
             }else{
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
+                System.out.println(this.newUser);
                 this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml");
             }
 
@@ -74,20 +75,30 @@ public class RegistrationGraphicController extends GraphicController {
     }
 
     @FXML
-    public void onGenerateButtonClick(){}
+    public void onGenerateButtonClick(){}  //MAnager
 
     @FXML
-    public  void onVerifyButtonClick(){
+    public  void onVerifyButtonClick(){    //EMployee
+
+        System.out.println(this.newUser);
+        UserBean managerAssociated = null;
         String managerIdStr = this.idField.getText();
+
         try {
 
             if (!(managerIdStr.matches("\\d+"))){ throw new CredentialException("ManagerID not valid"); }
             int managerID = Integer.parseInt(this.idField.getText());
             this.newUser.setManagerID(managerID);
+            managerAssociated = this.controller.checkManagerID(this.newUser);
 
-        }catch(CredentialException e){
+        }catch(CredentialException | ServiceException e){
             this.showError(e.getMessage());
         }
+
+        if(managerAssociated != null){
+            this.managerEmailLabel.setText(managerAssociated.getEmail());
+        }
+
 
 
     }
