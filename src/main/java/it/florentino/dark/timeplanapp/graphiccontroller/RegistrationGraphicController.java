@@ -33,8 +33,19 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     private TextField idField;
 
-    private static UserBean newUser;
-    private static RegistrationController controller;
+    private static  RegistrationGraphicController instance = null;
+    private  UserBean newUser;
+    private  RegistrationController controller;
+
+
+    private RegistrationGraphicController(){}
+
+    public static RegistrationGraphicController getInstance(){
+        if(instance == null){
+            instance = new RegistrationGraphicController();
+        }
+        return instance;
+    }
 
     @FXML
     public void onHyperLinkClicked(){
@@ -57,13 +68,13 @@ public class RegistrationGraphicController extends GraphicController {
 
             if(!(passwordString.equals(retypedPassword))) throw new CredentialException("Passwords do not match");
 
-            if(checkRole.isSelected()) {
-                newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
-                this.getScenePlayer().showScene("GUI/RegistrationPage2Man.fxml");
+            if(this.checkRole.isSelected()) {
+                this.newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
+                this.getScenePlayer().showRegistrationPage("GUI/RegistrationPage2Man.fxml");
             }else{
 
-                newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
-                this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml");
+                this.newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
+                this.getScenePlayer().showRegistrationPage("GUI/RegistrationPage2.fxml");
             }
 
         } catch (CredentialException e) {
@@ -71,7 +82,7 @@ public class RegistrationGraphicController extends GraphicController {
         } catch (SetSceneException e) {
             throw new RuntimeException(e);
         }
-        controller = new RegistrationController();
+        this.controller = new RegistrationController();
     }
 
     @FXML
@@ -80,7 +91,7 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     public  void onVerifyButtonClick(){    //EMployee
 
-        System.out.println(newUser);
+        System.out.println(this.newUser);
         UserBean managerAssociated = null;
         String managerIdStr = this.idField.getText();
 
@@ -88,8 +99,8 @@ public class RegistrationGraphicController extends GraphicController {
 
             if (!(managerIdStr.matches("\\d+"))){ throw new CredentialException("ManagerID not valid"); }
             int managerID = Integer.parseInt(this.idField.getText());
-            newUser.setManagerID(managerID);
-            managerAssociated = controller.checkManagerID(newUser);
+            this.newUser.setManagerID(managerID);
+            managerAssociated = controller.checkManagerID(this.newUser);
 
         }catch(CredentialException | ServiceException e){
             this.showError(e.getMessage());
@@ -108,7 +119,7 @@ public class RegistrationGraphicController extends GraphicController {
 
         try {
 
-            controller.insertUser(newUser);
+            this.controller.insertUser(this.newUser);
 
         } catch (ServiceException e) {
             throw new RuntimeException(e);
