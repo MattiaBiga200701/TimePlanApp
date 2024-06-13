@@ -88,7 +88,8 @@ public class LoginDao {
         String username;
         String email;
         String password;
-        int role, managerID;
+        int role;
+        int managerID;
 
         try{
 

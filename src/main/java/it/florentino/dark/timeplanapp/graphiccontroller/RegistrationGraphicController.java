@@ -61,8 +61,8 @@ public class RegistrationGraphicController extends GraphicController {
                 newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
                 this.getScenePlayer().showScene("GUI/RegistrationPage2Man.fxml");
             }else{
+
                 newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
-                System.out.println(newUser);
                 this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml");
             }
 
@@ -75,7 +75,7 @@ public class RegistrationGraphicController extends GraphicController {
     }
 
     @FXML
-    public void onGenerateButtonClick(){}  //MAnager
+    public void onGenerateButtonClick(){}  //Manager
 
     @FXML
     public  void onVerifyButtonClick(){    //EMployee
@@ -109,7 +109,6 @@ public class RegistrationGraphicController extends GraphicController {
         try {
 
             controller.insertUser(newUser);
-            System.out.println("User written");
 
         } catch (ServiceException e) {
             throw new RuntimeException(e);
