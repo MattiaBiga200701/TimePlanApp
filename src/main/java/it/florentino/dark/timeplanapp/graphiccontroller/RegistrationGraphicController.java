@@ -91,7 +91,7 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     public  void onVerifyButtonClick(){    //EMployee
 
-        System.out.println(this.newUser);
+
         UserBean managerAssociated = null;
         String managerIdStr = this.idField.getText();
 
