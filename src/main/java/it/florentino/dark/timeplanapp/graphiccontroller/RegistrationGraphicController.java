@@ -110,8 +110,6 @@ public class RegistrationGraphicController extends GraphicController {
             this.managerEmailLabel.setText(managerAssociated.getEmail());
         }
 
-
-
     }
 
     @FXML
