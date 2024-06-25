@@ -33,7 +33,6 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     private TextField idField;
 
-    private static  RegistrationGraphicController instance = null;
     private  UserBean newUser;
     private  RegistrationController controller;
 
