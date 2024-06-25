@@ -38,8 +38,9 @@ public class RegistrationController {
             throw new ServiceException();
         }
 
-        return this.createBeanFromUser(managerAssociated);
-
+        if(managerAssociated.getUsername() != null ) {
+            return this.createBeanFromUser(managerAssociated);
+        }else throw new CredentialException("MangerID not found");
 
     }
 

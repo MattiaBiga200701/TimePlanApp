@@ -97,7 +97,7 @@ public class RegistrationGraphicController extends GraphicController {
             if (!(managerIdStr.matches("\\d+"))){ throw new CredentialException("ManagerID not valid"); }
             int managerID = Integer.parseInt(this.idField.getText());
             this.newUser.setManagerID(managerID);
-            managerAssociated = controller.checkManagerID(this.newUser);
+            managerAssociated = this.controller.checkManagerID(this.newUser);
 
         }catch(CredentialException | ServiceException e){
             this.showError(e.getMessage());
