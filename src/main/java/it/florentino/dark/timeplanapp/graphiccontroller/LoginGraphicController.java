@@ -32,7 +32,6 @@ public class LoginGraphicController extends GraphicController {
         try {
             this.getScenePlayer().showScene("GUI/RegistrationPage.fxml");
         } catch(SetSceneException sE) {
-            sE.printStackTrace();
             System.exit(-1); //Da gestire graficamente
         }
     }
