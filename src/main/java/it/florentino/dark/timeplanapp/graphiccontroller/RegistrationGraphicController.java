@@ -37,14 +37,9 @@ public class RegistrationGraphicController extends GraphicController {
     private  UserBean newUser;
     private  RegistrationController controller;
 
-
-    private RegistrationGraphicController(){}
-
-    public static RegistrationGraphicController getInstance(){
-        if(instance == null){
-            instance = new RegistrationGraphicController();
-        }
-        return instance;
+    @FXML
+    public void initialize(){
+        this.controller =  new RegistrationController();
     }
 
     @FXML
@@ -64,17 +59,19 @@ public class RegistrationGraphicController extends GraphicController {
         String passwordString = this.password.getText();
         String retypedPassword = this.confirmPassword.getText();
 
+
+
         try {
 
             if(!(passwordString.equals(retypedPassword))) throw new CredentialException("Passwords do not match");
 
             if(this.checkRole.isSelected()) {
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
-                this.getScenePlayer().showRegistrationPage("GUI/RegistrationPage2Man.fxml");
+                this.getScenePlayer().showScene("GUI/RegistrationPage2Man.fxml", this.newUser);
             }else{
 
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
-                this.getScenePlayer().showRegistrationPage("GUI/RegistrationPage2.fxml");
+                this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml", this.newUser);
             }
 
         } catch (CredentialException e) {
@@ -89,7 +86,7 @@ public class RegistrationGraphicController extends GraphicController {
     public void onGenerateButtonClick(){}  //Manager
 
     @FXML
-    public  void onVerifyButtonClick(){    //EMployee
+    public  void onVerifyButtonClick(){    //Employee
 
 
         UserBean managerAssociated = null;
@@ -127,6 +124,10 @@ public class RegistrationGraphicController extends GraphicController {
     }
     public Label getErrorLabel(){
             return this.errorLabel;
+    }
+
+    public void setAttribute(UserBean newUser){
+        this.newUser = newUser;
     }
 
 }

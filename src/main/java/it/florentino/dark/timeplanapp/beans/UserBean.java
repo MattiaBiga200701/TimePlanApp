@@ -26,10 +26,12 @@ public class UserBean {
         this.setRole(role);
     }
 
+
+
     public void setUsername(String username) throws CredentialException {
         if(username != null) {
             this.username = username;
-        }else throw new CredentialException("Invalid username;");
+        }else throw new CredentialException("Invalid username");
     }
 
     public String getUsername() {

@@ -30,9 +30,10 @@ public class LoginGraphicController extends GraphicController {
     @FXML
     public void onHyperLinkClicked() {
         try {
-            this.getScenePlayer().showRegistrationPage("GUI/RegistrationPage.fxml");
+            this.getScenePlayer().showScene("GUI/RegistrationPage.fxml");
         } catch(SetSceneException sE) {
-           System.exit(-1); //Da gestire graficamente
+            sE.printStackTrace();
+            System.exit(-1); //Da gestire graficamente
         }
     }
 

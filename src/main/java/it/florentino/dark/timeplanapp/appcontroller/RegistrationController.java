@@ -51,8 +51,7 @@ public class RegistrationController {
         Role role = user.getRole();
         int managerID = user.getManagerID();
 
-        this.setUser(new User(username , email, password, role, managerID));
-
+        this.setUser(new User(username, email, password, role, managerID));
     }
 
     public UserBean createBeanFromUser(User user) throws CredentialException {
@@ -65,9 +64,6 @@ public class RegistrationController {
         return  new UserBean(username, email, password, role, managerID);
 
     }
-
-
-
 
 
     public void setUser(User user){
