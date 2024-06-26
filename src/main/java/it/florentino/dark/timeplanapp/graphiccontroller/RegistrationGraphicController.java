@@ -52,8 +52,8 @@ public class RegistrationGraphicController extends GraphicController {
     public void onHyperLinkClicked(){
         try {
             this.getScenePlayer().showScene("GUI/LoginPage.fxml");
-        }catch(SetSceneException sE){
-            throw new RuntimeException(sE);
+        }catch(SetSceneException e){
+            System.err.println("Errore");
         }
     }
 
