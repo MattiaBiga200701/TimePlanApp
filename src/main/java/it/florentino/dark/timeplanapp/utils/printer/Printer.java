@@ -13,7 +13,7 @@ public class Printer {
         }
 
         public static void perror(String s){
-            printCLI("\\033[31m" + s + "\033[0m");
+            printCLI("\033[31m" + s + "\033[0m");
         }
 
         private static void printCLI(String s) {

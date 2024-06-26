@@ -1,6 +1,6 @@
 package it.florentino.dark.timeplanapp;
 
-import it.florentino.dark.timeplanapp.appcontroller.RegistrationController;
+
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController;
@@ -9,9 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
+
+
 
 
 public class ScenePlayer {
@@ -52,8 +53,8 @@ public class ScenePlayer {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
-        }catch(IOException e){
-            throw new SetSceneException("SetSceneException:" + e.getMessage());
+        }catch(IllegalStateException | IOException e){
+            throw new SetSceneException("SetSceneException: " + e.getMessage());
         }
     }
 

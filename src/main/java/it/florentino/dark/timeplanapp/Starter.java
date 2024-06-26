@@ -1,6 +1,7 @@
 package it.florentino.dark.timeplanapp;
 
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,8 +14,8 @@ public class Starter extends Application {
             ScenePlayer player = ScenePlayer.getScenePlayerInstance(stage);    //SINGLETON
             player.showScene("GUI/LoginPage.fxml");
             stage.show();
-        }catch(SetSceneException sE){
-            System.exit(-1); //Gestione da terminale da cambiare
+        }catch(SetSceneException e){
+            Printer.perror(e.getMessage());
         }
     }
 
