@@ -8,7 +8,9 @@ import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -32,6 +34,8 @@ public class RegistrationGraphicController extends GraphicController {
     private Label managerEmailLabel;
     @FXML
     private TextField idField;
+    @FXML
+    private Button registerButton;
 
     private  UserBean newUser;
     private  RegistrationController controller;
@@ -102,14 +106,22 @@ public class RegistrationGraphicController extends GraphicController {
             this.showError(e.getMessage());
         }
 
-        if(managerAssociated != null){
-            this.managerEmailLabel.setText(managerAssociated.getEmail());
-        }
+        registerButton.setOnAction(this::onRegisterButtonClick);
+        this.managerEmailLabel.setText(managerAssociated.getEmail());
+
+
+    }
+
+
+    @FXML
+    public void onPreviousRegisterClick(){
+
+        this.showError("Please verify your MangerID");
 
     }
 
     @FXML
-    public void onRegisterButtonClick() {
+    public void onRegisterButtonClick(ActionEvent event) {
 
         try {
 
@@ -121,6 +133,7 @@ public class RegistrationGraphicController extends GraphicController {
             this.showError(e.getMessage());
         }
     }
+
     public Label getErrorLabel(){
             return this.errorLabel;
     }
