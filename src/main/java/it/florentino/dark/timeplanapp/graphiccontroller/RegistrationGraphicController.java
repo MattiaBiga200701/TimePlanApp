@@ -16,8 +16,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
 
 public class RegistrationGraphicController extends GraphicController {
 
@@ -46,7 +46,12 @@ public class RegistrationGraphicController extends GraphicController {
 
     @FXML
     public void initialize(){
+
         this.controller =  new RegistrationController();
+        if(registerButton != null){
+            this.registerButton.setOnAction(this::onPreviousRegisterClick);
+        }
+
     }
 
     @FXML
@@ -112,7 +117,7 @@ public class RegistrationGraphicController extends GraphicController {
             Printer.perror(e.getMessage());
         }
 
-        registerButton.setOnAction(this::onRegisterButtonClick);
+        this.registerButton.setOnAction(this::onRegisterButtonClick);
         this.managerEmailLabel.setText(managerAssociated.getEmail());
 
 
@@ -120,9 +125,11 @@ public class RegistrationGraphicController extends GraphicController {
 
 
     @FXML
-    public void onPreviousRegisterClick(){
+    public void onPreviousRegisterClick(ActionEvent event){
 
-        this.showError("Please verify your MangerID");
+        if(this.newUser.getRole() == Role.MANAGER){
+            this.showError("Generate your ManagerID!");
+        }else this.showError("Verify your ManagerID!");
 
     }
 
