@@ -15,6 +15,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class RegistrationGraphicController extends GraphicController {
 
 
@@ -80,8 +83,9 @@ public class RegistrationGraphicController extends GraphicController {
         } catch (CredentialException e) {
             this.showError(e.getMessage());
         } catch (SetSceneException e) {
-            throw new RuntimeException(e);
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
+
         this.controller = new RegistrationController();
     }
 
@@ -102,8 +106,10 @@ public class RegistrationGraphicController extends GraphicController {
             this.newUser.setManagerID(managerID);
             managerAssociated = this.controller.checkManagerID(this.newUser);
 
-        }catch(CredentialException | ServiceException e){
+        }catch(CredentialException e){
             this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
 
         registerButton.setOnAction(this::onRegisterButtonClick);
@@ -128,7 +134,7 @@ public class RegistrationGraphicController extends GraphicController {
             this.controller.insertUser(this.newUser);
 
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         } catch (NotUniqueEmailException e ){
             this.showError(e.getMessage());
         }

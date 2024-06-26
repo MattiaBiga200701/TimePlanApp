@@ -7,6 +7,7 @@ module it.florentino.dark.timeplanapp {
 
     opens it.florentino.dark.timeplanapp to javafx.fxml;
     exports it.florentino.dark.timeplanapp;
+    exports it.florentino.dark.timeplanapp.beans;
     exports it.florentino.dark.timeplanapp.graphiccontroller;
     opens it.florentino.dark.timeplanapp.graphiccontroller to javafx.fxml;
     exports it.florentino.dark.timeplanapp.exceptions;
