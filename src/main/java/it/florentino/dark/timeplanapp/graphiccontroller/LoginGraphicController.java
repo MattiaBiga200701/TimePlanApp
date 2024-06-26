@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-
+import java.util.Set;
 
 
 public class LoginGraphicController extends GraphicController {
@@ -32,8 +32,8 @@ public class LoginGraphicController extends GraphicController {
     public void onHyperLinkClicked() {
         try {
             this.getScenePlayer().showScene("GUI/RegistrationPage.fxml");
-        } catch(SetSceneException sE) {
-            System.exit(-1); //Da gestire graficamente
+        } catch(SetSceneException e) {
+           Printer.perror(e.getMessage());
         }
     }
 
@@ -55,8 +55,10 @@ public class LoginGraphicController extends GraphicController {
                 default -> throw new CredentialException();
             }
 
-        }catch(ServiceException | CredentialException e) {
+        }catch(CredentialException e) {
             this.showError(e.getMessage());
+        }catch(ServiceException e ){
+            Printer.perror(e.getMessage());
         }
     }
 

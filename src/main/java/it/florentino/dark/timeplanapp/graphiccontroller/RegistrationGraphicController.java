@@ -8,6 +8,7 @@ import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
+import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -53,7 +54,7 @@ public class RegistrationGraphicController extends GraphicController {
         try {
             this.getScenePlayer().showScene("GUI/LoginPage.fxml");
         }catch(SetSceneException e){
-            System.err.println("Errore");
+            Printer.perror(e.getMessage());
         }
     }
 
@@ -83,7 +84,7 @@ public class RegistrationGraphicController extends GraphicController {
         } catch (CredentialException e) {
             this.showError(e.getMessage());
         } catch (SetSceneException e) {
-            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+            Printer.perror(e.getMessage());
         }
 
     }
@@ -108,7 +109,7 @@ public class RegistrationGraphicController extends GraphicController {
         }catch(CredentialException e){
             this.showError(e.getMessage());
         }catch(ServiceException e){
-            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+            Printer.perror(e.getMessage());
         }
 
         registerButton.setOnAction(this::onRegisterButtonClick);
@@ -133,7 +134,7 @@ public class RegistrationGraphicController extends GraphicController {
             this.controller.insertUser(this.newUser);
 
         } catch (ServiceException e) {
-            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+            Printer.perror(e.getMessage());
         } catch (NotUniqueEmailException e ){
             this.showError(e.getMessage());
         }
