@@ -7,6 +7,7 @@ import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -49,8 +50,8 @@ public class LoginGraphicController extends GraphicController {
             UserBean verifiedUser = controller.authenticate(credentials);
 
             switch(verifiedUser.getRole()){
-                case MANAGER -> System.out.println("Manager logged");
-                case EMPLOYEE -> System.out.println("Employee logged");
+                case MANAGER -> Printer.printf("Manager logged");
+                case EMPLOYEE -> Printer.printf("Employee logged");
                 default -> throw new CredentialException();
             }
 
