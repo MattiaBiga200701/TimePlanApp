@@ -86,7 +86,6 @@ public class RegistrationGraphicController extends GraphicController {
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
 
-        this.controller = new RegistrationController();
     }
 
     @FXML
