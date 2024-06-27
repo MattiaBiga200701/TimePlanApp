@@ -95,7 +95,9 @@ public class RegistrationGraphicController extends GraphicController {
     }
 
     @FXML
-    public void onGenerateButtonClick(){}  //Manager
+    public void onGenerateButtonClick(){
+
+    }  //Manager
 
     @FXML
     public  void onVerifyButtonClick(){    //Employee
