@@ -19,7 +19,7 @@ public class EmployeesListGraphicController extends GraphicController {
     @FXML
     private Label errorLabel;
 
-    private String[] contractTypes = {"Part-Time" , "Full-Time"};
+    private final String[] contractTypes = {"Part-Time" , "Full-Time"};
 
 
     @FXML
