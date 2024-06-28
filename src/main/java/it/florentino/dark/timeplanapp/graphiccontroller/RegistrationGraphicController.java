@@ -159,8 +159,9 @@ public class RegistrationGraphicController extends GraphicController {
         try {
 
             this.controller.insertUser(this.newUser);
+            this.getScenePlayer().showScene("GUI/LoginPage.fxml");
 
-        } catch (ServiceException e) {
+        } catch (ServiceException | SetSceneException e) {
             Printer.perror(e.getMessage());
         } catch (NotUniqueEmailException e ){
             this.showError(e.getMessage());
