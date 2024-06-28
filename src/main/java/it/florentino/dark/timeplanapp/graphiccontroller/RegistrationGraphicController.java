@@ -9,14 +9,14 @@ import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-
+import javafx.util.Duration;
 
 
 public class RegistrationGraphicController extends GraphicController {
@@ -159,13 +159,23 @@ public class RegistrationGraphicController extends GraphicController {
         try {
 
             this.controller.insertUser(this.newUser);
-            this.getScenePlayer().showScene("GUI/LoginPage.fxml");
-
-        } catch (ServiceException | SetSceneException e) {
+        } catch (ServiceException e) {
             Printer.perror(e.getMessage());
         } catch (NotUniqueEmailException e ){
             this.showError(e.getMessage());
         }
+
+        this.getErrorLabel().setText("Registration Complete!");
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(newEvent -> {
+            try {
+                this.getScenePlayer().showScene("GUI/LoginPage.fxml");
+            } catch (SetSceneException e) {
+                Printer.perror(e.getMessage());
+            }
+        });
+        pause.play();
+
     }
 
     public Label getErrorLabel(){
