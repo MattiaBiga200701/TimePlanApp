@@ -39,7 +39,11 @@ public class RegistrationGraphicController extends GraphicController {
     @FXML
     private TextField idField;
     @FXML
+    private Label idLabel;
+    @FXML
     private Button registerButton;
+    @FXML
+    private Button generateButton;
 
     private  UserBean newUser;
     private  RegistrationController controller;
@@ -95,7 +99,20 @@ public class RegistrationGraphicController extends GraphicController {
     }
 
     @FXML
-    public void onGenerateButtonClick(){
+    public void onGenerateButtonClick() {
+
+        try{
+            this.newUser = this.controller.createManagerID(this.newUser);
+        }catch(CredentialException e){
+            this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+        }
+
+        this.idLabel.setText(Integer.toString(this.newUser.getManagerID()));
+        this.generateButton.setDisable(true);
+        this.registerButton.setOnAction(this::onRegisterButtonClick);
+
 
     }  //Manager
 

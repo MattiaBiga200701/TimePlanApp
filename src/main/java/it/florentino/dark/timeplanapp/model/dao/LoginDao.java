@@ -117,6 +117,25 @@ public class LoginDao {
 
     }
 
+    public User createManagerID(User user) throws DAOException {
+
+        int managerID;
+        User newManager = user;
+
+        try{
+
+            this.cs = this.conn.prepareCall("{call generate_manager_id(?)}");
+            this.cs.registerOutParameter(1, Types.NUMERIC);
+            this.cs.executeQuery();
+            managerID = this.cs.getInt(1);
+        }catch(SQLException e){
+            throw new DAOException("ManagerID generation error: " + e.getMessage());
+        }
+
+        newManager.setManagerID(managerID);
+        return user;
+    }
+
 
 
 }

@@ -44,6 +44,20 @@ public class RegistrationController {
 
     }
 
+    public UserBean createManagerID(UserBean newUser) throws ServiceException, CredentialException{
+
+        try{
+            LoginDao loginDao = new LoginDao();
+            this.createUserFromBean(newUser);
+            this.user = loginDao.createManagerID(this.user);
+        }catch(DAOException e){
+            throw new ServiceException();
+        }
+
+        return newUser = this.createBeanFromUser(this.user);
+
+    }
+
     public void createUserFromBean(UserBean user){
 
         String username = user.getUsername();
