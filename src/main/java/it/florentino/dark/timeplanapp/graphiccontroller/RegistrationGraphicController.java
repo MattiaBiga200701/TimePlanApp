@@ -137,8 +137,9 @@ public class RegistrationGraphicController extends GraphicController {
         }
 
         this.registerButton.setOnAction(this::onRegisterButtonClick);
-        this.managerEmailLabel.setText(managerAssociated.getEmail());
-
+        if (managerAssociated != null) {
+            this.managerEmailLabel.setText(managerAssociated.getEmail());
+        }
 
     }
 
