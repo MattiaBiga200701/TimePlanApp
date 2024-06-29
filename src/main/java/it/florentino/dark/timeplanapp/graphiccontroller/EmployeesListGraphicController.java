@@ -1,10 +1,11 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
+import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
+import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import it.florentino.dark.timeplanapp.utils.printer.Printer;
 
 public class EmployeesListGraphicController extends GraphicController {
 
@@ -18,8 +19,12 @@ public class EmployeesListGraphicController extends GraphicController {
     private Button addButton;
     @FXML
     private Label errorLabel;
+    @FXML
+    private ListView<String> employeesListView;
+    private ObservableList<String> employeesList;
 
     private final String[] contractTypes = {"Part-Time" , "Full-Time"};
+
 
 
     @FXML
@@ -31,10 +36,37 @@ public class EmployeesListGraphicController extends GraphicController {
 
 
     @FXML
-    public void onAddClick(){}
+    public void onAddClick(){
+
+        String name = this.nameField.getText();
+        String surname = this.surnameField.getText();
+        String contractType = this.contractChoiceBox.getValue();
+
+        try {
+            if (name.contains("  ") || surname.contains("  ")) {
+                throw new InvalidInputException("Invalid Input");
+            }
+            String combination = name + "  " + surname + "  " + contractType;
+            this.employeesListView.getItems().add(combination);
+
+            this.nameField.clear();
+            this.surnameField.clear();
+            this.contractChoiceBox.setValue(null);
+        }catch(InvalidInputException e){
+            this.showError(e.getMessage());
+        }
+
+    }
 
     @FXML
-    public void onWorkScheduleClick(){}
+    public void onWorkScheduleClick(){
+
+        try{
+            this.getScenePlayer().showScene("GUI/HomePageMan2.fxml");
+        }catch(SetSceneException e){
+            Printer.perror(e.getMessage());
+        }
+    }
 
     public Label getErrorLabel(){
         return this.errorLabel;

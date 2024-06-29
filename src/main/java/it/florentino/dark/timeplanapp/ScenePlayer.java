@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp;
 
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import it.florentino.dark.timeplanapp.graphiccontroller.GraphicController;
 import it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
