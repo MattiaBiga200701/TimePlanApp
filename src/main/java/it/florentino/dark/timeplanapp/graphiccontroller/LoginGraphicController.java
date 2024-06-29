@@ -13,8 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.util.Set;
-
 
 public class LoginGraphicController extends GraphicController {
 
@@ -50,14 +48,14 @@ public class LoginGraphicController extends GraphicController {
             UserBean verifiedUser = controller.authenticate(credentials);
 
             switch(verifiedUser.getRole()){
-                case MANAGER -> Printer.printf("Manager logged");
+                case MANAGER -> this.getScenePlayer().showScene("GUI/HomePageMan.fxml");
                 case EMPLOYEE -> Printer.printf("Employee logged");
                 default -> throw new CredentialException();
             }
 
         }catch(CredentialException e) {
             this.showError(e.getMessage());
-        }catch(ServiceException e ){
+        }catch(ServiceException  | SetSceneException e ){
             Printer.perror(e.getMessage());
         }
     }
