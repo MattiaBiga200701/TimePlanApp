@@ -116,7 +116,7 @@
             <HBox prefHeight="738.0" prefWidth="746.0">
                <children>
                   <Region prefHeight="738.0" prefWidth="42.0" />
-                  <ListView fx:id="employeeListView" prefHeight="738.0" prefWidth="600.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
+                  <ListView fx:id="employeesListView" prefHeight="738.0" prefWidth="600.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
                </children>
             </HBox>
          </children>

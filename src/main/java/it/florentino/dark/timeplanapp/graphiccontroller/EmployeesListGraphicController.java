@@ -2,6 +2,7 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,7 +22,7 @@ public class EmployeesListGraphicController extends GraphicController {
     private Label errorLabel;
     @FXML
     private ListView<String> employeesListView;
-    private ObservableList<String> employeesList;
+    private ObservableList<String> employeesItems;
 
     private final String[] contractTypes = {"Part-Time" , "Full-Time"};
 
@@ -31,6 +32,8 @@ public class EmployeesListGraphicController extends GraphicController {
     public void initialize(){
 
         this.contractChoiceBox.getItems().addAll(this.contractTypes);
+        this.employeesItems = FXCollections.observableArrayList();
+        this.employeesListView.setItems(this.employeesItems);
 
     }
 
@@ -47,7 +50,7 @@ public class EmployeesListGraphicController extends GraphicController {
                 throw new InvalidInputException("Invalid Input");
             }
             String combination = name + "  " + surname + "  " + contractType;
-            this.employeesListView.getItems().add(combination);
+            this.employeesItems.add(combination);
 
             this.nameField.clear();
             this.surnameField.clear();
