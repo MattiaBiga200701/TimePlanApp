@@ -55,6 +55,7 @@ public class EmployeesListGraphicController extends GraphicController {
             this.nameField.clear();
             this.surnameField.clear();
             this.contractChoiceBox.setValue(null);
+
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
         }
@@ -69,6 +70,13 @@ public class EmployeesListGraphicController extends GraphicController {
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
         }
+    }
+
+    @FXML
+    public void onLoadClick(){
+
+
+
     }
 
     public Label getErrorLabel(){

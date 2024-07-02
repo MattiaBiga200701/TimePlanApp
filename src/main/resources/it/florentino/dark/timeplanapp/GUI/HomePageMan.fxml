@@ -121,5 +121,10 @@
             </HBox>
          </children>
       </HBox>
+      <Button layoutX="939.0" layoutY="820.0" mnemonicParsing="false" onAction="#onLoadClick" prefHeight="48.0" prefWidth="280.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Load List">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

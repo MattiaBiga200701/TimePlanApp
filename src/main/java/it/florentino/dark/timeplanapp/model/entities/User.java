@@ -23,6 +23,11 @@ public class User {
         this.setRole(role);
     }
 
+    public User(String username, String password){
+        this.setUsername(username);
+        this.setPassword(password);
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }

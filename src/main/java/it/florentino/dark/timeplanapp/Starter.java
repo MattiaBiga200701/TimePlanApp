@@ -11,7 +11,7 @@ public class Starter extends Application {
     public void start(Stage stage) {
 
         try {
-            ScenePlayer player = ScenePlayer.getScenePlayerInstance(stage);    //SINGLETON
+            ScenePlayerSingleton player = ScenePlayerSingleton.getScenePlayerInstance(stage);    //SINGLETON
             player.showScene("GUI/LoginPage.fxml");
             stage.show();
         }catch(SetSceneException e){

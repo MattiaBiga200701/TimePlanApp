@@ -3,7 +3,6 @@ package it.florentino.dark.timeplanapp;
 
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
-import it.florentino.dark.timeplanapp.graphiccontroller.GraphicController;
 import it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,21 +15,21 @@ import java.io.IOException;
 
 
 
-public class ScenePlayer {
+public class ScenePlayerSingleton {
 
-    private static ScenePlayer instance = null;
+    private static ScenePlayerSingleton instance = null;
     private Stage stage;
 
 
 
-    private ScenePlayer(Stage stage){
+    private ScenePlayerSingleton(Stage stage){
         this.setStage(stage);
     }
 
 
-    public static ScenePlayer getScenePlayerInstance(Stage stage){
-        if(ScenePlayer.instance == null){
-            ScenePlayer.instance = new ScenePlayer(stage);
+    public static ScenePlayerSingleton getScenePlayerInstance(Stage stage){
+        if(ScenePlayerSingleton.instance == null){
+            ScenePlayerSingleton.instance = new ScenePlayerSingleton(stage);
         }
         return instance;
     }
@@ -50,7 +49,7 @@ public class ScenePlayer {
 
     public void showScene(String fxmlPath) throws SetSceneException{
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayer.class.getResource(fxmlPath));
+            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
@@ -61,7 +60,7 @@ public class ScenePlayer {
 
     public void showScene(String fxmlPath, UserBean newUser) throws SetSceneException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayer.class.getResource(fxmlPath));
+            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
             Parent root = fxmlLoader.load();
             RegistrationGraphicController graphicController  = fxmlLoader.getController();
             graphicController.setAttribute(newUser);

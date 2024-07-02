@@ -20,7 +20,7 @@ public class LoginController {
         String email;
         int managerID;
         Role role;
-        this.setUser(new User(username, null , password, null));
+        this.setUser(new User(username, password));
 
         try {
             LoginDao loginDao = new LoginDao();
