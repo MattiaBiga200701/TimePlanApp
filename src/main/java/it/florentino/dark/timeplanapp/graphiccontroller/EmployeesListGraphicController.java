@@ -1,12 +1,17 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
+import it.florentino.dark.timeplanapp.beans.EmployeeBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeesListGraphicController extends GraphicController {
 
@@ -23,6 +28,10 @@ public class EmployeesListGraphicController extends GraphicController {
     @FXML
     private ListView<String> employeesListView;
     private ObservableList<String> employeesItems;
+
+    private EmployeeBean employeeBean;
+
+    private List<EmployeeBean> employeeBeanList;
 
     private final String[] contractTypes = {"Part-Time" , "Full-Time"};
 
@@ -41,16 +50,19 @@ public class EmployeesListGraphicController extends GraphicController {
     @FXML
     public void onAddClick(){
 
-        String name = this.nameField.getText();
-        String surname = this.surnameField.getText();
-        String contractType = this.contractChoiceBox.getValue();
+        String name = this.nameField.getText().trim();
+        String surname = this.surnameField.getText().trim();
+        String contractType = this.contractChoiceBox.getValue().trim();
 
         try {
-            if (name.contains("  ") || surname.contains("  ")) {
-                throw new InvalidInputException("Invalid Input");
-            }
+
+            this.employeeBeanList = new ArrayList<>();
+            this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType));
+            this.employeeBeanList.add(this.employeeBean);
+
             String combination = name + "  " + surname + "  " + contractType;
             this.employeesItems.add(combination);
+
 
             this.nameField.clear();
             this.surnameField.clear();
@@ -59,6 +71,7 @@ public class EmployeesListGraphicController extends GraphicController {
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
         }
+
 
     }
 
