@@ -92,6 +92,11 @@ public class EmployeesListGraphicController extends GraphicController {
 
     }
 
+    @FXML
+    public void onRemoveClick(){
+
+    }
+
     public Label getErrorLabel(){
         return this.errorLabel;
     }
