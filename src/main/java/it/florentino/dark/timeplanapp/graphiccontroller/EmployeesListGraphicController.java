@@ -43,6 +43,7 @@ public class EmployeesListGraphicController extends GraphicController {
         this.contractChoiceBox.getItems().addAll(this.contractTypes);
         this.employeesItems = FXCollections.observableArrayList();
         this.employeesListView.setItems(this.employeesItems);
+        this.employeeBeanList = new ArrayList<>();
 
     }
 
@@ -56,7 +57,7 @@ public class EmployeesListGraphicController extends GraphicController {
 
         try {
 
-            this.employeeBeanList = new ArrayList<>();
+
             this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType));
             this.employeeBeanList.add(this.employeeBean);
 
@@ -87,14 +88,50 @@ public class EmployeesListGraphicController extends GraphicController {
 
     @FXML
     public void onLoadClick(){
-
-
-
     }
 
     @FXML
     public void onRemoveClick(){
 
+        int selectedIdx = this.employeesListView.getSelectionModel().getSelectedIndex();
+
+        String nameToRemove;
+        String surnameToRemove;
+        String contractTypeToRemove;
+
+        String name;
+        String surname;
+        ContractTypes contractType;
+
+
+        if(selectedIdx != -1){
+
+            String selectItem = this.employeesListView.getSelectionModel().getSelectedItem();
+            String[] tokens = selectItem.split("\\s{2}");
+
+            nameToRemove = tokens[0];
+            surnameToRemove = tokens[1];
+            contractTypeToRemove = tokens[2];
+
+            this.employeesListView.getItems().remove(selectedIdx);
+
+            for(EmployeeBean bean: this.employeeBeanList){
+
+                name = bean.getName();
+                surname = bean.getSurname();
+                contractType = bean.getContractType();
+
+                if(name.equals(nameToRemove) && surname.equals(surnameToRemove) && contractType == ContractTypes.fromString(contractTypeToRemove)){
+                    this.employeeBeanList.remove(bean);
+                    break;
+                }
+
+            }
+
+
+        }else{
+            this.showError("Select an Item");
+        }
     }
 
     public Label getErrorLabel(){

@@ -95,6 +95,6 @@ public class UserBean {
     }
 
     private boolean isValidManagerID(int managerID){
-        return (managerID >= 1 && managerID <= 1000000);
+        return (managerID >= 100000 && managerID <= 999999);
     }
 }
