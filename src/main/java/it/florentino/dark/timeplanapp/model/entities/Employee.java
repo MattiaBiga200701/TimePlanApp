@@ -1,12 +1,14 @@
 package it.florentino.dark.timeplanapp.model.entities;
 
+import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
+
 public class Employee {
 
     private String name;
     private String surname;
-    private String contractType;
+    private ContractTypes contractType;
 
-    public Employee(String name, String surname, String contractType){
+    public Employee(String name, String surname, ContractTypes contractType){
         this.setName(name);
         this.setSurname(surname);
         this.setContractType(contractType);
@@ -28,11 +30,11 @@ public class Employee {
         return this.surname;
     }
 
-    public void setContractType(String contractType) {
+    public void setContractType(ContractTypes contractType) {
         this.contractType = contractType;
     }
 
-    public String getContractType() {
-        return contractType;
+    public ContractTypes getContractType() {
+        return this.contractType;
     }
 }
