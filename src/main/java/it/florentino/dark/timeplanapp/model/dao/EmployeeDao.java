@@ -1,6 +1,6 @@
 package it.florentino.dark.timeplanapp.model.dao;
 
-import it.florentino.dark.timeplanapp.beans.EmployeeBean;
+
 import it.florentino.dark.timeplanapp.exceptions.ConnectionException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
