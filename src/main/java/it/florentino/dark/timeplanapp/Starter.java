@@ -12,7 +12,7 @@ public class Starter extends Application {
 
         try {
             ScenePlayerSingleton player = ScenePlayerSingleton.getScenePlayerInstance(stage);    //SINGLETON
-            player.showScene("GUI/HomePageMan.fxml");
+            player.showScene("GUI/LoginPage.fxml");
             stage.show();
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
