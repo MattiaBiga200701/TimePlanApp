@@ -32,7 +32,7 @@ public class LoginController {
 
 
         }catch(DAOException e){
-            throw new ServiceException();
+            throw new ServiceException(e.getMessage());
         }
 
         email = this.getUser().getEmail();
