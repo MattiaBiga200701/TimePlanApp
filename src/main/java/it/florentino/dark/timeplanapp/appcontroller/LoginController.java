@@ -11,7 +11,7 @@ import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 public class LoginController {
 
-    private User user = null;
+
 
     public UserBean authenticate(LoginBean credentials) throws ServiceException, CredentialException{
 
@@ -20,13 +20,13 @@ public class LoginController {
         String email;
         int managerID;
         Role role;
-        this.setUser(new User(username, password));
+        User user = new User(username, password);
 
         try {
             LoginDao loginDao = new LoginDao();
-            this.setUser(loginDao.loginProcedure(this.getUser()));
+            user = loginDao.loginProcedure(user);
 
-            if(this.getUser().getRole() == null){
+            if(user.getRole() == null){
                 throw new CredentialException();
             }
 
@@ -35,20 +35,13 @@ public class LoginController {
             throw new ServiceException(e.getMessage());
         }
 
-        email = this.getUser().getEmail();
-        role = this.getUser().getRole();
-        managerID = this.getUser().getManagerID();
+        email = user.getEmail();
+        role = user.getRole();
+        managerID = user.getManagerID();
 
 
         return new UserBean(username, email, password, role, managerID);
 
     }
 
-    public void setUser(User user){
-        this.user = user;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
 }

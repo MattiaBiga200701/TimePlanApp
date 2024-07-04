@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp;
 
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import it.florentino.dark.timeplanapp.graphiccontroller.EmployeesListGraphicController;
 import it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,7 +59,7 @@ public class ScenePlayerSingleton {
         }
     }
 
-    public void showScene(String fxmlPath, UserBean newUser) throws SetSceneException {
+    public void showRegistrationForm(String fxmlPath, UserBean newUser) throws SetSceneException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
             Parent root = fxmlLoader.load();
@@ -71,4 +72,20 @@ public class ScenePlayerSingleton {
         }
 
     }
+
+    public void showHomePageMan(String fxmlPath, UserBean loggedUser) throws SetSceneException{
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
+            Parent root = fxmlLoader.load();
+            EmployeesListGraphicController controller = fxmlLoader.getController();
+            controller.setAttribute(loggedUser);
+            Scene scene = new Scene(root);
+            instance.stage.setScene(scene);
+        }catch(IOException e){
+            throw new SetSceneException("SetSceneException:" + e.getMessage());
+        }
+
+    }
+
 }

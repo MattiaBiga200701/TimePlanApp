@@ -83,11 +83,11 @@ public class RegistrationGraphicController extends GraphicController {
 
             if(this.checkRole.isSelected()) {
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
-                this.getScenePlayer().showScene("GUI/RegistrationPage2Man.fxml", this.newUser);
+                this.getScenePlayer().showRegistrationForm("GUI/RegistrationPage2Man.fxml", this.newUser);
             }else{
 
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
-                this.getScenePlayer().showScene("GUI/RegistrationPage2.fxml", this.newUser);
+                this.getScenePlayer().showRegistrationForm("GUI/RegistrationPage2.fxml", this.newUser);
             }
 
         } catch (CredentialException e) {
@@ -182,8 +182,8 @@ public class RegistrationGraphicController extends GraphicController {
             return this.errorLabel;
     }
 
-    public void setAttribute(UserBean newUser){
+    @Override
+    public void setAttribute(UserBean newUser) {
         this.newUser = newUser;
     }
-
 }

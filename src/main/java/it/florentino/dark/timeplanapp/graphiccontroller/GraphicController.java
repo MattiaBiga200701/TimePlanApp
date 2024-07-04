@@ -4,10 +4,13 @@ import it.florentino.dark.timeplanapp.ScenePlayerSingleton;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
+import it.florentino.dark.timeplanapp.beans.UserBean;
 
 public abstract class GraphicController {
 
     private final ScenePlayerSingleton player = ScenePlayerSingleton.getScenePlayerInstance(null);
+
+    private UserBean loggedUser;
 
     protected abstract Label getErrorLabel();
 
@@ -22,5 +25,9 @@ public abstract class GraphicController {
     }
     public ScenePlayerSingleton getScenePlayer(){
         return this.player;
+    }
+
+    public void setAttribute(UserBean loggedUser){
+        this.loggedUser = loggedUser;
     }
 }
