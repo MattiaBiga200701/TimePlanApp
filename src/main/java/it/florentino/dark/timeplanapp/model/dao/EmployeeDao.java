@@ -28,6 +28,7 @@ public class EmployeeDao {
         String name = newEmployee.getName();
         String surname = newEmployee.getSurname();
         String contractType = newEmployee.getContractType().getId();
+        int managerID = newEmployee.getManagerID();
 
 
         try{
@@ -36,13 +37,14 @@ public class EmployeeDao {
             this.cs.setString(1, name);
             this.cs.setString(2, surname);
             this.cs.setString(3, contractType);
+            this.cs.setInt(4,managerID);
             this.cs.executeQuery();
 
         }catch(SQLException e){
             throw new DAOException(e.getMessage());
         }
 
-        return new Employee(name, surname, ContractTypes.fromString(contractType));
+        return new Employee(name, surname, ContractTypes.fromString(contractType), managerID);
     }
 
 }

@@ -30,4 +30,8 @@ public abstract class GraphicController {
     public void setAttribute(UserBean loggedUser){
         this.loggedUser = loggedUser;
     }
+
+    public UserBean getLoggedUser(){
+        return this.loggedUser;
+    }
 }

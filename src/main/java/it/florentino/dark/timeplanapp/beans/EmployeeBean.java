@@ -13,10 +13,13 @@ public class EmployeeBean {
     private String surname;
     private ContractTypes contractType;
 
-    public EmployeeBean(String name, String surname, ContractTypes contractType) throws InvalidInputException{
+    private int managerID;
+
+    public EmployeeBean(String name, String surname, ContractTypes contractType, int managerID) throws InvalidInputException{
         this.setName(name);
         this.setSurname(surname);
         this.setContractType(contractType);
+        this.setManagerID(managerID);
     }
 
     public void setName(String name) throws InvalidInputException{
@@ -61,6 +64,13 @@ public class EmployeeBean {
         return matcher.matches();
     }
 
+    public void setManagerID(int managerID) {
+        this.managerID = managerID;
+    }
+
+    public int getManagerID() {
+        return this.managerID;
+    }
 }
 
 

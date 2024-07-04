@@ -1,7 +1,9 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
+import it.florentino.dark.timeplanapp.appcontroller.EmployeeListController;
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
+import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import javafx.collections.FXCollections;
@@ -33,7 +35,7 @@ public class EmployeesListGraphicController extends GraphicController {
 
     private List<EmployeeBean> employeeBeanList;
 
-    private final String[] contractTypes = {"Part-Time" , "Full-Time"};
+    private final String[] contractTypes = {"part-time" , "full-time"};
 
 
 
@@ -59,7 +61,7 @@ public class EmployeesListGraphicController extends GraphicController {
         try {
 
 
-            this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType));
+            this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType), this.getLoggedUser().getManagerID());
             this.employeeBeanList.add(this.employeeBean);
 
             String combination = name + "  " + surname + "  " + contractType;
@@ -90,6 +92,16 @@ public class EmployeesListGraphicController extends GraphicController {
     @FXML
     public void onLoadClick(){
 
+        EmployeeListController controller;
+        try{
+            controller = new EmployeeListController();
+            this.employeeBeanList = controller.loadEmployeeList(this.employeeBeanList);
+
+        }catch(InvalidInputException e){
+            this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+        }
 
     }
 

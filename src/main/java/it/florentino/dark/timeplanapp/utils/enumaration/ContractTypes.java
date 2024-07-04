@@ -2,8 +2,8 @@ package it.florentino.dark.timeplanapp.utils.enumaration;
 
 public enum ContractTypes {
 
-    PART_TIME("Part-time"),
-    FULL_TIME("Full-time");
+    PART_TIME("part-time"),
+    FULL_TIME("full-time");
     private final String id;
 
     ContractTypes(String id){
