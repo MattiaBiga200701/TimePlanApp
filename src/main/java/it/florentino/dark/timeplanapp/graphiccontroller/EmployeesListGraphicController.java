@@ -56,10 +56,14 @@ public class EmployeesListGraphicController extends GraphicController {
 
         String name = this.nameField.getText().trim();
         String surname = this.surnameField.getText().trim();
-        String contractType = this.contractChoiceBox.getValue().trim();
 
         try {
 
+            if(contractChoiceBox.getValue() == null){
+                throw new InvalidInputException("Select Contract Type");
+            }
+
+            String contractType = this.contractChoiceBox.getValue();
 
             this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType), this.getLoggedUser().getManagerID());
             this.employeeBeanList.add(this.employeeBean);
