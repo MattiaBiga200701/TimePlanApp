@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: white;" stylesheets="@../StyleSheets/HomePageMan2Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.WorkScheduleGraphicController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1442.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);">
          <children>
-            <Label prefHeight="67.0" prefWidth="249.0" style="-fx-alignment: left;" text="Time Plan |">
+            <Label prefHeight="67.0" prefWidth="249.0" text="Time Plan |">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
@@ -23,7 +23,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Button fx:id="nextButton1" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Employee List">
+            <Button fx:id="employeeList" mnemonicParsing="false" onAction="#onEmployeeListClick" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Employee List">
                <font>
                   <Font size="42.0" />
                </font>
@@ -31,7 +31,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="nextButton11" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="49.0" prefWidth="242.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
+            <Button fx:id="nextButton11" mnemonicParsing="false" prefHeight="49.0" prefWidth="242.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
                <font>
                   <Font size="30.0" />
                </font>
@@ -44,7 +44,7 @@
       <Line endX="1242.9998779296875" endY="7.62939453125E-6" layoutX="199.0" layoutY="67.0" startX="-199.0" startY="7.62939453125E-6" strokeWidth="2.0" />
       <VBox layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="68.0">
          <children>
-            <Label alignment="CENTER" prefHeight="73.0" prefWidth="402.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="Label">
+            <Label alignment="CENTER" prefHeight="73.0" prefWidth="402.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="Employees">
                <font>
                   <Font size="24.0" />
                </font>

@@ -87,7 +87,7 @@ public class EmployeesListGraphicController extends GraphicController {
     public void onWorkScheduleClick(){
 
         try{
-            this.getScenePlayer().showScene("GUI/HomePageMan2.fxml");
+            this.getScenePlayer().showHomePageMan2("GUI/HomePageMan2.fxml", this.getLoggedUser());
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
         }
@@ -99,7 +99,7 @@ public class EmployeesListGraphicController extends GraphicController {
         EmployeeListController controller;
         try{
             controller = new EmployeeListController();
-            this.employeeBeanList = controller.loadEmployeeList(this.employeeBeanList);
+            this.employeeBeanList = controller.storeEmployeeList(this.employeeBeanList);
 
         }catch(InvalidInputException e){
             this.showError(e.getMessage());

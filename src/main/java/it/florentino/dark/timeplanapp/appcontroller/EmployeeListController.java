@@ -12,7 +12,7 @@ import java.util.List;
 
 public class EmployeeListController {
 
-    public List<EmployeeBean> loadEmployeeList(List<EmployeeBean> employeeBeanList) throws ServiceException, InvalidInputException {
+    public List<EmployeeBean> storeEmployeeList(List<EmployeeBean> employeeBeanList) throws ServiceException, InvalidInputException {
 
         List<EmployeeBean> checkedList = new ArrayList<>();
         Employee newEmployee;

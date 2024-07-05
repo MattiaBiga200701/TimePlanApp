@@ -28,6 +28,10 @@ public class User {
         this.setPassword(password);
     }
 
+    public User(int managerID){
+        this.setManagerID(managerID);
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
