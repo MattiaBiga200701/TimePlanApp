@@ -56,7 +56,7 @@ public class ScenePlayerSingleton {
             instance.stage.setScene(scene);
 
         }catch(IllegalStateException | IOException e){
-            throw new SetSceneException("SetSceneException: " + e.getMessage());
+            throw new SetSceneException(e.getMessage());
         }
     }
 
@@ -70,7 +70,7 @@ public class ScenePlayerSingleton {
             instance.stage.setScene(scene);
 
         }catch(IOException e){
-            throw new SetSceneException("SetSceneException:" + e.getMessage());
+            throw new SetSceneException(e.getMessage());
         }
 
     }
@@ -86,7 +86,7 @@ public class ScenePlayerSingleton {
             instance.stage.setScene(scene);
 
         }catch(IOException e){
-            throw new SetSceneException("SetSceneException:" + e.getMessage());
+            throw new SetSceneException(e.getMessage());
         }
 
     }
@@ -103,7 +103,7 @@ public class ScenePlayerSingleton {
 
         }catch(IOException e){
 
-            throw new SetSceneException("SetSceneException:" + e.getMessage());
+            throw new SetSceneException(e.getMessage());
         }
     }
 
