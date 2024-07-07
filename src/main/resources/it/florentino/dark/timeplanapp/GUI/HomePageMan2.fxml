@@ -28,7 +28,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Button fx:id="employeeList" mnemonicParsing="false" onAction="#onEmployeeListClick" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Employee List">
+            <Button fx:id="employeeList" mnemonicParsing="false" onAction="#onEmployeeListClick" prefHeight="57.0" prefWidth="230.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Employees List">
                <font>
                   <Font size="42.0" />
                </font>
@@ -36,7 +36,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="nextButton11" mnemonicParsing="false" prefHeight="49.0" prefWidth="242.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
+            <Button fx:id="nextButton11" mnemonicParsing="false" prefHeight="57.0" prefWidth="240.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
                <font>
                   <Font size="30.0" />
                </font>
@@ -49,12 +49,12 @@
       <Line endX="1241.0" layoutX="199.0" layoutY="67.0" startX="-199.0" startY="7.62939453125E-6" strokeWidth="2.5" />
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="956.0" prefWidth="402.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="68.0">
          <children>
-            <Label alignment="CENTER" prefHeight="76.0" prefWidth="400.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="Employees Stored">
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="402.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="Employees Stored">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <ListView fx:id="employeesListView" prefHeight="939.0" prefWidth="400.0" />
+            <ListView fx:id="employeesListView" prefHeight="910.0" prefWidth="402.0" />
          </children>
       </VBox>
       <VBox layoutX="625.5" layoutY="149.5">
@@ -193,12 +193,12 @@
             </GridPane>
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="554.0" layoutY="107.0" prefHeight="46.0" prefWidth="1040.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="Calendar" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="68.0">
+      <Label alignment="CENTER" layoutX="402.0" layoutY="107.0" prefHeight="46.0" prefWidth="1038.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="Calendar" AnchorPane.leftAnchor="402.0" AnchorPane.topAnchor="68.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <Line endX="773.0" endY="7.62939453125E-6" layoutX="667.0" layoutY="114.0" startX="-678.5239868164062" startY="7.62939453125E-6" />
-      <Line endX="-53.000030517578125" endY="854.0" layoutX="453.0" layoutY="170.0" startX="-51.091461181640625" startY="-101.24107360839844" />
+      <Line endX="-51.0" endY="854.0" layoutX="453.0" layoutY="170.0" startX="-51.091461181640625" startY="-101.24107360839844" />
    </children>
 </AnchorPane>

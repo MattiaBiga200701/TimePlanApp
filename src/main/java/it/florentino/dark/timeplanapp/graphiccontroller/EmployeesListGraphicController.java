@@ -2,6 +2,7 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 
 import it.florentino.dark.timeplanapp.appcontroller.EmployeeListController;
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
+import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
@@ -41,12 +42,13 @@ public class EmployeesListGraphicController extends GraphicController {
 
 
     @FXML
-    public void initialize(){
+    public void initialize(UserBean loggedUser){
 
         this.contractChoiceBox.getItems().addAll(this.contractTypes);
         this.employeesItems = FXCollections.observableArrayList();
         this.employeesListView.setItems(this.employeesItems);
         this.employeeBeanList = new ArrayList<>();
+        this.setAttribute(loggedUser);
 
     }
 
