@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
@@ -20,9 +21,15 @@ public class WorkScheduleGraphicController extends GraphicController{
     @FXML
     private ListView<String> employeesListView;
 
+    @FXML
+    private GridPane schedulationTable;
     private List<EmployeeBean> employeesBeanList;
     private ObservableList<String> employeeItems;
     private WorkScheduleController controller;
+
+
+
+
 
     @FXML
     private Label errorLabel;
@@ -66,6 +73,11 @@ public class WorkScheduleGraphicController extends GraphicController{
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
         }
+    }
+
+    @FXML
+    public void onSchedulationClick(){
+
     }
 
     public Label getErrorLabel(){ return this.errorLabel; }
