@@ -1,7 +1,7 @@
 package it.florentino.dark.timeplanapp;
 
 
-import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
+
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.graphiccontroller.EmployeesListGraphicController;
@@ -39,9 +39,6 @@ public class ScenePlayerSingleton {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-
-        //this.stage.setWidth(1440.0);
-        //this.stage.setMinHeight(1024);
         this.stage.setResizable(false);
     }
 
@@ -57,7 +54,7 @@ public class ScenePlayerSingleton {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
-            System.out.println(instance.stage.getHeight());
+
         }catch(IllegalStateException | IOException e){
             throw new SetSceneException("SetSceneException: " + e.getMessage());
         }
@@ -71,7 +68,7 @@ public class ScenePlayerSingleton {
             graphicController.setAttribute(newUser);
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
-            System.out.println(instance.stage.getHeight());
+
         }catch(IOException e){
             throw new SetSceneException("SetSceneException:" + e.getMessage());
         }
@@ -87,7 +84,7 @@ public class ScenePlayerSingleton {
             controller.initialize(loggedUser);
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
-            System.out.println(instance.stage.getHeight());
+
         }catch(IOException e){
             throw new SetSceneException("SetSceneException:" + e.getMessage());
         }
@@ -103,7 +100,7 @@ public class ScenePlayerSingleton {
             controller.initialize(loggedUser);
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
-            System.out.println(instance.stage.getHeight());
+
         }catch(IOException e){
 
             throw new SetSceneException("SetSceneException:" + e.getMessage());
