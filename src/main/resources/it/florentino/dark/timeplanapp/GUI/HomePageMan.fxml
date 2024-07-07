@@ -14,11 +14,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: white;" stylesheets="@../StyleSheets/HomePageMan.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.EmployeesListGraphicController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1440.0" style="-fx-background-color: white;" stylesheets="@../StyleSheets/HomePageMan.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.EmployeesListGraphicController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1442.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);">
+      <HBox alignment="CENTER_LEFT" style="-fx-background-color: rgba(0, 137, 123, 0.7);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label prefHeight="67.0" prefWidth="249.0" text="Time Plan |">
+            <Label text="Time Plan | ">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 30px; -fx-text-fill: black;" text="Employee List">
+            <Button mnemonicParsing="false" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 30px; -fx-text-fill: black;" text="Employee List">
                <font>
                   <Font size="42.0" />
                </font>
@@ -34,7 +34,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="menuButton1" mnemonicParsing="false" onAction="#onWorkScheduleClick" prefHeight="49.0" prefWidth="242.0" style="-fx-background-color: rgba(0, 0, 0 , 0 );" text="Work Schedule">
+            <Button fx:id="menuButton1" mnemonicParsing="false" onAction="#onWorkScheduleClick" style="-fx-background-color: rgba(0, 0, 0 , 0 );" text="Work Schedule">
                <font>
                   <Font size="30.0" />
                </font>
@@ -44,12 +44,12 @@
             </Button>
          </children>
       </HBox>
-      <Line endX="1242.9998779296875" endY="7.62939453125E-6" layoutX="199.0" layoutY="67.0" startX="-199.0" startY="7.62939453125E-6" strokeWidth="2.0" />
-      <HBox layoutX="221.0" layoutY="174.0" prefHeight="698.0" prefWidth="998.0" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="100.0">
+      <Line endX="1241.0" endY="-6.999992370605469" layoutX="199.0" layoutY="67.0" startX="-199.0" startY="-6.999992370605469" strokeWidth="2.0" />
+      <HBox layoutX="221.0" layoutY="174.0" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="75.0">
          <children>
-            <VBox focusTraversable="true" prefHeight="738.0" prefWidth="479.0" spacing="10.0">
+            <VBox focusTraversable="true" spacing="10.0">
                <children>
-                  <VBox prefHeight="79.0" prefWidth="240.0">
+                  <VBox>
                      <children>
                         <Label style="-fx-font-size: 24px;" text="Name">
                            <font>
@@ -66,7 +66,7 @@
                         </TextField>
                      </children>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="49.0" prefHeight="79.0" prefWidth="240.0">
+                  <VBox layoutX="10.0" layoutY="49.0">
                      <children>
                         <Label style="-fx-font-size: 24px;" text="Surname">
                            <font>
@@ -83,7 +83,7 @@
                         </TextField>
                      </children>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="49.0" prefHeight="79.0" prefWidth="240.0">
+                  <VBox layoutX="10.0" layoutY="49.0" prefHeight="79.0">
                      <children>
                         <Label style="-fx-font-size: 24px;" text="Contract Type">
                            <font>
@@ -124,8 +124,8 @@
                         <Region prefHeight="629.0" prefWidth="37.0" />
                         <VBox spacing="9.0">
                            <children>
-                              <ListView fx:id="employeesListView" prefHeight="738.0" prefWidth="600.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
-                              <HBox prefHeight="45.0" prefWidth="616.0">
+                              <ListView fx:id="employeesListView" prefHeight="738.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
+                              <HBox>
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#onRemoveClick" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #dc143c; -fx-font-size: 24px; -fx-text-fill: black;" text="Remove Item">
                                        <font>

@@ -39,8 +39,9 @@ public class ScenePlayerSingleton {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-        this.stage.setHeight(1024.0);
-        this.stage.setWidth(1440.0);
+
+        //this.stage.setWidth(1440.0);
+        //this.stage.setMinHeight(1024);
         this.stage.setResizable(false);
     }
 
@@ -56,6 +57,7 @@ public class ScenePlayerSingleton {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
+            System.out.println(instance.stage.getHeight());
         }catch(IllegalStateException | IOException e){
             throw new SetSceneException("SetSceneException: " + e.getMessage());
         }
@@ -69,6 +71,7 @@ public class ScenePlayerSingleton {
             graphicController.setAttribute(newUser);
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
+            System.out.println(instance.stage.getHeight());
         }catch(IOException e){
             throw new SetSceneException("SetSceneException:" + e.getMessage());
         }
@@ -84,6 +87,7 @@ public class ScenePlayerSingleton {
             controller.initialize(loggedUser);
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
+            System.out.println(instance.stage.getHeight());
         }catch(IOException e){
             throw new SetSceneException("SetSceneException:" + e.getMessage());
         }
@@ -99,6 +103,7 @@ public class ScenePlayerSingleton {
             controller.initialize(loggedUser);
             Scene scene = new Scene(root);
             instance.stage.setScene(scene);
+            System.out.println(instance.stage.getHeight());
         }catch(IOException e){
 
             throw new SetSceneException("SetSceneException:" + e.getMessage());
