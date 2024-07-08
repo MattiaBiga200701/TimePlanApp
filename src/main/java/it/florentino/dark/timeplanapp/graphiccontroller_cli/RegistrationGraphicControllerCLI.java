@@ -16,12 +16,16 @@ import java.io.InputStreamReader;
 public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCLI {
 
     UserBean newUser;
-    public void start(){
+    public void start() {
 
         this.showMenu();
-        switch(this.newUser.getRole()){
-            case MANAGER -> this.managerRegistration();
-            case EMPLOYEE -> this.employeeRegistration();
+
+        if (this.newUser.getRole() == Role.MANAGER) {
+
+            this.managerRegistration();
+
+        } else if (this.newUser.getRole() == Role.EMPLOYEE){
+            this.employeeRegistration();
         }
 
     }
