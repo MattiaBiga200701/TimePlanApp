@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 
-
+import java.time.LocalDate;
 import java.util.List;
 
 public class WorkScheduleGraphicController extends GraphicController{
@@ -110,10 +110,17 @@ public class WorkScheduleGraphicController extends GraphicController{
         String employeeName = this.nameLabel.getText();
         String employeeSurname = this.surnameLabel.getText();
         String employeeContract = this.contractLabel.getText();
+        LocalDate shiftDate = this.shiftDatePicker.getValue();
+        String shiftTime = this.shiftTimeChoice.getValue();
+
         try{
 
-            if(this.shiftTimeChoice.getValue() == null){
+            if(shiftTime.isEmpty()){
                 throw new InvalidInputException("Select shift time");
+            }
+
+            if(shiftDate == null){
+                throw new InvalidInputException("Select a date");
             }
 
         }catch(InvalidInputException e){
