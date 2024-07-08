@@ -1,6 +1,6 @@
 package it.florentino.dark.timeplanapp;
 
-import it.florentino.dark.timeplanapp.CLIgraphicController.LoginGenericGraphicControllerCLI;
+import it.florentino.dark.timeplanapp.graphiccontroller_cli.LoginGenericGraphicControllerCLI;
 
 
 public class CLIStarter {

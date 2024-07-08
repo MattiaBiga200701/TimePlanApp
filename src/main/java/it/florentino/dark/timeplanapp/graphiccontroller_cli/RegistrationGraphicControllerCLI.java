@@ -1,4 +1,4 @@
-package it.florentino.dark.timeplanapp.CLIgraphicController;
+package it.florentino.dark.timeplanapp.graphiccontroller_cli;
 
 import it.florentino.dark.timeplanapp.appcontroller.RegistrationController;
 import it.florentino.dark.timeplanapp.beans.UserBean;
