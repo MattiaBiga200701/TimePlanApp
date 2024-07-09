@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1440.0" style="-fx-background-color: white;" stylesheets="@../StyleSheets/HomePageMan.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.WorkScheduleGraphicController">
+   <children>
+      <HBox alignment="CENTER_LEFT" style="-fx-background-color: rgba(0, 137, 123, 0.7);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label text="Time Plan | ">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Employee List">
+               <font>
+                  <Font size="42.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="menuButton1" mnemonicParsing="false" prefWidth="238.0" style="-fx-background-color: rgba(0, 0, 0 , 0 );" text="Work Schedule">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 30px; -fx-text-fill: black;" text="Schedulation View">
+               <font>
+                  <Font size="42.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <Line endX="1241.0" endY="-6.999992370605469" layoutX="199.0" layoutY="67.0" startX="-199.0" startY="-6.999992370605469" strokeWidth="2.0" />
+      <HBox layoutX="221.0" layoutY="174.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="75.0">
+         <children>
+            <VBox focusTraversable="true" spacing="10.0">
+               <children>
+                  <VBox prefHeight="74.0" prefWidth="231.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="229.0" text="Schedulation Date">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="shiftDatePicker" prefHeight="45.0" prefWidth="450.0" promptText="Type a Date" style="-fx-background-color: rgba(0, 137, 123, 0.7);" />
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#onSearchClick" prefHeight="48.0" prefWidth="280.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Search">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_RIGHT">
+               <children>
+                  <HBox prefHeight="738.0" prefWidth="746.0">
+                     <children>
+                        <Region prefHeight="629.0" prefWidth="37.0" />
+                        <VBox spacing="9.0">
+                           <children>
+                              <ListView fx:id="employeesListView" prefHeight="738.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
+                              <HBox>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#onRemoveClick" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #dc143c; -fx-font-size: 24px; -fx-text-fill: black;" text="Remove Item">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Button>
+                                    <Region prefHeight="45.0" prefWidth="56.0" />
+                                    <Button mnemonicParsing="false" onAction="#onLoadClick" prefHeight="48.0" prefWidth="280.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Load Schedulation">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

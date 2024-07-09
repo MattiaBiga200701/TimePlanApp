@@ -12,13 +12,16 @@ public class WorkShiftBean {
     private String employeeSurname;
     private ContractTypes employeeContract;
 
-    public WorkShiftBean(ShiftSlots shiftTime, String shiftDate, String employeeName, String employeeSurname, ContractTypes employeeContract) throws InvalidInputException{
+    private int managerID;
+
+    public WorkShiftBean(ShiftSlots shiftTime, String shiftDate, String employeeName, String employeeSurname, ContractTypes employeeContract, int managerID) throws InvalidInputException{
 
         this.setShiftTime(shiftTime);
         this.setShiftDate(shiftDate);
         this.setEmployeeName(employeeName);
         this.setEmployeeSurname(employeeSurname);
         this.setEmployeeContract(employeeContract);
+        this.setManagerID(managerID);
 
     }
 
@@ -66,8 +69,17 @@ public class WorkShiftBean {
         return this.employeeContract;
     }
 
+    public void setManagerID(int managerID) {
+        this.managerID = managerID;
+    }
+
+    public int getManagerID() {
+        return this.managerID;
+    }
+
     private boolean isValidString(String inputString){
         return inputString.isEmpty();
     }
+
 
 }

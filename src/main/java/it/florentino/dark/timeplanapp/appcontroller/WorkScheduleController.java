@@ -2,12 +2,16 @@ package it.florentino.dark.timeplanapp.appcontroller;
 
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
 import it.florentino.dark.timeplanapp.beans.UserBean;
+import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.model.dao.EmployeeDao;
+import it.florentino.dark.timeplanapp.model.dao.WorkShiftDao;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
 import it.florentino.dark.timeplanapp.model.entities.User;
+import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
+import it.florentino.dark.timeplanapp.model.entities.WorkShift;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +42,32 @@ public class WorkScheduleController {
         }
 
         return employeeBeanList;
+    }
+
+    public WorkShiftBean insertWorkShift(WorkShiftBean workShiftBean) throws ServiceException, InvalidInputException{
+
+
+        String employeeName = workShiftBean.getEmployeeName();
+        String employeeSurname = workShiftBean.getEmployeeSurname();
+        ContractTypes employeeContract = workShiftBean.getEmployeeContract();
+        int employeeMangerID = workShiftBean.getManagerID();
+
+        Employee employeeAssigned = new Employee(employeeName, employeeSurname, employeeContract, employeeMangerID);
+
+        WorkShift newWorkShift = new WorkShift(workShiftBean.getShiftTime(), workShiftBean.getShiftDate(), employeeAssigned);
+
+        try{
+            WorkShiftDao dao = new WorkShiftDao();
+            newWorkShift = dao.insertWorkShift(newWorkShift);
+        }catch(DAOException e){
+            throw new ServiceException(e.getMessage());
+        }
+
+        employeeName = newWorkShift.getEmployee().getName();
+        employeeSurname = newWorkShift.getEmployee().getSurname();
+        employeeContract = newWorkShift.getEmployee().getContractType();
+        employeeMangerID = newWorkShift.getEmployee().getManagerID();
+
+        return new WorkShiftBean(newWorkShift.getShiftTime(), newWorkShift.getShiftDate(), employeeName, employeeSurname, employeeContract, employeeMangerID);
     }
 }

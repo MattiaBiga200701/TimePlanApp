@@ -3,10 +3,13 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
 import it.florentino.dark.timeplanapp.beans.UserBean;
+import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 
+import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
+import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class WorkScheduleGraphicController extends GraphicController{
@@ -110,8 +114,10 @@ public class WorkScheduleGraphicController extends GraphicController{
         String employeeName = this.nameLabel.getText();
         String employeeSurname = this.surnameLabel.getText();
         String employeeContract = this.contractLabel.getText();
-        LocalDate shiftDate = this.shiftDatePicker.getValue();
+        LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
         String shiftTime = this.shiftTimeChoice.getValue();
+        String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        WorkScheduleController controller = new WorkScheduleController();
 
         try{
 
@@ -119,14 +125,33 @@ public class WorkScheduleGraphicController extends GraphicController{
                 throw new InvalidInputException("Select shift time");
             }
 
-            if(shiftDate == null){
+            if(shiftDate.isEmpty()){
                 throw new InvalidInputException("Select a date");
+            }
+            WorkShiftBean newWorkShiftBean = new WorkShiftBean(ShiftSlots.fromString(shiftTime), shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), this.getLoggedUser().getManagerID());
+
+            newWorkShiftBean = controller.insertWorkShift(newWorkShiftBean);
+
+            if(newWorkShiftBean == null){
+                throw new ServiceException("Instatiation error");
             }
 
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
+
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
         }
     }
+
+    @FXML
+    public void onSearchClick(){}
+
+    @FXML
+    public void onLoadClick(){}
+
+    @FXML
+    public void onRemoveClick(){}
 
     public Label getErrorLabel(){ return this.errorLabel; }
 }
