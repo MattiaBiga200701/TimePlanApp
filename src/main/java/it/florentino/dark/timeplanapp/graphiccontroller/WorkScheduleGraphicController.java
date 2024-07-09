@@ -116,18 +116,20 @@ public class WorkScheduleGraphicController extends GraphicController{
         String employeeContract = this.contractLabel.getText();
         LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
         String shiftTime = this.shiftTimeChoice.getValue();
-        String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
+        Printer.printf(employeeName);
 
         try{
 
-            if(shiftTime.isEmpty()){
+            if(shiftTime == null){
                 throw new InvalidInputException("Select shift time");
             }
 
-            if(shiftDate.isEmpty()){
+            if(shiftDatePickerValue == null){
                 throw new InvalidInputException("Select a date");
             }
+
+            String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             WorkShiftBean newWorkShiftBean = new WorkShiftBean(ShiftSlots.fromString(shiftTime), shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), this.getLoggedUser().getManagerID());
 
             newWorkShiftBean = this.controller.insertWorkShift(newWorkShiftBean);

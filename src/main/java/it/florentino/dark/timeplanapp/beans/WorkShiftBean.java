@@ -78,7 +78,7 @@ public class WorkShiftBean {
     }
 
     private boolean isValidString(String inputString){
-        return inputString.isEmpty();
+        return !(inputString.isEmpty());
     }
 
 

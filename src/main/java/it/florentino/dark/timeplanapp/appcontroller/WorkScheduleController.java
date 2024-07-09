@@ -56,9 +56,26 @@ public class WorkScheduleController {
 
         WorkShift newWorkShift = new WorkShift(workShiftBean.getShiftTime(), workShiftBean.getShiftDate(), employeeAssigned);
 
+        int shiftCount;
+
         try{
             WorkShiftDao dao = new WorkShiftDao();
+
+            shiftCount = dao.shiftCount(newWorkShift);
+
+            if(newWorkShift.getEmployee().getContractType() == ContractTypes.PART_TIME && shiftCount == 4){
+                throw new InvalidInputException("Maximum number of shifts reached for a part-time employee");
+            }else if(newWorkShift.getEmployee().getContractType() == ContractTypes.FULL_TIME && shiftCount == 8){
+                throw new InvalidInputException("Maximum number of shifts reached for a full-time employee");
+            }
+
+            if(dao.isShiftAssigned(newWorkShift)){
+                throw new InvalidInputException("Shift already assigned");
+            }
+
+
             newWorkShift = dao.insertWorkShift(newWorkShift);
+
         }catch(DAOException e){
             throw new ServiceException(e.getMessage());
         }
