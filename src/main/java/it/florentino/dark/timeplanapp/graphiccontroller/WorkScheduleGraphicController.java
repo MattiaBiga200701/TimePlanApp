@@ -117,7 +117,7 @@ public class WorkScheduleGraphicController extends GraphicController{
         LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
         String shiftTime = this.shiftTimeChoice.getValue();
         String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        WorkScheduleController controller = new WorkScheduleController();
+
 
         try{
 
@@ -130,7 +130,7 @@ public class WorkScheduleGraphicController extends GraphicController{
             }
             WorkShiftBean newWorkShiftBean = new WorkShiftBean(ShiftSlots.fromString(shiftTime), shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), this.getLoggedUser().getManagerID());
 
-            newWorkShiftBean = controller.insertWorkShift(newWorkShiftBean);
+            newWorkShiftBean = this.controller.insertWorkShift(newWorkShiftBean);
 
             if(newWorkShiftBean == null){
                 throw new ServiceException("Instatiation error");
