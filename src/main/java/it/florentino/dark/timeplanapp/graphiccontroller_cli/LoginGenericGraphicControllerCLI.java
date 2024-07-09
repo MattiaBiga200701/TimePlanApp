@@ -25,12 +25,14 @@ public class LoginGenericGraphicControllerCLI extends GenericGraphicControllerCL
         this.showAppName();
         Printer.printf("1) Log in now");
         Printer.printf("2) Register now");
+        Printer.printf("3) Quit");
 
-        choice = getChoice(1, 2);
+        choice = getChoice(1, 3);
         try{
             switch(choice){
                 case 1 -> this.authenticate();
                 case 2 -> new RegistrationGraphicControllerCLI().start();
+                case 3 -> System.exit(0);
                 default -> throw new InvalidInputException("Invalid choice");
             }
         }catch(InvalidInputException e){

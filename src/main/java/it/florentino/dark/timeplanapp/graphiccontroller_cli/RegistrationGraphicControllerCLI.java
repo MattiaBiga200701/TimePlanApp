@@ -4,6 +4,7 @@ import it.florentino.dark.timeplanapp.appcontroller.RegistrationController;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
+import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
@@ -17,40 +18,33 @@ public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCL
 
     UserBean newUser;
     public void start() {
+        while(true) {
+            this.showMenu();
+            try {
+                if (this.newUser.getRole() == Role.MANAGER) {
 
-        this.showMenu();
+                    this.managerRegistration();
 
-        if (this.newUser.getRole() == Role.MANAGER) {
+                } else if (this.newUser.getRole() == Role.EMPLOYEE) {
 
-            this.managerRegistration();
+                    this.employeeRegistration();
+                }
 
-        } else if (this.newUser.getRole() == Role.EMPLOYEE){
-            this.employeeRegistration();
+                break;
+
+            } catch (NotUniqueEmailException e) {
+                Printer.perror(e.getMessage() + "Retype Information\n");
+            }
         }
 
+        LoginGenericGraphicControllerCLI controller = new LoginGenericGraphicControllerCLI();
+        controller.authenticate();
+
     }
+
+
 
     public void showMenu(){
-
-        int choice;
-        this.showAppName();
-        Printer.printf("1) Register now");
-        Printer.printf("2) Log in now");
-
-        choice = getChoice(1, 2);
-        try{
-            switch(choice){
-                case 1 -> this.registrationChoice();
-                case 2 -> new LoginGenericGraphicControllerCLI().start();
-                default -> throw new InvalidInputException("Invalid choice");
-            }
-
-        }catch(InvalidInputException e){
-            Printer.perror(e.getMessage());
-        }
-    }
-
-    public void registrationChoice(){
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Printer.printf("\nREGISTRATION");
@@ -58,6 +52,7 @@ public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCL
 
         Printer.printf("1) Manager Registration");
         Printer.printf("2) Employee Registration");
+        Printer.printf("3) Quit");
         choice = this.getChoice(1, 2);
 
         while(true) {
@@ -82,6 +77,7 @@ public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCL
                 switch(choice){
                     case 1 -> this.newUser = new UserBean(username, email, password, Role.MANAGER);
                     case 2 -> this.newUser = new UserBean(username, email, password, Role.EMPLOYEE);
+                    case 3 -> System.exit(0);
                     default -> throw new InvalidInputException("Invalid choice");
                 }
 
@@ -91,17 +87,38 @@ public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCL
                 Printer.perror(e.getMessage());
                 System.exit(-1);
             } catch(CredentialException | InvalidInputException e){
-                Printer.perror(e.getMessage());
+                Printer.perror(e.getMessage() + "\n");
             }
 
         }
     }
 
-    public void managerRegistration(){
+    public void managerRegistration() throws NotUniqueEmailException{
+
+        RegistrationController controller = new RegistrationController();
+
+        try{
+
+            this.newUser = controller.createManagerID(this.newUser);
+            Printer.printf("This is your new managerID: " + this.newUser.getManagerID());
+
+            controller.insertUser(this.newUser);
+
+            Printer.printf("Registration Completed");
+
+
+        }catch(CredentialException e){
+            Printer.perror(e.getMessage() + "\n");
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+            System.exit(-1);
+        }
+
+
 
     }
 
-    public void employeeRegistration(){
+    public void employeeRegistration() throws NotUniqueEmailException{
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String managerIdStr;
@@ -122,18 +139,26 @@ public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCL
                 this.newUser.setManagerID(managerID);
                 managerAssociated = controller.checkManagerID(this.newUser);
 
+                if(managerAssociated != null){
+                    Printer.printf("Manager email: " + managerAssociated.getEmail());
+                }
+
+                controller.insertUser(this.newUser);
+
+                Printer.printf("Registration Completed");
+
                 break;
 
             } catch (IOException | ServiceException e) {
                 Printer.perror(e.getMessage());
                 System.exit(-1);
             } catch (CredentialException e) {
-                Printer.perror(e.getMessage());
+                Printer.perror(e.getMessage() + "\n");
             }
         }
 
-        if(managerAssociated != null){
-            Printer.printf("Manager email: " + managerAssociated.getEmail());
-        }
+
+
     }
+
 }
