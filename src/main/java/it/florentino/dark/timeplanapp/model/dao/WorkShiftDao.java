@@ -32,7 +32,7 @@ public class WorkShiftDao {
             this.cs.executeQuery();
 
         }catch(SQLException e){
-            throw new DAOException("DAO error: " + e.getMessage());
+            throw new DAOException(e.getMessage());
         }
 
         return newWorkshift;
@@ -48,7 +48,7 @@ public class WorkShiftDao {
             this.cs.executeQuery();
 
         }catch(SQLException e){
-            throw new DAOException("DAO error: " + e.getMessage());
+            throw new DAOException(e.getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ public class WorkShiftDao {
             this.cs.executeQuery();
             shiftCount = this.cs.getInt(6);
         }catch(SQLException e){
-            throw new DAOException("DAO error: " + e.getMessage());
+            throw new DAOException(e.getMessage());
         }
 
         return shiftCount;
@@ -96,7 +96,7 @@ public class WorkShiftDao {
 
         }catch(SQLException e){
 
-            throw new DAOException("DAO error: " + e.getMessage());
+            throw new DAOException(e.getMessage());
         }
 
         if(count == 0){
