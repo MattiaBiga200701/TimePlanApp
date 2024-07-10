@@ -3,7 +3,6 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 import it.florentino.dark.timeplanapp.ScenePlayerSingleton;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 
