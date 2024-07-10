@@ -1,0 +1,20 @@
+.list-view{
+    -fx-font-size: 24px;
+}
+
+date-picker .text-field {
+    -fx-font-size: 24px;
+}
+
+.date-picker-popup {
+    -fx-pref-width: 500px;
+    -fx-pref-height: 200px;
+}
+
+.date-picker-popup .day-cell {
+    -fx-font-size: 14px;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-font-size: 14px;
+}

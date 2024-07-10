@@ -20,6 +20,13 @@ public class WorkShift {
         this.setEmployee(employee);
     }
 
+    public WorkShift(String shiftDate, Employee employee){
+
+        this.setShiftDate(shiftDate);
+        this.setEmployee(employee);
+
+    }
+
     public void setShiftTime(ShiftSlots shiftTime) {
         this.shiftTime = shiftTime;
     }

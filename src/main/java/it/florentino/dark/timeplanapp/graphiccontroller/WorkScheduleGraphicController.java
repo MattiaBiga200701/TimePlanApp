@@ -117,7 +117,6 @@ public class WorkScheduleGraphicController extends GraphicController{
         LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
         String shiftTime = this.shiftTimeChoice.getValue();
 
-        Printer.printf(employeeName);
 
         try{
 

@@ -17,6 +17,10 @@ public class Employee {
         this.setManagerID(managerID);
     }
 
+    public Employee(int managerID ){
+        this.setManagerID(managerID);
+    }
+
     public void setName(String name) {
         this.name = name;
     }

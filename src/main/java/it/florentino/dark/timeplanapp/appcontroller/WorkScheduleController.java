@@ -13,6 +13,7 @@ import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.model.entities.WorkShift;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +65,9 @@ public class WorkScheduleController {
             shiftCount = dao.shiftCount(newWorkShift);
 
             if(newWorkShift.getEmployee().getContractType() == ContractTypes.PART_TIME && shiftCount == 4){
-                throw new InvalidInputException("Maximum number of shifts reached for a part-time employee");
+                throw new InvalidInputException("Maximum number of shifts reached for part-time");
             }else if(newWorkShift.getEmployee().getContractType() == ContractTypes.FULL_TIME && shiftCount == 8){
-                throw new InvalidInputException("Maximum number of shifts reached for a full-time employee");
+                throw new InvalidInputException("Maximum number of shifts reached for full-time");
             }
 
             if(dao.isShiftAssigned(newWorkShift)){
@@ -86,6 +87,58 @@ public class WorkScheduleController {
         employeeMangerID = newWorkShift.getEmployee().getManagerID();
 
         return new WorkShiftBean(newWorkShift.getShiftTime(), newWorkShift.getShiftDate(), employeeName, employeeSurname, employeeContract, employeeMangerID);
+    }
+
+    public List<WorkShiftBean> workShiftReader(WorkShiftBean workShiftBeanToRead) throws ServiceException, InvalidInputException{
+
+        String shiftDate = workShiftBeanToRead.getShiftDate();
+        int managerID = workShiftBeanToRead.getManagerID();
+
+        Employee employeeToRead = new Employee(managerID);
+
+        WorkShift workShiftToRead = new WorkShift(shiftDate, employeeToRead);
+
+        List<WorkShift> workShiftList;
+
+        List<WorkShiftBean> workShiftBeanList = new ArrayList<>();
+
+
+        String employeeName;
+        String employeeSurname;
+        ContractTypes employeeContract;
+
+
+        try{
+
+            WorkShiftDao dao = new WorkShiftDao();
+            workShiftList = dao.readWorkShiftList(workShiftToRead);
+
+            if(workShiftList == null){
+                throw new InvalidInputException("Schedulation empty for this date");
+            }else {
+
+                for (WorkShift workShiftRead : workShiftList) {
+
+
+                    employeeName = workShiftRead.getEmployee().getName();
+                    employeeSurname = workShiftRead.getEmployee().getSurname();
+                    employeeContract = workShiftRead.getEmployee().getContractType();
+
+                    WorkShiftBean workShiftBeanRead = new WorkShiftBean(workShiftRead.getShiftTime(), employeeName, employeeSurname, employeeContract);
+
+                    workShiftBeanList.add(workShiftBeanRead);
+
+                }
+            }
+
+
+        }catch(DAOException e){
+            throw new ServiceException(e.getMessage());
+        }
+
+        return workShiftBeanList;
+
+
     }
 
 }

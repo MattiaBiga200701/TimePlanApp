@@ -25,6 +25,18 @@ public class WorkShiftBean {
 
     }
 
+    public WorkShiftBean(String shiftDate, int managerID){
+
+        this.setShiftDate(shiftDate);
+        this.setManagerID(managerID);
+    }
+
+    public WorkShiftBean(ShiftSlots shiftTime, String employeeName, String employeeSurname, ContractTypes employeeContract) throws InvalidInputException{
+        this.setShiftTime(shiftTime);
+        this.setEmployeeName(employeeName);
+        this.setEmployeeSurname(employeeSurname);
+        this.setEmployeeContract(employeeContract);
+    }
     public void setShiftTime(ShiftSlots shiftTime) {
         this.shiftTime = shiftTime;
     }
