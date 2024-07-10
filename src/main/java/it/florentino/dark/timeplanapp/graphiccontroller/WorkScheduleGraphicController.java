@@ -147,13 +147,18 @@ public class WorkScheduleGraphicController extends GraphicController{
     }
 
     @FXML
-    public void onSearchClick(){}
+    public void onViewClick() {
 
-    @FXML
-    public void onLoadClick(){}
+        try{
 
-    @FXML
-    public void onRemoveClick(){}
+            this.getScenePlayer().showSchedulationViewPage("GUI/SchedulationViewPage.fxml", this.getLoggedUser());
+
+        }catch(SetSceneException e){
+            Printer.perror(e.getMessage());
+        }
+
+    }
+
 
     public Label getErrorLabel(){ return this.errorLabel; }
 }

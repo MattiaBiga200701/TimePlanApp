@@ -155,6 +155,19 @@ public class EmployeesListGraphicController extends GraphicController {
         }
     }
 
+    @FXML
+    public void onViewClick(){
+
+        try{
+
+            this.getScenePlayer().showSchedulationViewPage("GUI/SchedulationViewPage.fxml", this.getLoggedUser());
+
+        }catch(SetSceneException e){
+            Printer.perror(e.getMessage());
+        }
+
+    }
+
     public Label getErrorLabel(){
         return this.errorLabel;
     }

@@ -87,4 +87,5 @@ public class WorkScheduleController {
 
         return new WorkShiftBean(newWorkShift.getShiftTime(), newWorkShift.getShiftDate(), employeeName, employeeSurname, employeeContract, employeeMangerID);
     }
+
 }

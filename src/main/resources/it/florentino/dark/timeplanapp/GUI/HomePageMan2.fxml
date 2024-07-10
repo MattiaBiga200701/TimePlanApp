@@ -116,7 +116,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Button mnemonicParsing="false" onAction="#onEmployeeListClick" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Employee List">
+            <Button mnemonicParsing="false" onAction="#onEmployeeListClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Employee List">
                <font>
                   <Font size="42.0" />
                </font>
@@ -124,7 +124,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="menuButton1" mnemonicParsing="false" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
+            <Button fx:id="menuButton1" mnemonicParsing="false" prefWidth="281.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
                <font>
                   <Font size="30.0" />
                </font>
@@ -132,7 +132,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Schedulation View">
+            <Button mnemonicParsing="false" onAction="#onViewClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Schedulation View">
                <font>
                   <Font size="42.0" />
                </font>
