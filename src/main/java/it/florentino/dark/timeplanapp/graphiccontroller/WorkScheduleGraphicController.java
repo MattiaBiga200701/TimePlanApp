@@ -11,11 +11,13 @@ import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 
 import java.time.LocalDate;
@@ -143,6 +145,8 @@ public class WorkScheduleGraphicController extends GraphicController{
         }catch(ServiceException e){
             Printer.perror(e.getMessage());
         }
+
+
     }
 
     @FXML

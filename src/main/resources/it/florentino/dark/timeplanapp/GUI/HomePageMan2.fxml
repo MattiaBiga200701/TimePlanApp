@@ -150,7 +150,7 @@
       <ListView fx:id="employeesListView" layoutX="64.0" layoutY="110.0" onMouseClicked="#onDoubleClick" prefWidth="402.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="101.0" />
       <Line endX="1339.2928466796875" endY="-7.62939453125E-6" layoutX="129.0" layoutY="60.0" startX="-100.0" strokeWidth="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Line endX="1320.7764892578125" endY="-0.7642059326171875" layoutX="119.0" layoutY="101.0" startX="-119.00000762939453" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="689.0" layoutY="675.0" prefHeight="48.0" prefWidth="460.0" textFill="CRIMSON" wrapText="true">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="689.0" layoutY="675.0" prefHeight="48.0" prefWidth="482.0" textFill="CRIMSON" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
