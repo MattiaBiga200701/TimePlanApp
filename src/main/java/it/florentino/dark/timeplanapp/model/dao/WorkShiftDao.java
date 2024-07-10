@@ -10,6 +10,7 @@ import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class WorkShiftDao {
@@ -130,7 +131,7 @@ public class WorkShiftDao {
             ResultSet rs = this.cs.executeQuery();
 
             if (!rs.isBeforeFirst()) {
-                return null;
+                return Collections.emptyList();
             }
 
             while(rs.next()) {

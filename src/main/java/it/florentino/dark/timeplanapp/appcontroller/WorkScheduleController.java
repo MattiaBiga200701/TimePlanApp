@@ -113,7 +113,7 @@ public class WorkScheduleController {
             WorkShiftDao dao = new WorkShiftDao();
             workShiftList = dao.readWorkShiftList(workShiftToRead);
 
-            if(workShiftList == null){
+            if(workShiftList.isEmpty()){
                 throw new InvalidInputException("Schedulation empty for this date");
             }else {
 
