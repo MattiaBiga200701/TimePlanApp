@@ -47,15 +47,7 @@ public class WorkScheduleController {
 
     public WorkShiftBean insertWorkShift(WorkShiftBean workShiftBean) throws ServiceException, InvalidInputException{
 
-
-        String employeeName = workShiftBean.getEmployeeName();
-        String employeeSurname = workShiftBean.getEmployeeSurname();
-        ContractTypes employeeContract = workShiftBean.getEmployeeContract();
-        int employeeMangerID = workShiftBean.getManagerID();
-
-        Employee employeeAssigned = new Employee(employeeName, employeeSurname, employeeContract, employeeMangerID);
-
-        WorkShift newWorkShift = new WorkShift(workShiftBean.getShiftTime(), workShiftBean.getShiftDate(), employeeAssigned);
+        WorkShift newWorkShift = this.createWorkShiftFromBean(workShiftBean);
 
         int shiftCount;
 
@@ -81,12 +73,28 @@ public class WorkScheduleController {
             throw new ServiceException(e.getMessage());
         }
 
-        employeeName = newWorkShift.getEmployee().getName();
-        employeeSurname = newWorkShift.getEmployee().getSurname();
-        employeeContract = newWorkShift.getEmployee().getContractType();
-        employeeMangerID = newWorkShift.getEmployee().getManagerID();
+        String employeeName = newWorkShift.getEmployee().getName();
+        String employeeSurname = newWorkShift.getEmployee().getSurname();
+        ContractTypes employeeContract = newWorkShift.getEmployee().getContractType();
+        int employeeMangerID = newWorkShift.getEmployee().getManagerID();
 
         return new WorkShiftBean(newWorkShift.getShiftTime(), newWorkShift.getShiftDate(), employeeName, employeeSurname, employeeContract, employeeMangerID);
+    }
+
+    public void removeWorkShift(WorkShiftBean workShiftBeanToRemove) throws ServiceException {
+
+
+        WorkShift workShiftToRemove = this.createWorkShiftFromBean(workShiftBeanToRemove);
+
+        try{
+
+            WorkShiftDao dao = new WorkShiftDao();
+            dao.deleteWorkShift(workShiftToRemove);
+
+        }catch(DAOException e){
+            throw new ServiceException(e.getMessage());
+        }
+
     }
 
     public List<WorkShiftBean> workShiftReader(WorkShiftBean workShiftBeanToRead) throws ServiceException, InvalidInputException{
@@ -137,8 +145,18 @@ public class WorkScheduleController {
         }
 
         return workShiftBeanList;
+    }
 
+    public WorkShift createWorkShiftFromBean(WorkShiftBean workShiftBean){
 
+        String employeeName = workShiftBean.getEmployeeName();
+        String employeeSurname = workShiftBean.getEmployeeSurname();
+        ContractTypes employeeContract = workShiftBean.getEmployeeContract();
+        int managerID = workShiftBean.getManagerID();
+
+        Employee employee = new Employee(employeeName, employeeSurname,employeeContract, managerID);
+
+        return  new WorkShift(workShiftBean.getShiftTime(), workShiftBean.getShiftDate(), employee);
     }
 
 }

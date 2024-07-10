@@ -85,13 +85,13 @@
                   <ListView fx:id="workShiftListView" prefHeight="682.0" prefWidth="589.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
                   <HBox>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onRemoveClick" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #dc143c; -fx-font-size: 24px; -fx-text-fill: black;" text="Remove Item">
+                        <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onRemoveClick" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #dc143c; -fx-font-size: 24px; -fx-text-fill: black;" text="Remove Item">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Region prefHeight="45.0" prefWidth="91.0" />
-                        <Button mnemonicParsing="false" onAction="#onLoadClick" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Load Schedulation">
+                        <Region prefHeight="45.0" prefWidth="124.0" />
+                        <Button fx:id="notifyButton" mnemonicParsing="false" onAction="#onNotifyClick" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Notify Employees">
                            <font>
                               <Font size="24.0" />
                            </font>

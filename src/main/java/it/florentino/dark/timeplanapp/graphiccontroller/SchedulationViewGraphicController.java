@@ -5,10 +5,14 @@ import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
+import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
+import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -29,6 +33,10 @@ public class SchedulationViewGraphicController extends GraphicController{
     private DatePicker shiftDatePicker;
 
     @FXML
+    private Button removeButton;
+
+    @FXML
+    private Button notifyButton;
 
     private ObservableList<String> items;
 
@@ -43,6 +51,10 @@ public class SchedulationViewGraphicController extends GraphicController{
         this.controller = new WorkScheduleController();
 
         this.workShiftBeanList = new ArrayList<>();
+
+        this.removeButton.setOnAction(this::onPreviousClick);
+
+        this.notifyButton.setOnAction(this::onPreviousClick);
 
     }
 
@@ -73,7 +85,6 @@ public class SchedulationViewGraphicController extends GraphicController{
                 String employeeContract = workShiftBeanRead.getEmployeeContract().getId();
 
                 String item = shiftTime + "  " + employeeName + "  " + employeeSurname + "  " + employeeContract;
-                Printer.printf(item);
                 this.items.add(item);
                 this.workShiftListView.setItems(this.items);
             }
@@ -86,13 +97,56 @@ public class SchedulationViewGraphicController extends GraphicController{
             Printer.perror(e.getMessage());
         }
 
+        this.removeButton.setOnAction(this::onRemoveClick);
+        this.notifyButton.setOnAction(this::onNotifyClick);
+
     }
 
     @FXML
-    public void onLoadClick(){}
+    public void onNotifyClick(ActionEvent event){}
 
     @FXML
-    public void onRemoveClick(){}
+    public void onPreviousClick(ActionEvent event){
+
+        this.showError("Search Schedulation!");
+    }
+
+    @FXML
+    public void onRemoveClick(ActionEvent event){
+
+        int selectedIdx = this.workShiftListView.getSelectionModel().getSelectedIndex();
+
+        LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
+        String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        if(selectedIdx != -1){
+
+            String selectItem = this.workShiftListView.getSelectionModel().getSelectedItem();
+            String[] tokens = selectItem.split("\\s{2}");
+
+            String shiftTime = tokens[0];
+            String employeeName = tokens[1];
+            String employeeSurname = tokens[2];
+            String employeeContract = tokens[3];
+
+            this.workShiftListView.getItems().remove(selectedIdx);
+
+            try {
+
+
+                WorkShiftBean workShiftBeanToRemove = new WorkShiftBean(ShiftSlots.fromString(shiftTime),shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), this.getLoggedUser().getManagerID());
+                this.controller.removeWorkShift(workShiftBeanToRemove);
+
+            }catch(InvalidInputException e){
+                this.showError(e.getMessage());
+            }catch(ServiceException e){
+                Printer.perror(e.getMessage());
+            }
+
+        }else{
+            this.showError("Select an item");
+        }
+    }
 
 
 
