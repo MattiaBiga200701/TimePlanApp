@@ -13,9 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EmployeesListGraphicController extends GraphicController {
 
     @FXML
@@ -27,17 +24,10 @@ public class EmployeesListGraphicController extends GraphicController {
     @FXML
     private TextField emailField;
     @FXML
-    private Button addButton;
-    @FXML
     private Label errorLabel;
     @FXML
     private ListView<String> employeesListView;
     private ObservableList<String> employeesItems;
-
-    private EmployeeBean employeeBean;
-
-    private List<EmployeeBean> employeeBeanList;
-
     private final String[] contractTypes = {"part-time" , "full-time"};
 
     private EmployeeListController controller;
@@ -51,7 +41,6 @@ public class EmployeesListGraphicController extends GraphicController {
         this.contractChoiceBox.getItems().addAll(this.contractTypes);
         this.employeesItems = FXCollections.observableArrayList();
         this.employeesListView.setItems(this.employeesItems);
-        this.employeeBeanList = new ArrayList<>();
         this.setAttribute(loggedUser);
         this.controller = new EmployeeListController();
 
@@ -75,7 +64,7 @@ public class EmployeesListGraphicController extends GraphicController {
             String contractType = this.contractChoiceBox.getValue();
 
 
-            this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType), email,  this.getLoggedUser().getManagerID());
+            EmployeeBean employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType), email,  this.getLoggedUser().getManagerID());
 
             String combination = name + "  " + surname + "  " + contractType + "  " + email;
 

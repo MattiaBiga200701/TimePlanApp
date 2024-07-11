@@ -38,8 +38,6 @@ public class SchedulationViewGraphicController extends GraphicController{
     @FXML
     private Button notifyButton;
 
-    private ObservableList<String> items;
-
     private List<WorkShiftBean> workShiftBeanList;
 
     private WorkScheduleController controller;
@@ -64,7 +62,7 @@ public class SchedulationViewGraphicController extends GraphicController{
         LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
         WorkShiftBean workShiftsToRead;
         String shiftDate;
-        this.items = FXCollections.observableArrayList();
+        ObservableList<String> items = FXCollections.observableArrayList();
 
         try{
 
@@ -80,8 +78,8 @@ public class SchedulationViewGraphicController extends GraphicController{
             for(WorkShiftBean workShiftBeanRead: this.workShiftBeanList){
 
                 String item = this.setItem(workShiftBeanRead);
-                this.items.add(item);
-                this.workShiftListView.setItems(this.items);
+                items.add(item);
+                this.workShiftListView.setItems(items);
 
             }
 

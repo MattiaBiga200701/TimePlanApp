@@ -42,9 +42,6 @@ public class WorkScheduleGraphicController extends GraphicController{
     @FXML
     private Label emailLabel;
 
-
-    private List<EmployeeBean> employeesBeanList;
-    private ObservableList<String> employeeItems;
     private WorkScheduleController controller;
 
     private final String[] items = {"8:00 - 9:00", "9:00 - 10:00", "10:00 - 11:00",
@@ -62,7 +59,7 @@ public class WorkScheduleGraphicController extends GraphicController{
         this.controller = new WorkScheduleController();
         this.setAttribute(loggedUser);
 
-        this.employeeItems = FXCollections.observableArrayList();
+        ObservableList<String> employeeItems = FXCollections.observableArrayList();
 
        this.shiftTimeChoice.getItems().addAll(items);
 
@@ -73,8 +70,8 @@ public class WorkScheduleGraphicController extends GraphicController{
         String item;
         try {
 
-            this.employeesBeanList = this.controller.loadEmployeeList(this.getLoggedUser());
-            for(EmployeeBean employeeBeanStored : this.employeesBeanList){
+            List<EmployeeBean> employeesBeanList = this.controller.loadEmployeeList(this.getLoggedUser());
+            for(EmployeeBean employeeBeanStored : employeesBeanList){
 
                 name = employeeBeanStored.getName();
                 surname = employeeBeanStored.getSurname();
@@ -82,8 +79,8 @@ public class WorkScheduleGraphicController extends GraphicController{
                 email = employeeBeanStored.getEmail();
                 item = name + "  " + surname + "  " + contractType + "  " + email;
 
-                this.employeeItems.add(item);
-                this.employeesListView.setItems(this.employeeItems);
+                employeeItems.add(item);
+                this.employeesListView.setItems(employeeItems);
             }
         }catch(ServiceException e){
             Printer.perror(e.getMessage());

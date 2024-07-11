@@ -34,7 +34,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="menuButton1" mnemonicParsing="false" onAction="#onWorkScheduleClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0 , 0 );" text="Work Schedule">
+            <Button mnemonicParsing="false" onAction="#onWorkScheduleClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0 , 0 );" text="Work Schedule">
                <font>
                   <Font size="30.0" />
                </font>
@@ -126,7 +126,7 @@
                         <Region prefHeight="0.0" prefWidth="321.0" />
                         <HBox>
                            <children>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddClick" prefHeight="45.0" prefWidth="443.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Add">
+                              <Button mnemonicParsing="false" onAction="#onAddClick" prefHeight="45.0" prefWidth="443.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Add">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
