@@ -38,7 +38,7 @@ public class LoginGraphicController extends GraphicController {
     @FXML
     public void onLoginClick(){
 
-        String email = this.email.getText().trim();
+        String emailString = this.email.getText().trim();
         String pass = this.password.getText().trim();
 
 
