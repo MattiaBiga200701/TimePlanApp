@@ -44,7 +44,7 @@ public class LoginGraphicController extends GraphicController {
 
         LoginController controller = new LoginController();
         try {
-            LoginBean credentials = new LoginBean(email, pass);
+            LoginBean credentials = new LoginBean(emailString, pass);
             UserBean loggedUser = controller.authenticate(credentials);
 
             switch(loggedUser.getRole()){
