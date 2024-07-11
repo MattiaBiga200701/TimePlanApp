@@ -25,7 +25,7 @@ public class EmployeeDao {
         }
     }
 
-    public Employee insertEmployee(Employee newEmployee) throws DAOException, NotUniqueEmailException{
+    public void insertEmployee(Employee newEmployee) throws DAOException, NotUniqueEmailException{
 
         int status;
 
@@ -44,7 +44,6 @@ public class EmployeeDao {
             throw new DAOException(e.getMessage());
         }
 
-        return newEmployee;
     }
 
     public void removeEmployee(Employee employeeToRemove) throws DAOException{
