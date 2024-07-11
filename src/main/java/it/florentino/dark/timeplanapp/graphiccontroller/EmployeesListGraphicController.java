@@ -25,6 +25,8 @@ public class EmployeesListGraphicController extends GraphicController {
     @FXML
     private TextField surnameField;
     @FXML
+    private TextField emailField;
+    @FXML
     private Button addButton;
     @FXML
     private Label errorLabel;
@@ -38,6 +40,8 @@ public class EmployeesListGraphicController extends GraphicController {
 
     private final String[] contractTypes = {"part-time" , "full-time"};
 
+    private EmployeeListController controller;
+
 
 
 
@@ -49,6 +53,8 @@ public class EmployeesListGraphicController extends GraphicController {
         this.employeesListView.setItems(this.employeesItems);
         this.employeeBeanList = new ArrayList<>();
         this.setAttribute(loggedUser);
+        this.controller = new EmployeeListController();
+
 
     }
 
@@ -58,6 +64,7 @@ public class EmployeesListGraphicController extends GraphicController {
 
         String name = this.nameField.getText().trim();
         String surname = this.surnameField.getText().trim();
+        String email = this.emailField.getText().trim();
 
         try {
 
@@ -67,19 +74,23 @@ public class EmployeesListGraphicController extends GraphicController {
 
             String contractType = this.contractChoiceBox.getValue();
 
-            this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType), this.getLoggedUser().getManagerID());
-            this.employeeBeanList.add(this.employeeBean);
 
-            String combination = name + "  " + surname + "  " + contractType;
+            this.employeeBean = new EmployeeBean(name, surname, ContractTypes.fromString(contractType), email,  this.getLoggedUser().getManagerID());
+
+            String combination = name + "  " + surname + "  " + contractType + "  " + email;
+
+            this.controller.insertEmployee(employeeBean);
             this.employeesItems.add(combination);
-
 
             this.nameField.clear();
             this.surnameField.clear();
+            this.emailField.clear();
             this.contractChoiceBox.setValue(null);
 
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
         }
 
 
@@ -96,33 +107,14 @@ public class EmployeesListGraphicController extends GraphicController {
     }
 
     @FXML
-    public void onLoadClick(){
-
-        EmployeeListController controller;
-        try{
-            controller = new EmployeeListController();
-            this.employeeBeanList = controller.storeEmployeeList(this.employeeBeanList);
-
-        }catch(InvalidInputException e){
-            this.showError(e.getMessage());
-        }catch(ServiceException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
-
-    @FXML
     public void onRemoveClick(){
 
         int selectedIdx = this.employeesListView.getSelectionModel().getSelectedIndex();
 
         String nameToRemove;
         String surnameToRemove;
+        String emailToRemove;
         String contractTypeToRemove;
-
-        String name;
-        String surname;
-        ContractTypes contractType;
 
 
         if(selectedIdx != -1){
@@ -133,21 +125,21 @@ public class EmployeesListGraphicController extends GraphicController {
             nameToRemove = tokens[0];
             surnameToRemove = tokens[1];
             contractTypeToRemove = tokens[2];
+            emailToRemove = tokens[3];
 
             this.employeesListView.getItems().remove(selectedIdx);
+            try {
 
-            for(EmployeeBean bean: this.employeeBeanList){
+                EmployeeBean employeeBeanToRemove = new EmployeeBean(nameToRemove, surnameToRemove, ContractTypes.fromString(contractTypeToRemove), emailToRemove, this.getLoggedUser().getManagerID());
+                this.controller.removeEmployee(employeeBeanToRemove);
 
-                name = bean.getName();
-                surname = bean.getSurname();
-                contractType = bean.getContractType();
-
-                if(name.equals(nameToRemove) && surname.equals(surnameToRemove) && contractType == ContractTypes.fromString(contractTypeToRemove)){
-                    this.employeeBeanList.remove(bean);
-                    break;
-                }
-
+            }catch(InvalidInputException e){
+                this.showError(e.getMessage());
+            }catch(ServiceException e){
+                Printer.perror(e.getMessage());
             }
+
+
 
 
         }else{

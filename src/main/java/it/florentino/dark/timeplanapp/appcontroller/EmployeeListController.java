@@ -6,33 +6,55 @@ import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.model.dao.EmployeeDao;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
+import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class EmployeeListController {
 
-    public List<EmployeeBean> storeEmployeeList(List<EmployeeBean> employeeBeanList) throws ServiceException, InvalidInputException {
+    public EmployeeBean insertEmployee(EmployeeBean newEmployeeBean) throws ServiceException, InvalidInputException{
 
-        List<EmployeeBean> checkedList = new ArrayList<>();
-        Employee newEmployee;
-
+        Employee newEmployee = this.createEmployeeFromBean(newEmployeeBean);
 
         try{
+
             EmployeeDao dao = new EmployeeDao();
-            for(EmployeeBean bean: employeeBeanList){
+            if(dao.isEmployeeRegistered(newEmployee)) {
+                dao.insertEmployee(newEmployee);
+            }else throw new InvalidInputException("Employee not registered");
 
-                newEmployee = new Employee(bean.getName(), bean.getSurname(), bean.getContractType(), bean.getManagerID());
-                newEmployee = dao.insertEmployee(newEmployee);
-                bean = new EmployeeBean(newEmployee.getName(), newEmployee.getSurname(), newEmployee.getContractType(), newEmployee.getManagerID());
-                checkedList.add(bean);
-
-            }
         }catch(DAOException e){
             throw new ServiceException(e.getMessage());
         }
 
-        return checkedList;
+        return newEmployeeBean;
+
+
+    }
+
+    public void removeEmployee(EmployeeBean employeeBeanToRemove) throws ServiceException{
+
+        Employee employeeToRemove = this.createEmployeeFromBean(employeeBeanToRemove);
+        try{
+
+            EmployeeDao dao = new EmployeeDao();
+            dao.removeEmployee(employeeToRemove);
+
+        }catch(DAOException e){
+            throw new ServiceException(e.getMessage());
+        }
+
+    }
+
+    public Employee createEmployeeFromBean(EmployeeBean employeeBean){
+
+        String employeeName = employeeBean.getName();
+        String employeeSurname = employeeBean.getSurname();
+        ContractTypes employeeContract = employeeBean.getContractType();
+        String employeeEmail = employeeBean.getEmail();
+        int managerID = employeeBean.getManagerID();
+
+        return new Employee(employeeName, employeeSurname, employeeContract, employeeEmail, managerID);
 
     }
 

@@ -53,7 +53,7 @@
          </children>
       </HBox>
       <Line endX="1241.0" endY="-6.999992370605469" layoutX="199.0" layoutY="67.0" startX="-199.0" startY="-6.999992370605469" strokeWidth="2.0" />
-      <HBox layoutX="221.0" layoutY="174.0" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="75.0">
+      <HBox layoutX="221.0" layoutY="174.0" prefHeight="686.0" prefWidth="998.0" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="75.0">
          <children>
             <VBox focusTraversable="true" spacing="10.0">
                <children>
@@ -91,6 +91,23 @@
                         </TextField>
                      </children>
                   </VBox>
+                  <VBox>
+                     <children>
+                        <Label style="-fx-font-size: 24px;" text="Email">
+                           <font>
+                              <Font name="System Italic" size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="emailField" prefHeight="49.0" prefWidth="240.0" promptText="Email" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
                   <VBox layoutX="10.0" layoutY="49.0" prefHeight="79.0">
                      <children>
                         <Label style="-fx-font-size: 24px;" text="Contract Type">
@@ -106,16 +123,21 @@
                   </VBox>
                   <VBox spacing="10.0">
                      <children>
-                        <Region prefHeight="20.0" prefWidth="365.0" />
+                        <Region prefHeight="0.0" prefWidth="321.0" />
                         <HBox>
                            <children>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddClick" prefHeight="48.0" prefWidth="443.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Add">
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddClick" prefHeight="45.0" prefWidth="443.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Add">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Button>
                            </children>
                         </HBox>
+                        <Button mnemonicParsing="false" onAction="#onRemoveClick" prefHeight="45.0" prefWidth="323.0" style="-fx-background-color: #dc143c; -fx-font-size: 24px; -fx-text-fill: black;" text="Remove Item">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
                         <Label fx:id="errorLabel" alignment="CENTER" prefHeight="48.0" prefWidth="365.0" textFill="CRIMSON" wrapText="true">
                            <font>
                               <Font size="20.0" />
@@ -125,6 +147,7 @@
                   </VBox>
                </children>
             </VBox>
+            <Region prefHeight="738.0" prefWidth="174.0" />
             <VBox alignment="BOTTOM_RIGHT">
                <children>
                   <HBox prefHeight="738.0" prefWidth="746.0">
@@ -132,22 +155,7 @@
                         <Region prefHeight="629.0" prefWidth="37.0" />
                         <VBox spacing="9.0">
                            <children>
-                              <ListView fx:id="employeesListView" prefHeight="738.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
-                              <HBox>
-                                 <children>
-                                    <Button mnemonicParsing="false" onAction="#onRemoveClick" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #dc143c; -fx-font-size: 24px; -fx-text-fill: black;" text="Remove Item">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Button>
-                                    <Region prefHeight="45.0" prefWidth="56.0" />
-                                    <Button mnemonicParsing="false" onAction="#onLoadClick" prefHeight="48.0" prefWidth="280.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Load List">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
+                              <ListView fx:id="employeesListView" prefHeight="684.0" prefWidth="674.0" style="-fx-border-color: rgba(0, 137, 123, 0.7);" />
                            </children>
                         </VBox>
                      </children>

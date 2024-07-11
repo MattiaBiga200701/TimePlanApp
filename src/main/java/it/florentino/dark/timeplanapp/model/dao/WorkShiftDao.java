@@ -31,7 +31,7 @@ public class WorkShiftDao {
 
         try{
 
-            this.cs = this.conn.prepareCall("{ call work_shift_insertion(?, ?, ?, ?, ?, ?)}");
+            this.cs = this.conn.prepareCall("{ call work_shift_insertion(?, ?, ?, ?, ?, ?, ?)}");
             this.setParametersFromEntity(newWorkshift);
             this.cs.executeQuery();
 
@@ -47,7 +47,7 @@ public class WorkShiftDao {
 
         try{
 
-            this.cs = this.conn.prepareCall("{ call delete_work_shift(?, ?, ?, ?, ?, ?)}");
+            this.cs = this.conn.prepareCall("{ call delete_work_shift(?, ?, ?, ?, ?, ?, ?)}");
             this.setParametersFromEntity(workShiftToDelete);
             this.cs.executeQuery();
 
@@ -60,20 +60,22 @@ public class WorkShiftDao {
         String employeeName = newWorkshift.getEmployee().getName();
         String employeeSurname = newWorkshift.getEmployee().getSurname();
         String employeeContract = newWorkshift.getEmployee().getContractType().getId();
+        String employeeEmail = newWorkshift.getEmployee().getEmail();
         int managerID = newWorkshift.getEmployee().getManagerID();
         String shiftDate = newWorkshift.getShiftDate();
         int shiftCount;
 
         try{
-            this.cs = this.conn.prepareCall("{call shiftCount(?, ?, ?, ?, ?, ?)}");
+            this.cs = this.conn.prepareCall("{call shiftCount(?, ?, ?, ?, ?, ?, ?)}");
             this.cs.setString(1, shiftDate);
             this.cs.setString(2, employeeName);
             this.cs.setString(3, employeeSurname);
             this.cs.setString(4,employeeContract);
-            this.cs.setInt(5, managerID);
-            this.cs.registerOutParameter(6, Types.NUMERIC);
+            this.cs.setString(5,employeeEmail);
+            this.cs.setInt(6, managerID);
+            this.cs.registerOutParameter(7, Types.NUMERIC);
             this.cs.executeQuery();
-            shiftCount = this.cs.getInt(6);
+            shiftCount = this.cs.getInt(7);
         }catch(SQLException e){
             throw new DAOException(e.getMessage());
         }
@@ -119,6 +121,7 @@ public class WorkShiftDao {
         String employeeName;
         String employeeSurname;
         String employeeContract;
+        String employeeEmail;
 
         Employee employeeRead;
         WorkShift workShiftRead;
@@ -140,8 +143,9 @@ public class WorkShiftDao {
                 employeeName = rs.getString(2);
                 employeeSurname = rs.getString(3);
                 employeeContract = rs.getString(4);
+                employeeEmail = rs.getString(5);
 
-                employeeRead = new Employee(employeeName, employeeSurname, ContractTypes.fromString(employeeContract), managerID);
+                employeeRead = new Employee(employeeName, employeeSurname, ContractTypes.fromString(employeeContract), employeeEmail, managerID);
 
                 workShiftRead = new WorkShift(ShiftSlots.fromString(shiftTime), shiftDate, employeeRead);
 
@@ -163,6 +167,7 @@ public class WorkShiftDao {
         String employeeName = entity.getEmployee().getName();
         String employeeSurname =entity.getEmployee().getSurname();
         String employeeContract = entity.getEmployee().getContractType().getId();
+        String employeeEmail = entity.getEmployee().getEmail();
         int managerID = entity.getEmployee().getManagerID();
 
         this.cs.setString(1, entity.getShiftDate());
@@ -170,6 +175,7 @@ public class WorkShiftDao {
         this.cs.setString(3, employeeName);
         this.cs.setString(4, employeeSurname);
         this.cs.setString(5, employeeContract);
-        this.cs.setInt(6, managerID);
+        this.cs.setString(6,employeeEmail);
+        this.cs.setInt(7, managerID);
     }
 }

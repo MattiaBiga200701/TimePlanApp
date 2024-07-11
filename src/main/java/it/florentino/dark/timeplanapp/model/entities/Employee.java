@@ -6,14 +6,17 @@ public class Employee {
 
     private String name;
     private String surname;
+
+    private String email;
     private ContractTypes contractType;
 
     private int managerID;
 
-    public Employee(String name, String surname, ContractTypes contractType, int managerID){
+    public Employee(String name, String surname, ContractTypes contractType, String email,  int managerID){
         this.setName(name);
         this.setSurname(surname);
         this.setContractType(contractType);
+        this.setEmail(email);
         this.setManagerID(managerID);
     }
 
@@ -43,6 +46,14 @@ public class Employee {
 
     public ContractTypes getContractType() {
         return this.contractType;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 
     public void setManagerID(int managerID) {

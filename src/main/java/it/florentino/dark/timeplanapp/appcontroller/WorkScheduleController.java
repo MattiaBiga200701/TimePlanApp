@@ -34,7 +34,7 @@ public class WorkScheduleController {
 
             for(Employee employee: employeeList){
 
-                    storedEmployee = new EmployeeBean(employee.getName(), employee.getSurname(), employee.getContractType(), employee.getManagerID());
+                    storedEmployee = new EmployeeBean(employee.getName(), employee.getSurname(), employee.getContractType(), employee.getEmail(), employee.getManagerID());
                     employeeBeanList.add(storedEmployee);
             }
 
@@ -76,9 +76,10 @@ public class WorkScheduleController {
         String employeeName = newWorkShift.getEmployee().getName();
         String employeeSurname = newWorkShift.getEmployee().getSurname();
         ContractTypes employeeContract = newWorkShift.getEmployee().getContractType();
+        String employeeEmail = newWorkShift.getEmployee().getEmail();
         int employeeMangerID = newWorkShift.getEmployee().getManagerID();
 
-        return new WorkShiftBean(newWorkShift.getShiftTime(), newWorkShift.getShiftDate(), employeeName, employeeSurname, employeeContract, employeeMangerID);
+        return new WorkShiftBean(newWorkShift.getShiftTime(), newWorkShift.getShiftDate(), employeeName, employeeSurname, employeeContract, employeeEmail, employeeMangerID);
     }
 
     public void removeWorkShift(WorkShiftBean workShiftBeanToRemove) throws ServiceException {
@@ -114,6 +115,7 @@ public class WorkScheduleController {
         String employeeName;
         String employeeSurname;
         ContractTypes employeeContract;
+        String employeeEmail;
 
 
         try{
@@ -131,8 +133,9 @@ public class WorkScheduleController {
                     employeeName = workShiftRead.getEmployee().getName();
                     employeeSurname = workShiftRead.getEmployee().getSurname();
                     employeeContract = workShiftRead.getEmployee().getContractType();
+                    employeeEmail = workShiftRead.getEmployee().getEmail();
 
-                    WorkShiftBean workShiftBeanRead = new WorkShiftBean(workShiftRead.getShiftTime(), employeeName, employeeSurname, employeeContract);
+                    WorkShiftBean workShiftBeanRead = new WorkShiftBean(workShiftRead.getShiftTime(), employeeName, employeeSurname, employeeEmail, employeeContract);
 
                     workShiftBeanList.add(workShiftBeanRead);
 
@@ -152,9 +155,10 @@ public class WorkScheduleController {
         String employeeName = workShiftBean.getEmployeeName();
         String employeeSurname = workShiftBean.getEmployeeSurname();
         ContractTypes employeeContract = workShiftBean.getEmployeeContract();
+        String employeeEmail = workShiftBean.getEmployeeEmail();
         int managerID = workShiftBean.getManagerID();
 
-        Employee employee = new Employee(employeeName, employeeSurname,employeeContract, managerID);
+        Employee employee = new Employee(employeeName, employeeSurname,employeeContract, employeeEmail, managerID);
 
         return  new WorkShift(workShiftBean.getShiftTime(), workShiftBean.getShiftDate(), employee);
     }

@@ -11,13 +11,13 @@ import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
-import javafx.animation.PauseTransition;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
+
 
 
 import java.time.LocalDate;
@@ -39,6 +39,8 @@ public class WorkScheduleGraphicController extends GraphicController{
     private Label surnameLabel;
     @FXML
     private Label contractLabel;
+    @FXML
+    private Label emailLabel;
 
 
     private List<EmployeeBean> employeesBeanList;
@@ -67,15 +69,19 @@ public class WorkScheduleGraphicController extends GraphicController{
         String name;
         String surname;
         String contractType;
+        String email;
         String item;
         try {
 
             this.employeesBeanList = this.controller.loadEmployeeList(this.getLoggedUser());
             for(EmployeeBean employeeBeanStored : this.employeesBeanList){
+
                 name = employeeBeanStored.getName();
                 surname = employeeBeanStored.getSurname();
                 contractType = employeeBeanStored.getContractType().getId();
-                item = name + "  " + surname + "  " + contractType;
+                email = employeeBeanStored.getEmail();
+                item = name + "  " + surname + "  " + contractType + "  " + email;
+
                 this.employeeItems.add(item);
                 this.employeesListView.setItems(this.employeeItems);
             }
@@ -96,6 +102,7 @@ public class WorkScheduleGraphicController extends GraphicController{
             this.nameLabel.setText(tokens[0]);
             this.surnameLabel.setText(tokens[1]);
             this.contractLabel.setText(tokens[2]);
+            this.emailLabel.setText(tokens[3]);
         }
     }
 
@@ -116,6 +123,7 @@ public class WorkScheduleGraphicController extends GraphicController{
         String employeeName = this.nameLabel.getText();
         String employeeSurname = this.surnameLabel.getText();
         String employeeContract = this.contractLabel.getText();
+        String employeeEmail = this.emailLabel.getText();
         LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
         String shiftTime = this.shiftTimeChoice.getValue();
 
@@ -131,7 +139,7 @@ public class WorkScheduleGraphicController extends GraphicController{
             }
 
             String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            WorkShiftBean newWorkShiftBean = new WorkShiftBean(ShiftSlots.fromString(shiftTime), shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), this.getLoggedUser().getManagerID());
+            WorkShiftBean newWorkShiftBean = new WorkShiftBean(ShiftSlots.fromString(shiftTime), shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), employeeEmail, this.getLoggedUser().getManagerID());
 
             newWorkShiftBean = this.controller.insertWorkShift(newWorkShiftBean);
 

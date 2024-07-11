@@ -79,14 +79,10 @@ public class SchedulationViewGraphicController extends GraphicController{
 
             for(WorkShiftBean workShiftBeanRead: this.workShiftBeanList){
 
-                String shiftTime = workShiftBeanRead.getShiftTime().getId();
-                String employeeName = workShiftBeanRead.getEmployeeName();
-                String employeeSurname = workShiftBeanRead.getEmployeeSurname();
-                String employeeContract = workShiftBeanRead.getEmployeeContract().getId();
-
-                String item = shiftTime + "  " + employeeName + "  " + employeeSurname + "  " + employeeContract;
+                String item = this.setItem(workShiftBeanRead);
                 this.items.add(item);
                 this.workShiftListView.setItems(this.items);
+
             }
 
 
@@ -99,6 +95,18 @@ public class SchedulationViewGraphicController extends GraphicController{
 
         this.removeButton.setOnAction(this::onRemoveClick);
         this.notifyButton.setOnAction(this::onNotifyClick);
+
+    }
+
+    private String setItem(WorkShiftBean workShiftBeanRead) {
+
+        String shiftTime = workShiftBeanRead.getShiftTime().getId();
+        String employeeName = workShiftBeanRead.getEmployeeName();
+        String employeeSurname = workShiftBeanRead.getEmployeeSurname();
+        String employeeContract = workShiftBeanRead.getEmployeeContract().getId();
+        String employeeEmail = workShiftBeanRead.getEmployeeEmail();
+
+        return shiftTime + "  " + employeeName + "  " + employeeSurname + "  " + employeeContract + "  " + employeeEmail;
 
     }
 
@@ -128,13 +136,14 @@ public class SchedulationViewGraphicController extends GraphicController{
             String employeeName = tokens[1];
             String employeeSurname = tokens[2];
             String employeeContract = tokens[3];
+            String employeeEmail = tokens[4];
 
             this.workShiftListView.getItems().remove(selectedIdx);
 
             try {
 
 
-                WorkShiftBean workShiftBeanToRemove = new WorkShiftBean(ShiftSlots.fromString(shiftTime),shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), this.getLoggedUser().getManagerID());
+                WorkShiftBean workShiftBeanToRemove = new WorkShiftBean(ShiftSlots.fromString(shiftTime), shiftDate, employeeName, employeeSurname, ContractTypes.fromString(employeeContract), employeeEmail, this.getLoggedUser().getManagerID());
                 this.controller.removeWorkShift(workShiftBeanToRemove);
 
             }catch(InvalidInputException e){

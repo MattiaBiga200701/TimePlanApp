@@ -13,14 +13,18 @@ public class EmployeeBean {
     private String surname;
     private ContractTypes contractType;
 
+    private String email;
+
     private int managerID;
 
-    public EmployeeBean(String name, String surname, ContractTypes contractType, int managerID) throws InvalidInputException{
+    public EmployeeBean(String name, String surname, ContractTypes contractType, String email,  int managerID) throws InvalidInputException{
         this.setName(name);
         this.setSurname(surname);
         this.setContractType(contractType);
+        this.setEmail(email);
         this.setManagerID(managerID);
     }
+
 
     public void setName(String name) throws InvalidInputException{
 
@@ -54,6 +58,24 @@ public class EmployeeBean {
 
     public ContractTypes getContractType() {
         return contractType;
+    }
+
+    public void setEmail(String email) throws InvalidInputException {
+        if(this.isValidEmail(email)) {
+            this.email = email;
+        }else throw new InvalidInputException("Invalid email");
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    private boolean isValidEmail(String email){
+        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(emailPattern);
+        if(email == null) return false;
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     private boolean isValidString(String inputString){
