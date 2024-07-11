@@ -28,7 +28,7 @@ public class LoginDao {
     public User loginProcedure(User user) throws DAOException {
         
         int role;
-        String email;
+        String username;
         int managerID;
 
         try{
@@ -41,7 +41,7 @@ public class LoginDao {
             this.cs.registerOutParameter(5, Types.NUMERIC);
             this.cs.executeQuery();
             role = this.cs.getInt(3);
-            email = this.cs.getString(4);
+            username = this.cs.getString(4);
             managerID = this.cs.getInt(5);
             this.cs.close();
 
@@ -51,7 +51,7 @@ public class LoginDao {
         }
 
 
-        user.setEmail(email);
+        user.setUsername(username);
         user.setRole(Role.fromInt(role));
         user.setManagerID(managerID);
         return user;

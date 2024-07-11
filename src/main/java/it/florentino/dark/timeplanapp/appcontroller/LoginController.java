@@ -15,12 +15,12 @@ public class LoginController {
 
     public UserBean authenticate(LoginBean credentials) throws ServiceException, CredentialException{
 
-        String username = credentials.getUsername();
+        String email = credentials.getEmail();
         String password = credentials.getPassword();
-        String email;
+        String username;
         int managerID;
         Role role;
-        User user = new User(username, password);
+        User user = new User(email, password);
 
         try {
             LoginDao loginDao = new LoginDao();
@@ -35,7 +35,7 @@ public class LoginController {
             throw new ServiceException(e.getMessage());
         }
 
-        email = user.getEmail();
+        username = user.getUsername();
         role = user.getRole();
         managerID = user.getManagerID();
 

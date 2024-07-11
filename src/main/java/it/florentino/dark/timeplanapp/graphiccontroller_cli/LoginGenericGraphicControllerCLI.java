@@ -46,13 +46,13 @@ public class LoginGenericGraphicControllerCLI extends GenericGraphicControllerCL
         Printer.printf("\nLOG IN");
         try {
 
-            Printer.print("Username: ");
-            String username = reader.readLine();
+            Printer.print("Email: ");
+            String email = reader.readLine();
 
             Printer.print("Password: ");
             String password = reader.readLine();
 
-            LoginBean credentials = new LoginBean(username, password);
+            LoginBean credentials = new LoginBean(email, password);
             UserBean loggedUser = controller.authenticate(credentials);
 
             switch(loggedUser.getRole()){

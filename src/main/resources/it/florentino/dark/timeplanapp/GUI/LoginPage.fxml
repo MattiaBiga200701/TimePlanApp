@@ -37,7 +37,7 @@
                         </VBox>
                         <VBox prefHeight="79.0" prefWidth="240.0">
                            <children>
-                              <Label style="-fx-font-size: 24px;" text="Username">
+                              <Label style="-fx-font-size: 24px;" text="Email">
                                  <font>
                                     <Font name="System Italic" size="24.0" />
                                  </font>
@@ -45,7 +45,7 @@
                                     <Insets left="3.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="username" prefHeight="49.0" prefWidth="240.0" promptText="Username" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
+                              <TextField fx:id="email" prefHeight="49.0" prefWidth="240.0" promptText="Email" style="-fx-font-size: 20px; -fx-border-color: rgba(0, 137, 123, 0.7);">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

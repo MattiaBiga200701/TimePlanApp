@@ -4,16 +4,16 @@ import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 
 public class LoginBean {
 
-    private String username;
+    private String email;
     private String password;
-    public LoginBean(String username, String password) throws CredentialException{
-        setUsername(username);
+    public LoginBean(String email, String password) throws CredentialException{
+        setEmail(email);
         setPassword(password);
     }
 
-    public void setUsername(String username) throws CredentialException{
-        if(this.isValidUsername(username)) {
-            this.username = username;
+    public void setEmail(String email) throws CredentialException{
+        if(this.isValidEmail(email)) {
+            this.email = email;
         }else {
             throw new CredentialException();
         }
@@ -26,16 +26,17 @@ public class LoginBean {
         }
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getEmail() {
+        return this.email;
     }
+
 
     public String getPassword(){
         return this.password;
     }
 
-    private boolean isValidUsername(String username){
-        return username != null;
+    private boolean isValidEmail(String email){
+        return email != null;
     }
     private boolean isValidPassword(String password){
         return password != null;

@@ -18,7 +18,7 @@ public class LoginGraphicController extends GraphicController {
 
 
     @FXML
-    private TextField username;
+    private TextField email;
 
     @FXML
     private PasswordField password;
@@ -38,13 +38,13 @@ public class LoginGraphicController extends GraphicController {
     @FXML
     public void onLoginClick(){
 
-        String user = this.username.getText().trim();
+        String email = this.email.getText().trim();
         String pass = this.password.getText().trim();
 
 
         LoginController controller = new LoginController();
         try {
-            LoginBean credentials = new LoginBean(user, pass);
+            LoginBean credentials = new LoginBean(email, pass);
             UserBean loggedUser = controller.authenticate(credentials);
 
             switch(loggedUser.getRole()){
