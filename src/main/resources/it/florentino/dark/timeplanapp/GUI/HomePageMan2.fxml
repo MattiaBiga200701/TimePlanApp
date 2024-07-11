@@ -138,7 +138,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="menuButton1" mnemonicParsing="false" prefWidth="281.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
+            <Button mnemonicParsing="false" prefWidth="281.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-text-fill: black;" text="Work Schedule">
                <font>
                   <Font size="30.0" />
                </font>
