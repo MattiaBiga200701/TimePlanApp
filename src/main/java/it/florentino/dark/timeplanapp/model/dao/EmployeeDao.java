@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp.model.dao;
 
 import it.florentino.dark.timeplanapp.exceptions.ConnectionException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
+import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
 import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
@@ -24,13 +25,20 @@ public class EmployeeDao {
         }
     }
 
-    public Employee insertEmployee(Employee newEmployee) throws DAOException{
+    public Employee insertEmployee(Employee newEmployee) throws DAOException, NotUniqueEmailException{
+
+        int status;
 
         try{
 
-            this.cs = this.conn.prepareCall("{ call employee_insertion(?, ?, ?, ?, ?)}");
+            this.cs = this.conn.prepareCall("{ call employee_insertion(?, ?, ?, ?, ?, ?)}");
             this.setParametersFromEntity(newEmployee);
+            this.cs.registerOutParameter(6, Types.INTEGER);
             this.cs.executeQuery();
+            status = this.cs.getInt(6);
+            if(status == 1){
+                throw new NotUniqueEmailException();
+            }
 
         }catch(SQLException e){
             throw new DAOException(e.getMessage());

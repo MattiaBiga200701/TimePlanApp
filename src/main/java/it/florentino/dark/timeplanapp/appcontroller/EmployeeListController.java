@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp.appcontroller;
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
+import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.model.dao.EmployeeDao;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
@@ -25,6 +26,8 @@ public class EmployeeListController {
 
         }catch(DAOException e){
             throw new ServiceException(e.getMessage());
+        }catch(NotUniqueEmailException e){
+            throw new InvalidInputException(e.getMessage());
         }
 
         return newEmployeeBean;
