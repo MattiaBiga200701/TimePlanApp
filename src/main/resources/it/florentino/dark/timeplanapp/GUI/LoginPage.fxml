@@ -71,7 +71,7 @@
                         </VBox>
                         <VBox spacing="10.0">
                            <children>
-                              <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="48.0" prefWidth="251.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Login now">
+                              <Button mnemonicParsing="false" onAction="#onLoginClick" prefHeight="48.0" prefWidth="251.0" style="-fx-background-color: rgba(0, 137, 123, 0.7); -fx-font-size: 24px; -fx-text-fill: black;" text="Login now">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
