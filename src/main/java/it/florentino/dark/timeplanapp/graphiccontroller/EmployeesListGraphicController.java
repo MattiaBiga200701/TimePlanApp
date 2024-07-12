@@ -82,6 +82,8 @@ public class EmployeesListGraphicController extends GraphicController {
             Printer.perror(e.getMessage());
         }
 
+        this.showError("Employee Added");
+
 
     }
 

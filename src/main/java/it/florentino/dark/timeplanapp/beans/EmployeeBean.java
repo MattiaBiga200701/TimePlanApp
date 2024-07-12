@@ -25,6 +25,10 @@ public class EmployeeBean {
         this.setManagerID(managerID);
     }
 
+    public EmployeeBean(String email) throws InvalidInputException{
+        this.setEmail(email);
+    }
+
 
     public void setName(String name) throws InvalidInputException{
 

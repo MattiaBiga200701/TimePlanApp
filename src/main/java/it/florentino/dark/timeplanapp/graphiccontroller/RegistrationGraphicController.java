@@ -159,22 +159,24 @@ public class RegistrationGraphicController extends GraphicController {
         try {
 
             this.controller.insertUser(this.newUser);
+
+            this.getErrorLabel().setText("Registration Complete!");
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(newEvent -> {
+                try {
+                    this.getScenePlayer().showScene("GUI/LoginPage.fxml");
+                } catch (SetSceneException e) {
+                    Printer.perror(e.getMessage());
+                }
+            });
+            pause.play();
         } catch (ServiceException e) {
             Printer.perror(e.getMessage());
         } catch (NotUniqueEmailException e ){
             this.showError(e.getMessage());
         }
 
-        this.getErrorLabel().setText("Registration Complete!");
-        PauseTransition pause = new PauseTransition(Duration.seconds(1));
-        pause.setOnFinished(newEvent -> {
-            try {
-                this.getScenePlayer().showScene("GUI/LoginPage.fxml");
-            } catch (SetSceneException e) {
-                Printer.perror(e.getMessage());
-            }
-        });
-        pause.play();
+
 
     }
 

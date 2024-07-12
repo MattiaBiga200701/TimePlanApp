@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCLI {
 
     UserBean newUser;
-    public void start() {
+    public void start(UserBean loggedUser) {
         while(true) {
             this.showMenu();
             try {

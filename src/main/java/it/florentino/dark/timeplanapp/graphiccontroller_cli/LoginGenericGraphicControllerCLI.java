@@ -15,7 +15,9 @@ import java.io.InputStreamReader;
 public class LoginGenericGraphicControllerCLI extends GenericGraphicControllerCLI {
 
 
-    public void start(){
+    public void start(UserBean loggedUser){
+
+        this.setLoggedUser(loggedUser);
         this.showMenu();
     }
 
@@ -23,46 +25,59 @@ public class LoginGenericGraphicControllerCLI extends GenericGraphicControllerCL
 
         int choice;
         this.showAppName();
-        Printer.printf("1) Log in now");
-        Printer.printf("2) Register now");
-        Printer.printf("3) Quit");
 
-        choice = getChoice(1, 3);
-        try{
-            switch(choice){
-                case 1 -> this.authenticate();
-                case 2 -> new RegistrationGraphicControllerCLI().start();
-                case 3 -> System.exit(0);
-                default -> throw new InvalidInputException("Invalid choice");
+        while(true) {
+            Printer.printf("1) Log in now");
+            Printer.printf("2) Register now");
+            Printer.printf("3) Quit");
+
+            choice = getChoice(1, 3);
+            try {
+                switch (choice) {
+                    case 1 -> this.authenticate();
+                    case 2 -> new RegistrationGraphicControllerCLI().start(null);
+                    case 3 -> System.exit(1);
+                    default -> throw new InvalidInputException("Invalid choice");
+                }
+
+
+            } catch (InvalidInputException e) {
+                Printer.perror(e.getMessage());
             }
-        }catch(InvalidInputException e){
-            Printer.perror(e.getMessage());
         }
     }
 
     public void authenticate(){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         LoginController controller = new LoginController();
-        Printer.printf("\nLOG IN");
-        try {
+        Printer.printf("\n*---- LOGIN ----*");
 
-            Printer.print("Email: ");
-            String email = reader.readLine();
+        while(true) {
+            try {
 
-            Printer.print("Password: ");
-            String password = reader.readLine();
+                Printer.print("Email: ");
+                String email = reader.readLine();
 
-            LoginBean credentials = new LoginBean(email, password);
-            UserBean loggedUser = controller.authenticate(credentials);
+                Printer.print("Password: ");
+                String password = reader.readLine();
 
-            switch(loggedUser.getRole()){
-                case MANAGER -> Printer.printf("Manager Logged");
-                case EMPLOYEE -> Printer.printf("Employee Logged");
-                default -> throw new CredentialException("Invalid Credentials");
+                LoginBean credentials = new LoginBean(email, password);
+                UserBean loggedUser = controller.authenticate(credentials);
+
+                switch (loggedUser.getRole()) {
+                    case MANAGER -> new ManagerHomeGraphicControllerCLI().start(loggedUser);
+                    case EMPLOYEE -> Printer.printf("Employee Logged");
+                    default -> throw new CredentialException("Invalid Credentials");
+                }
+
+                break;
+
+            } catch (IOException | ServiceException e) {
+                Printer.perror(e.getMessage());
+                System.exit(-1);
+            } catch (CredentialException e) {
+                Printer.perror(e.getMessage());
             }
-
-        }catch(IOException | CredentialException | ServiceException e){
-            Printer.perror(e.getMessage());
         }
     }
 
