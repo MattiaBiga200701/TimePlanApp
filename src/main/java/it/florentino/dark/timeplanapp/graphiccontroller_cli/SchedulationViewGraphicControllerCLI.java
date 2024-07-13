@@ -41,7 +41,7 @@ public class SchedulationViewGraphicControllerCLI extends GenericGraphicControll
                 switch(choice){
 
                     case 1 -> this.removeShift();
-                    case 2 -> this.notify();
+                    case 2 -> Printer.printf("Notify Employees");
                     case 3 -> new ManagerHomeGraphicControllerCLI().start(this.getLoggedUser());
                     case 4 -> System.exit(1);
                     default -> throw new InvalidInputException("Invalid choice");
