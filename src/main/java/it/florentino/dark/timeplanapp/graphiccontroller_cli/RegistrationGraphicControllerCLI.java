@@ -42,8 +42,8 @@ public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCL
             }
         }
 
-        LoginGenericGraphicControllerCLI controller = new LoginGenericGraphicControllerCLI();
-        controller.authenticate();
+        LoginGenericGraphicControllerCLI loginGraphicController = new LoginGenericGraphicControllerCLI();
+        loginGraphicController.authenticate();
 
     }
 
