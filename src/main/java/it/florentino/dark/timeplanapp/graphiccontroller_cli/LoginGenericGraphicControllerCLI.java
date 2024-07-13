@@ -40,6 +40,7 @@ public class LoginGenericGraphicControllerCLI extends GenericGraphicControllerCL
                     default -> throw new InvalidInputException("Invalid choice");
                 }
 
+                break;
 
             } catch (InvalidInputException e) {
                 Printer.perror(e.getMessage());
