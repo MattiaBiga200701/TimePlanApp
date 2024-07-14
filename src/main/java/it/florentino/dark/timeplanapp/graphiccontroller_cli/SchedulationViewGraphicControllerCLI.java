@@ -15,6 +15,7 @@ import java.util.List;
 public class SchedulationViewGraphicControllerCLI extends GenericGraphicControllerCLI {
 
     private WorkScheduleController controllerAppl;
+
     public void start(UserBean loggedUser){
 
         this.controllerAppl = new WorkScheduleController();
