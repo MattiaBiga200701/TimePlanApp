@@ -14,10 +14,10 @@ import java.util.List;
 
 public class SchedulationViewGraphicControllerCLI extends GenericGraphicControllerCLI {
 
-    private WorkScheduleController controller;
+    private WorkScheduleController controllerAppl;
     public void start(UserBean loggedUser){
 
-        this.controller = new WorkScheduleController();
+        this.controllerAppl = new WorkScheduleController();
         this.setLoggedUser(loggedUser);
         this.showMenu();
     }
@@ -77,7 +77,7 @@ public class SchedulationViewGraphicControllerCLI extends GenericGraphicControll
 
 
                 Printer.printf("\nWork Shift Stored");
-                workShiftBeanList = this.controller.workShiftReader(workShiftBeanToRead);
+                workShiftBeanList = this.controllerAppl.workShiftReader(workShiftBeanToRead);
 
                 index = 1;
 
@@ -102,7 +102,7 @@ public class SchedulationViewGraphicControllerCLI extends GenericGraphicControll
                 workShiftBeanToRemove.setShiftDate(shiftDate);
                 workShiftBeanToRemove.setManagerID(this.getLoggedUser().getManagerID());
 
-                this.controller.removeWorkShift(workShiftBeanToRemove);
+                this.controllerAppl.removeWorkShift(workShiftBeanToRemove);
                 Printer.printf("Work Shift Removed");
 
                 break;
