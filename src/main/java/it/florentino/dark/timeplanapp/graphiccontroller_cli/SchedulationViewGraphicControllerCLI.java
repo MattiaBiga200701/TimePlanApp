@@ -1,7 +1,6 @@
 package it.florentino.dark.timeplanapp.graphiccontroller_cli;
 
 import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
-import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
@@ -14,13 +13,11 @@ import java.util.List;
 
 public class SchedulationViewGraphicControllerCLI extends GenericGraphicControllerCLI {
 
-    private WorkScheduleController controllerAppl;
+    private final WorkScheduleController controller;
 
-    public void start(UserBean loggedUser){
+    public SchedulationViewGraphicControllerCLI(){
 
-        this.controllerAppl = new WorkScheduleController();
-        this.setLoggedUser(loggedUser);
-        this.showMenu();
+        this.controller = new WorkScheduleController();
     }
 
     public void showMenu(){
@@ -78,7 +75,7 @@ public class SchedulationViewGraphicControllerCLI extends GenericGraphicControll
 
 
                 Printer.printf("\nWork Shift Stored");
-                workShiftBeanList = this.controllerAppl.workShiftReader(workShiftBeanToRead);
+                workShiftBeanList = this.controller.workShiftReader(workShiftBeanToRead);
 
                 index = 1;
 
@@ -103,7 +100,7 @@ public class SchedulationViewGraphicControllerCLI extends GenericGraphicControll
                 workShiftBeanToRemove.setShiftDate(shiftDate);
                 workShiftBeanToRemove.setManagerID(this.getLoggedUser().getManagerID());
 
-                this.controllerAppl.removeWorkShift(workShiftBeanToRemove);
+                this.controller.removeWorkShift(workShiftBeanToRemove);
                 Printer.printf("Work Shift Removed");
 
                 break;

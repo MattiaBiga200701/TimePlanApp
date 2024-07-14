@@ -25,7 +25,7 @@ public class LoginController {
         Role role;
         User user = new User(email, password);
 
-        DaoSetter.setDao("CSV");
+        DaoSetter.setDao("MySQL");
         UserDao dao;
 
 

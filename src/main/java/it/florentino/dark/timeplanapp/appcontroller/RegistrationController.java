@@ -85,7 +85,7 @@ public class RegistrationController {
         User newUser = new User(email);
         boolean check;
         UserDao dao;
-        DaoSetter.setDao("CSV");
+        DaoSetter.setDao("MySQL");
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {

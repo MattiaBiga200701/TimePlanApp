@@ -14,11 +14,12 @@ import java.io.InputStreamReader;
 
 public class LoginGraphicControllerCLI extends GenericGraphicControllerCLI {
 
+    private final LoginController controller;
 
-    public void start(UserBean loggedUser){
+    public LoginGraphicControllerCLI(){
 
-        this.setLoggedUser(loggedUser);
-        this.showMenu();
+         this.controller = new LoginController();
+
     }
 
     public void showMenu(){
@@ -50,7 +51,6 @@ public class LoginGraphicControllerCLI extends GenericGraphicControllerCLI {
 
     public void authenticate(){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        LoginController controller = new LoginController();
         Printer.printf("\n*---- LOGIN ----*");
 
         while(true) {
@@ -63,7 +63,7 @@ public class LoginGraphicControllerCLI extends GenericGraphicControllerCLI {
                 String password = reader.readLine();
 
                 LoginBean credentials = new LoginBean(email, password);
-                UserBean loggedUser = controller.authenticate(credentials);
+                UserBean loggedUser = this.controller.authenticate(credentials);
 
                 switch (loggedUser.getRole()) {
                     case MANAGER -> new ManagerHomeGraphicControllerCLI().start(loggedUser);

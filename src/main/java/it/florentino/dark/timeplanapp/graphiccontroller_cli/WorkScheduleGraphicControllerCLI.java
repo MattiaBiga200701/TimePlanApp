@@ -2,7 +2,6 @@ package it.florentino.dark.timeplanapp.graphiccontroller_cli;
 
 import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
-import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
@@ -18,12 +17,11 @@ import java.util.List;
 
 public class WorkScheduleGraphicControllerCLI extends GenericGraphicControllerCLI {
 
-    private WorkScheduleController controller;
-    public void start(UserBean loggedUser){
+    private final WorkScheduleController controller;
+
+    public WorkScheduleGraphicControllerCLI(){
 
         this.controller = new WorkScheduleController();
-        this.setLoggedUser(loggedUser);
-        this.showMenu();
     }
 
     public void showMenu() {

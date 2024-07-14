@@ -2,7 +2,6 @@ package it.florentino.dark.timeplanapp.graphiccontroller_cli;
 
 import it.florentino.dark.timeplanapp.appcontroller.EmployeeListController;
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
-import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
@@ -15,14 +14,10 @@ import java.io.InputStreamReader;
 
 public class EmployeeListGraphicControllerCLI extends GenericGraphicControllerCLI {
 
-    private EmployeeListController controller;
-    public void start(UserBean loggedUser){
+    private final EmployeeListController controller;
+    public EmployeeListGraphicControllerCLI(){
 
         this.controller = new EmployeeListController();
-
-        this.setLoggedUser(loggedUser);
-        this.showMenu();
-
     }
 
     public void showMenu(){

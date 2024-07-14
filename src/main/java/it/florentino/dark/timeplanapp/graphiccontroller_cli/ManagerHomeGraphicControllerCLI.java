@@ -1,16 +1,9 @@
 package it.florentino.dark.timeplanapp.graphiccontroller_cli;
 
-import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
 
 public class ManagerHomeGraphicControllerCLI extends GenericGraphicControllerCLI {
-
-    public void start(UserBean loggedUser){
-
-        this.setLoggedUser(loggedUser);
-        this.showMenu();
-    }
 
     public void showMenu(){
 

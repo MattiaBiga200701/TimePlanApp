@@ -12,7 +12,11 @@ public abstract class GenericGraphicControllerCLI {
 
     public abstract void showMenu();
 
-    public abstract void start(UserBean loggedUser);
+    public void start(UserBean loggedUser){
+
+        this.setLoggedUser(loggedUser);
+        this.showMenu();
+    }
 
     public void setLoggedUser(UserBean loggedUser) {
         this.loggedUser = loggedUser;
