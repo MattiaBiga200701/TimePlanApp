@@ -23,13 +23,17 @@ public class User {
         this.setRole(role);
     }
 
-    public User(String username, String password){
-        this.setUsername(username);
+    public User(String email, String password){
+        this.setEmail(email);
         this.setPassword(password);
     }
 
     public User(int managerID){
         this.setManagerID(managerID);
+    }
+
+    public User(String email){
+        this.setEmail(email);
     }
 
     public void setUsername(String username) {

@@ -1,13 +1,13 @@
 package it.florentino.dark.timeplanapp;
 
-import it.florentino.dark.timeplanapp.graphiccontroller_cli.LoginGenericGraphicControllerCLI;
+import it.florentino.dark.timeplanapp.graphiccontroller_cli.LoginGraphicControllerCLI;
 
 
 public class CLIStarter {
 
     public static void main (String[] args){
 
-        LoginGenericGraphicControllerCLI graphicController = new LoginGenericGraphicControllerCLI();
+        LoginGraphicControllerCLI graphicController = new LoginGraphicControllerCLI();
         graphicController.start(null);
 
     }

@@ -3,25 +3,33 @@ package it.florentino.dark.timeplanapp.appcontroller;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
-import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
-import it.florentino.dark.timeplanapp.model.dao.LoginDao;
+import it.florentino.dark.timeplanapp.model.dao.UserDao;
+import it.florentino.dark.timeplanapp.model.dao.UserDaoCSV;
+import it.florentino.dark.timeplanapp.model.dao.UserDaoMySQL;
 import it.florentino.dark.timeplanapp.model.entities.User;
+import it.florentino.dark.timeplanapp.utils.DaoSetter;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 
 public class RegistrationController {
 
     User user = null;
-    public void insertUser(UserBean newUser) throws ServiceException, NotUniqueEmailException {
+    public void insertUser(UserBean newUser) throws ServiceException {
 
         this.createUserFromBean(newUser);
-
+        UserDao dao;
         try{
-            LoginDao loginDao = new LoginDao();
-            loginDao.registrationProcedure(this.getUser());
+
+            if(DaoSetter.getDao().equals("CSV")) {
+                dao = new UserDaoCSV();
+            }else {
+                dao = new UserDaoMySQL();
+            }
+
+            dao.registrationProcedure(this.getUser());
         }catch(DAOException e){
-            throw new ServiceException();
+            throw new ServiceException(e.getMessage());
         }
 
     }
@@ -30,12 +38,18 @@ public class RegistrationController {
 
         User managerAssociated;
         this.createUserFromBean(user);
-
+        UserDao dao;
         try{
-            LoginDao loginDao = new LoginDao();
-            managerAssociated = loginDao.getManagerAssociatedTo(this.getUser());
+
+            if(DaoSetter.getDao().equals("CSV")) {
+                dao = new UserDaoCSV();
+            }else {
+                dao = new UserDaoMySQL();
+            }
+
+            managerAssociated = dao.getManagerAssociatedTo(this.getUser());
         }catch(DAOException e ){
-            throw new ServiceException();
+            throw new ServiceException(e.getMessage());
         }
 
         if(managerAssociated.getUsername() != null) {
@@ -46,16 +60,47 @@ public class RegistrationController {
 
     public UserBean createManagerID(UserBean newUser) throws ServiceException, CredentialException{
 
+        UserDao dao;
         try{
-            LoginDao loginDao = new LoginDao();
+
+            if(DaoSetter.getDao().equals("CSV")) {
+                dao = new UserDaoCSV();
+            }else {
+                dao = new UserDaoMySQL();
+            }
+
             this.createUserFromBean(newUser);
-            this.user = loginDao.createManagerID(this.user);
+            this.user = dao.createManagerID(this.user);
         }catch(DAOException e){
-            throw new ServiceException();
+            throw new ServiceException(e.getMessage());
         }
 
         return this.createBeanFromUser(this.user);
 
+    }
+
+    public boolean isEmailUnique(UserBean newUserBean) throws ServiceException{
+
+        String email = newUserBean.getEmail();
+        User newUser = new User(email);
+        boolean check;
+        UserDao dao;
+        DaoSetter.setDao("CSV");
+        try{
+
+            if(DaoSetter.getDao().equals("CSV")) {
+                dao = new UserDaoCSV();
+            }else {
+                dao = new UserDaoMySQL();
+            }
+
+            check = dao.isEmailUnique(newUser);
+
+        }catch(DAOException e){
+            throw new ServiceException(e.getMessage());
+        }
+
+        return check;
     }
 
     public void createUserFromBean(UserBean user){
@@ -79,7 +124,6 @@ public class RegistrationController {
         return  new UserBean(username, email, password, role, managerID);
 
     }
-
 
     public void setUser(User user){
         this.user = user;

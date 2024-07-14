@@ -4,7 +4,6 @@ package it.florentino.dark.timeplanapp.graphiccontroller;
 import it.florentino.dark.timeplanapp.appcontroller.RegistrationController;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
-import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
@@ -83,16 +82,25 @@ public class RegistrationGraphicController extends GraphicController {
 
             if(this.checkRole.isSelected()) {
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.MANAGER);
+
+                if(!(this.controller.isEmailUnique(this.newUser))) {
+                    throw new CredentialException("Email already exist");
+                }
+
                 this.getScenePlayer().showRegistrationForm("GUI/RegistrationPage2Man.fxml", this.newUser);
             }else{
 
                 this.newUser = new UserBean(usernameString, emailString, passwordString, Role.EMPLOYEE);
+                if(!(this.controller.isEmailUnique(this.newUser))){
+                    throw new CredentialException("Email already exist");
+                }
+
                 this.getScenePlayer().showRegistrationForm("GUI/RegistrationPage2.fxml", this.newUser);
             }
 
         } catch (CredentialException e) {
             this.showError(e.getMessage());
-        } catch (SetSceneException e) {
+        } catch (SetSceneException | ServiceException e) {
             Printer.perror(e.getMessage());
         }
 
@@ -172,8 +180,6 @@ public class RegistrationGraphicController extends GraphicController {
             pause.play();
         } catch (ServiceException e) {
             Printer.perror(e.getMessage());
-        } catch (NotUniqueEmailException e ){
-            this.showError(e.getMessage());
         }
 
 

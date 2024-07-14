@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class ConnectionManager {
 
-    private static final String PROPERTIES_PATH = "src/main/resources/it/florentino/dark/timeplanapp/persistenceProperties/timePlanDB.properties";
+    private static final String PROPERTIES_PATH = "src/main/resources/it/florentino/dark/timeplanapp/persistence/persistenceProperties/timePlanDB.properties";
     private static Connection connection = null;
 
     private ConnectionManager(){}

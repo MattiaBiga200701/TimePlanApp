@@ -5,8 +5,11 @@ import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
-import it.florentino.dark.timeplanapp.model.dao.LoginDao;
+import it.florentino.dark.timeplanapp.model.dao.UserDao;
+import it.florentino.dark.timeplanapp.model.dao.UserDaoCSV;
+import it.florentino.dark.timeplanapp.model.dao.UserDaoMySQL;
 import it.florentino.dark.timeplanapp.model.entities.User;
+import it.florentino.dark.timeplanapp.utils.DaoSetter;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 public class LoginController {
@@ -22,9 +25,19 @@ public class LoginController {
         Role role;
         User user = new User(email, password);
 
+        DaoSetter.setDao("CSV");
+        UserDao dao;
+
+
         try {
-            LoginDao loginDao = new LoginDao();
-            user = loginDao.loginProcedure(user);
+
+            if(DaoSetter.getDao().equals("CSV")) {
+                dao = new UserDaoCSV();
+            }else {
+                dao = new UserDaoMySQL();
+            }
+
+            user = dao.loginProcedure(user);
 
             if(user.getRole() == null){
                 throw new CredentialException();

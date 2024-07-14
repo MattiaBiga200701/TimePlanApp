@@ -2,7 +2,6 @@ package it.florentino.dark.timeplanapp.model.dao;
 
 import it.florentino.dark.timeplanapp.exceptions.ConnectionException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
-import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
 import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
@@ -11,12 +10,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
 
-public class LoginDao {
+public class UserDaoMySQL implements UserDao {
 
     private final Connection conn;
     private CallableStatement cs;
 
-    public LoginDao() throws DAOException{
+    public UserDaoMySQL() throws DAOException{
         try {
 
             this.conn = ConnectionManager.getConnection();
@@ -30,11 +29,10 @@ public class LoginDao {
         int role;
         String username;
         int managerID;
-
         try{
 
             this.cs = this.conn.prepareCall("{call login(?,?,?,?,?)}");
-            this.cs.setString(1, user.getUsername());
+            this.cs.setString(1, user.getEmail());
             this.cs.setString(2, user.getPassword());
             this.cs.registerOutParameter(3, Types.NUMERIC);
             this.cs.registerOutParameter(4, Types.VARCHAR);
@@ -43,7 +41,7 @@ public class LoginDao {
             role = this.cs.getInt(3);
             username = this.cs.getString(4);
             managerID = this.cs.getInt(5);
-            this.cs.close();
+
 
 
         } catch(SQLException e) {
@@ -58,24 +56,19 @@ public class LoginDao {
 
     }
 
-    public void registrationProcedure(User user) throws DAOException, NotUniqueEmailException {
+    public void registrationProcedure(User user) throws DAOException{
 
-        int status;
         try {
 
-            this.cs = this.conn.prepareCall("{call registration( ?, ?, ?, ?, ?, ?)}");
+            this.cs = this.conn.prepareCall("{call registration( ?, ?, ?, ?, ?)}");
             this.cs.setString(1, user.getUsername());
             this.cs.setString(2, user.getEmail());
             this.cs.setString(3, user.getPassword());
             this.cs.setInt(4, user.getRole().getId());
             this.cs.setInt(5, user.getManagerID());
-            this.cs.registerOutParameter(6, Types.NUMERIC);
             this.cs.executeQuery();
-            status = this.cs.getInt(6);
-            this.cs.close();
-            if(status == 1){
-                throw new NotUniqueEmailException();
-            }
+
+
 
         } catch (SQLException e) {
            throw new DAOException(e.getMessage());
@@ -120,7 +113,6 @@ public class LoginDao {
     public User createManagerID(User user) throws DAOException {
 
         int managerID;
-        User newManager = user;
 
         try{
 
@@ -132,8 +124,27 @@ public class LoginDao {
             throw new DAOException("ManagerID generation error: " + e.getMessage());
         }
 
-        newManager.setManagerID(managerID);
+        user.setManagerID(managerID);
         return user;
+    }
+
+    public boolean isEmailUnique(User user) throws DAOException{
+
+        String email = user.getEmail();
+        int checkCount;
+
+        try{
+            this.cs = this.conn.prepareCall("{call check_email(?, ?)}");
+            this.cs.setString(1, email);
+            this.cs.registerOutParameter(2, Types.INTEGER);
+            this.cs.executeQuery();
+            checkCount = this.cs.getInt(2);
+
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }
+
+        return (checkCount == 0);
     }
 
 

@@ -3,7 +3,7 @@ package it.florentino.dark.timeplanapp.model.dao;
 
 import it.florentino.dark.timeplanapp.exceptions.ConnectionException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
-import it.florentino.dark.timeplanapp.exceptions.NotUniqueEmailException;
+import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
 import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
@@ -25,7 +25,7 @@ public class EmployeeDao {
         }
     }
 
-    public void insertEmployee(Employee newEmployee) throws DAOException, NotUniqueEmailException{
+    public void insertEmployee(Employee newEmployee) throws DAOException, InvalidInputException {
 
         int status;
 
@@ -37,7 +37,7 @@ public class EmployeeDao {
             this.cs.executeQuery();
             status = this.cs.getInt(6);
             if(status == 1){
-                throw new NotUniqueEmailException();
+                throw new InvalidInputException("Email already exist");
             }
 
         }catch(SQLException e){
