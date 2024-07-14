@@ -5,11 +5,12 @@ import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 import java.io.*;
-import java.util.Random;
+import java.security.SecureRandom;
+
 
 public class UserDaoCSV implements UserDao {
 
-    private final Random random = new Random();
+    private final SecureRandom random = new SecureRandom();
     private static final String CSV_PATH = "src/main/resources/it/florentino/dark/timeplanapp/persistence/CSV/User.csv";
     public User loginProcedure(User user) throws DAOException {
 
@@ -100,17 +101,17 @@ public class UserDaoCSV implements UserDao {
         boolean loopVar = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_PATH))) {
 
-            String firstLine = reader.readLine();
             while (loopVar) {
 
                 loopVar = false;
                 newManagerID = 100000 + this.random.nextInt(900000);
+                String newManagerIdStr = String.valueOf(newManagerID);
 
                 while ((tuple = reader.readLine()) != null) {
 
                     String[] attribute = tuple.split(",");
 
-                    if ((Integer.parseInt(attribute[4])) == newManagerID) {
+                    if (attribute[4].equals(newManagerIdStr)) {
                         loopVar = true;
                         break;
                     }
