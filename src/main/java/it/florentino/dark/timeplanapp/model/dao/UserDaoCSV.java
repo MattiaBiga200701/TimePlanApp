@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class UserDaoCSV implements UserDao {
 
+    private final Random random = new Random();
     private static final String CSV_PATH = "src/main/resources/it/florentino/dark/timeplanapp/persistence/CSV/User.csv";
     public User loginProcedure(User user) throws DAOException {
 
@@ -93,7 +94,7 @@ public class UserDaoCSV implements UserDao {
 
     public User createManagerID(User user) throws DAOException {
 
-        Random random = new Random();
+
         int newManagerID = 0;
         String tuple;
         boolean loopVar = true;
@@ -103,7 +104,7 @@ public class UserDaoCSV implements UserDao {
             while (loopVar) {
 
                 loopVar = false;
-                newManagerID = 100000 + random.nextInt(900000);
+                newManagerID = 100000 + this.random.nextInt(900000);
 
                 while ((tuple = reader.readLine()) != null) {
 
