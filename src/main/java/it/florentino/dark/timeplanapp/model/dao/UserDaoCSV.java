@@ -10,10 +10,6 @@ import java.util.Random;
 public class UserDaoCSV implements UserDao {
 
     private static final String CSV_PATH = "src/main/resources/it/florentino/dark/timeplanapp/persistence/CSV/User.csv";
-
-
-    public UserDaoCSV(){}
-
     public User loginProcedure(User user) throws DAOException {
 
         String email = user.getEmail();
