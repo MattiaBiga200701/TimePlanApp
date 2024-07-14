@@ -100,7 +100,7 @@ public class UserDaoCSV implements UserDao {
         boolean loopVar = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_PATH))) {
 
-            reader.readLine();
+            String firstLine = reader.readLine();
             while (loopVar) {
 
                 loopVar = false;
