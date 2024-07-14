@@ -18,7 +18,7 @@ public class RegistrationGraphicControllerCLI extends GenericGraphicControllerCL
     private UserBean newUser;
     private RegistrationController controller;
 
-
+    @Override
     public void start(UserBean loggedUser) {
 
        this.controller = new RegistrationController();
