@@ -1,6 +1,10 @@
 package it.florentino.dark.timeplanapp.beans;
 
+import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class NotificationBean {
@@ -11,7 +15,7 @@ public class NotificationBean {
 
     private int managerID;
 
-    public NotificationBean(String message, Role role, int managerID){
+    public NotificationBean(String message, Role role, int managerID) throws InvalidInputException {
 
         this.setMessage(message);
         this.setRole(role);
@@ -19,8 +23,10 @@ public class NotificationBean {
 
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessage(String message) throws InvalidInputException{
+        if(isValidMessage(message)) {
+            this.message = message;
+        }else throw new InvalidInputException("Invalid message");
     }
 
     public String getMessage() {
@@ -43,5 +49,10 @@ public class NotificationBean {
         return this.managerID;
     }
 
-    private boolean isValidMessage(){ return false; }
+    private boolean isValidMessage(String message){
+        String messageFormat = "\\d{4}-\\d{2}-\\d{2} .+";
+        Pattern pattern = Pattern.compile(messageFormat);
+        Matcher matcher = pattern.matcher(message);
+        return matcher.matches();
+    }
 }
