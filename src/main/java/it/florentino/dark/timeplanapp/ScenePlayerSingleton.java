@@ -4,10 +4,7 @@ package it.florentino.dark.timeplanapp;
 
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
-import it.florentino.dark.timeplanapp.graphiccontroller.EmployeesListGraphicController;
-import it.florentino.dark.timeplanapp.graphiccontroller.RegistrationGraphicController;
-import it.florentino.dark.timeplanapp.graphiccontroller.SchedulationViewGraphicController;
-import it.florentino.dark.timeplanapp.graphiccontroller.WorkScheduleGraphicController;
+import it.florentino.dark.timeplanapp.graphiccontroller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -76,7 +73,7 @@ public class ScenePlayerSingleton {
 
     }
 
-    public void showHomePageMan(String fxmlPath, UserBean loggedUser) throws SetSceneException{
+    public void showEmployeeListPage(String fxmlPath, UserBean loggedUser) throws SetSceneException{
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
@@ -92,7 +89,7 @@ public class ScenePlayerSingleton {
 
     }
 
-    public void showHomePageMan2(String fxmlPath, UserBean loggedUser) throws SetSceneException{
+    public void showWorkSchedulePage(String fxmlPath, UserBean loggedUser) throws SetSceneException{
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
@@ -108,13 +105,46 @@ public class ScenePlayerSingleton {
         }
     }
 
-    public void showSchedulationViewPage(String fxmlPath, UserBean loggedUser) throws SetSceneException{
+    public void showSchedulingViewPage(String fxmlPath, UserBean loggedUser) throws SetSceneException{
 
         try{
 
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
             Parent root = fxmlLoader.load();
-            SchedulationViewGraphicController controller = fxmlLoader.getController();
+            SchedulingViewGraphicController controller = fxmlLoader.getController();
+            controller.setAttribute(loggedUser);
+            Scene scene  = new Scene(root);
+            instance.stage.setScene(scene);
+        }catch(IOException e){
+
+            throw new SetSceneException(e.getMessage());
+
+        }
+    }
+
+    public void showValidationViewPage(String fxmlPath, UserBean loggedUser) throws SetSceneException{
+        try{
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
+            Parent root = fxmlLoader.load();
+            ValidationViewGraphicController controller = fxmlLoader.getController();
+            controller.setAttribute(loggedUser);
+            Scene scene  = new Scene(root);
+            instance.stage.setScene(scene);
+        }catch(IOException e){
+
+            throw new SetSceneException(e.getMessage());
+
+        }
+    }
+
+    public void showEmployeeNotificationsPage(String fxmlPath, UserBean loggedUser) throws SetSceneException{
+
+        try{
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
+            Parent root = fxmlLoader.load();
+            EmployeeNotificationGraphicController controller = fxmlLoader.getController();
             controller.setAttribute(loggedUser);
             Scene scene  = new Scene(root);
             instance.stage.setScene(scene);

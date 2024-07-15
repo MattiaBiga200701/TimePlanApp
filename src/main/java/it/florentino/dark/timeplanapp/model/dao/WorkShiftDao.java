@@ -3,6 +3,7 @@ package it.florentino.dark.timeplanapp.model.dao;
 import it.florentino.dark.timeplanapp.exceptions.ConnectionException;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
+import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.model.entities.WorkShift;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
@@ -110,10 +111,12 @@ public class WorkShiftDao {
         }else return count == 1;
     }
 
-    public List<WorkShift> readWorkShiftList(WorkShift workShift) throws DAOException{
+    public List<WorkShift> readWorkShiftList(WorkShift workShift, User requester) throws DAOException{
 
         String shiftDate = workShift.getShiftDate();
         int managerID = workShift.getEmployee().getManagerID();
+        int requesterRole = requester.getRole().getId();
+        String requesterEmail = requester.getEmail();
 
         List<WorkShift> workShiftList = new ArrayList<>();
 
@@ -128,9 +131,11 @@ public class WorkShiftDao {
 
         try{
 
-            this.cs = conn.prepareCall("{call read_work_shift_list(?, ?)}");
+            this.cs = conn.prepareCall("{call read_work_shift_list(?, ? , ?, ?)}");
             this.cs.setString(1, shiftDate);
-            this.cs.setInt(2, managerID);
+            this.cs.setString(2,requesterEmail);
+            this.cs.setInt(3, requesterRole);
+            this.cs.setInt(4, managerID);
             ResultSet rs = this.cs.executeQuery();
 
             if (!rs.isBeforeFirst()) {

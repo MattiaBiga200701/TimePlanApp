@@ -1,6 +1,7 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
 import it.florentino.dark.timeplanapp.ScenePlayerSingleton;
+import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
@@ -21,6 +22,18 @@ public abstract class GraphicController {
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event -> errorLabel.setVisible(false));
         pause.play();
+    }
+
+    protected String setItem(WorkShiftBean workShiftBeanRead) {
+
+        String shiftTime = workShiftBeanRead.getShiftTime().getId();
+        String employeeName = workShiftBeanRead.getEmployeeName();
+        String employeeSurname = workShiftBeanRead.getEmployeeSurname();
+        String employeeContract = workShiftBeanRead.getEmployeeContract().getId();
+        String employeeEmail = workShiftBeanRead.getEmployeeEmail();
+
+        return shiftTime + "  " + employeeName + "  " + employeeSurname + "  " + employeeContract + "  " + employeeEmail;
+
     }
 
     public ScenePlayerSingleton getScenePlayer(){

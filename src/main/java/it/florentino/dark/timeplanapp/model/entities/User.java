@@ -28,6 +28,11 @@ public class User {
         this.setPassword(password);
     }
 
+    public User(Role role,String email){
+        this.setRole(role);
+        this.setEmail(email);
+    }
+
     public User(int managerID){
         this.setManagerID(managerID);
     }

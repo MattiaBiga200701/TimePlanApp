@@ -48,8 +48,8 @@ public class LoginGraphicController extends GraphicController {
             UserBean loggedUser = controller.authenticate(credentials);
 
             switch(loggedUser.getRole()){
-                case MANAGER -> this.getScenePlayer().showHomePageMan("GUI/HomePageMan.fxml", loggedUser);
-                case EMPLOYEE -> Printer.printf("Employee logged");
+                case MANAGER -> this.getScenePlayer().showEmployeeListPage("GUI/EmployeeListPage.fxml", loggedUser);
+                case EMPLOYEE -> this.getScenePlayer().showValidationViewPage("GUI/ValidationViewPage.fxml", loggedUser);
                 default -> throw new CredentialException();
             }
 

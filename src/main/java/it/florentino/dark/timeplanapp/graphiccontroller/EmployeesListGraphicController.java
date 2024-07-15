@@ -91,7 +91,7 @@ public class EmployeesListGraphicController extends GraphicController {
     public void onWorkScheduleClick(){
 
         try{
-            this.getScenePlayer().showHomePageMan2("GUI/HomePageMan2.fxml", this.getLoggedUser());
+            this.getScenePlayer().showWorkSchedulePage("GUI/WorkSchedulePage.fxml", this.getLoggedUser());
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
         }
@@ -143,7 +143,7 @@ public class EmployeesListGraphicController extends GraphicController {
 
         try{
 
-            this.getScenePlayer().showSchedulationViewPage("GUI/SchedulationViewPage.fxml", this.getLoggedUser());
+            this.getScenePlayer().showSchedulingViewPage("GUI/SchedulingViewPage.fxml", this.getLoggedUser());
 
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());

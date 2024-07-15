@@ -107,7 +107,7 @@ public class WorkScheduleGraphicController extends GraphicController{
     public void onEmployeeListClick(){
         try{
 
-            this.getScenePlayer().showHomePageMan("GUI/HomePageMan.fxml", this.getLoggedUser());
+            this.getScenePlayer().showEmployeeListPage("GUI/EmployeeListPage.fxml", this.getLoggedUser());
 
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
@@ -151,7 +151,7 @@ public class WorkScheduleGraphicController extends GraphicController{
             Printer.perror(e.getMessage());
         }
 
-
+        this.showError("Shift Added Correctly");
     }
 
     @FXML
@@ -159,7 +159,7 @@ public class WorkScheduleGraphicController extends GraphicController{
 
         try{
 
-            this.getScenePlayer().showSchedulationViewPage("GUI/SchedulationViewPage.fxml", this.getLoggedUser());
+            this.getScenePlayer().showSchedulingViewPage("GUI/SchedulingViewPage.fxml", this.getLoggedUser());
 
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());

@@ -12,7 +12,7 @@ import it.florentino.dark.timeplanapp.model.entities.Employee;
 import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.model.entities.WorkShift;
-
+import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +98,7 @@ public class WorkScheduleController {
 
     }
 
-    public List<WorkShiftBean> workShiftReader(WorkShiftBean workShiftBeanToRead) throws ServiceException, InvalidInputException{
+    public List<WorkShiftBean> workShiftReader(WorkShiftBean workShiftBeanToRead, UserBean loggedUser) throws ServiceException, InvalidInputException{
 
         String shiftDate = workShiftBeanToRead.getShiftDate();
         int managerID = workShiftBeanToRead.getManagerID();
@@ -106,6 +106,11 @@ public class WorkScheduleController {
         Employee employeeToRead = new Employee(managerID);
 
         WorkShift workShiftToRead = new WorkShift(shiftDate, employeeToRead);
+
+        Role requesterRole = loggedUser.getRole();
+        String requesterEmail = loggedUser.getEmail();
+
+        User requester = new User(requesterRole, requesterEmail);
 
         List<WorkShift> workShiftList;
 
@@ -121,7 +126,7 @@ public class WorkScheduleController {
         try{
 
             WorkShiftDao dao = new WorkShiftDao();
-            workShiftList = dao.readWorkShiftList(workShiftToRead);
+            workShiftList = dao.readWorkShiftList(workShiftToRead, requester);
 
             if(workShiftList.isEmpty()){
                 throw new InvalidInputException("Schedulation empty for this date");

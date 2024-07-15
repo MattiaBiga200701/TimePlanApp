@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchedulationViewGraphicController extends GraphicController{
+public class SchedulingViewGraphicController extends GraphicController{
 
     @FXML
     private Label errorLabel;
@@ -73,7 +73,7 @@ public class SchedulationViewGraphicController extends GraphicController{
             shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             workShiftsToRead = new WorkShiftBean(shiftDate, this.getLoggedUser().getManagerID());
-            this.workShiftBeanList = this.controller.workShiftReader(workShiftsToRead);
+            this.workShiftBeanList = this.controller.workShiftReader(workShiftsToRead, this.getLoggedUser());
 
             for(WorkShiftBean workShiftBeanRead: this.workShiftBeanList){
 
@@ -93,18 +93,6 @@ public class SchedulationViewGraphicController extends GraphicController{
 
         this.removeButton.setOnAction(this::onRemoveClick);
         this.notifyButton.setOnAction(this::onNotifyClick);
-
-    }
-
-    private String setItem(WorkShiftBean workShiftBeanRead) {
-
-        String shiftTime = workShiftBeanRead.getShiftTime().getId();
-        String employeeName = workShiftBeanRead.getEmployeeName();
-        String employeeSurname = workShiftBeanRead.getEmployeeSurname();
-        String employeeContract = workShiftBeanRead.getEmployeeContract().getId();
-        String employeeEmail = workShiftBeanRead.getEmployeeEmail();
-
-        return shiftTime + "  " + employeeName + "  " + employeeSurname + "  " + employeeContract + "  " + employeeEmail;
 
     }
 
@@ -161,7 +149,7 @@ public class SchedulationViewGraphicController extends GraphicController{
     public void onWorkScheduleClick(){
 
         try{
-            this.getScenePlayer().showHomePageMan2("GUI/HomePageMan2.fxml", this.getLoggedUser());
+            this.getScenePlayer().showWorkSchedulePage("GUI/WorkSchedulePage.fxml", this.getLoggedUser());
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
         }
@@ -173,7 +161,7 @@ public class SchedulationViewGraphicController extends GraphicController{
 
         try{
 
-            this.getScenePlayer().showHomePageMan("GUI/HomePageMan.fxml", this.getLoggedUser());
+            this.getScenePlayer().showEmployeeListPage("GUI/EmployeeListPage.fxml", this.getLoggedUser());
 
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());

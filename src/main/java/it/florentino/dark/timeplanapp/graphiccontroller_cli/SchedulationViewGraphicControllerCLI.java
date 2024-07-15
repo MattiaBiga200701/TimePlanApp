@@ -75,7 +75,7 @@ public class SchedulationViewGraphicControllerCLI extends GenericGraphicControll
 
 
                 Printer.printf("\nWork Shift Stored");
-                workShiftBeanList = this.controller.workShiftReader(workShiftBeanToRead);
+                workShiftBeanList = this.controller.workShiftReader(workShiftBeanToRead, this.getLoggedUser());
 
                 index = 1;
 

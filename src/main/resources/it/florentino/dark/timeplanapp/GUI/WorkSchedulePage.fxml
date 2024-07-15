@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1440.0" stylesheets="@../StyleSheets/HomePageMan2Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.WorkScheduleGraphicController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1440.0" stylesheets="@../StyleSheets/WorkScheduleStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.florentino.dark.timeplanapp.graphiccontroller.WorkScheduleGraphicController">
    <children>
       <Label alignment="CENTER" layoutX="415.0" layoutY="77.0" prefHeight="40.0" prefWidth="1038.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text=" Create Calendar" AnchorPane.leftAnchor="402.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="61.0">
          <font>
@@ -146,7 +146,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onViewClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Schedulation View">
+            <Button mnemonicParsing="false" onAction="#onViewClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0, 0); -fx-font-size: 30px;" text="Scheduling View">
                <font>
                   <Font size="42.0" />
                </font>
