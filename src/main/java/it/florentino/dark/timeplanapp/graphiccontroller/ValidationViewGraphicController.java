@@ -55,7 +55,7 @@ public class ValidationViewGraphicController extends GraphicController{
 
         LocalDate schedulingDatePicker = this.schedulingDate.getValue();
         WorkShiftBean workShiftToRead;
-        String schedulingDate;
+        String schedulingDateStr;
         ObservableList<String> items = FXCollections.observableArrayList();
         this.declineButton.setDisable(true);
         this.approveButton.setDisable(true);
@@ -69,9 +69,9 @@ public class ValidationViewGraphicController extends GraphicController{
             this.declineButton.setDisable(false);
             this.approveButton.setDisable(false);
 
-            schedulingDate = schedulingDatePicker.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            schedulingDateStr = schedulingDatePicker.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-            workShiftToRead = new WorkShiftBean(schedulingDate, this.getLoggedUser().getManagerID());
+            workShiftToRead = new WorkShiftBean(schedulingDateStr, this.getLoggedUser().getManagerID());
             this.workShiftBeanList = this.controller.workShiftReader(workShiftToRead, this.getLoggedUser());
 
             for(WorkShiftBean workShiftRead : workShiftBeanList){
