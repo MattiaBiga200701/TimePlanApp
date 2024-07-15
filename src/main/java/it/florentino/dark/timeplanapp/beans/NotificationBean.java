@@ -41,8 +41,10 @@ public class NotificationBean {
         return this.role;
     }
 
-    public void setManagerID(int managerID) {
-        this.managerID = managerID;
+    public void setManagerID(int managerID) throws InvalidInputException {
+        if(managerID >= 100000 && managerID <= 999999) {
+            this.managerID = managerID;
+        }else throw new InvalidInputException("Invalid ManagerID");
     }
 
     public int getManagerID() {
