@@ -1,5 +1,6 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
+import it.florentino.dark.timeplanapp.observer.MessageSubject;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.fxml.FXML;
@@ -11,9 +12,17 @@ public class ManagerNotificationGraphicController extends GraphicController{
     @FXML
     private Label errorLabel;
 
+    private MessageSubject message;
+
 
     @FXML
-    public void initialize(){}
+    public void initialize(){
+
+
+
+        this.message = MessageSubject.getInstance();
+
+    }
 
     @FXML
     public void onEmployeeListClick(){

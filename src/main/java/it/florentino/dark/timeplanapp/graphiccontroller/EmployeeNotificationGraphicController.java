@@ -1,8 +1,8 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
 
-import it.florentino.dark.timeplanapp.Observer.MessageSubject;
-import it.florentino.dark.timeplanapp.Observer.Observer;
+import it.florentino.dark.timeplanapp.observer.MessageSubject;
+import it.florentino.dark.timeplanapp.observer.Observer;
 import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
