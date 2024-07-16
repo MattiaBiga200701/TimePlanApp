@@ -4,7 +4,6 @@ import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
 import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
-import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
@@ -22,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchedulingViewGraphicController extends GraphicController{
+public class SchedulingViewGraphicController extends ManagerGraphicController {
 
     @FXML
     private Label errorLabel;
@@ -143,44 +142,6 @@ public class SchedulingViewGraphicController extends GraphicController{
         }
     }
 
-
-
-    @FXML
-    public void onWorkScheduleClick(){
-
-        try{
-            this.getScenePlayer().showWorkSchedulePage("GUI/WorkSchedulePage.fxml", this.getLoggedUser());
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
-
-    @FXML
-    public void onEmployeeListClick(){
-
-        try{
-
-            this.getScenePlayer().showEmployeeListPage("GUI/EmployeeListPage.fxml", this.getLoggedUser());
-
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
-
-    @FXML
-    public void onNotificationsClick(){
-
-        try{
-
-            this.getScenePlayer().showSchedulingViewPage("GUI/EmployeeNotificationsPage.fxml", this.getLoggedUser());
-
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
 
     public Label getErrorLabel(){
         return this.errorLabel;

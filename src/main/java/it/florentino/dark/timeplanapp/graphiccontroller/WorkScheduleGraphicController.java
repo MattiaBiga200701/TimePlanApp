@@ -6,7 +6,6 @@ import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
-import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.utils.enumaration.ShiftSlots;
@@ -24,7 +23,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class WorkScheduleGraphicController extends GraphicController{
+public class WorkScheduleGraphicController extends ManagerGraphicController{
 
     @FXML
     private ListView<String> employeesListView;
@@ -103,16 +102,6 @@ public class WorkScheduleGraphicController extends GraphicController{
         }
     }
 
-    @FXML
-    public void onEmployeeListClick(){
-        try{
-
-            this.getScenePlayer().showEmployeeListPage("GUI/EmployeeListPage.fxml", this.getLoggedUser());
-
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-    }
 
     @FXML
     public void onAddShiftClick(){
@@ -154,31 +143,7 @@ public class WorkScheduleGraphicController extends GraphicController{
         this.showError("Shift Added Correctly");
     }
 
-    @FXML
-    public void onViewClick() {
 
-        try{
-
-            this.getScenePlayer().showSchedulingViewPage("GUI/SchedulingViewPage.fxml", this.getLoggedUser());
-
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
-
-    @FXML
-    public void onNotificationsClick(){
-
-        try{
-
-            this.getScenePlayer().showSchedulingViewPage("GUI/EmployeeNotificationsPage.fxml", this.getLoggedUser());
-
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
 
 
     public Label getErrorLabel(){ return this.errorLabel; }

@@ -8,7 +8,7 @@ import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class ManagerNotificationGraphicController extends GraphicController implements Observer {
+public class ManagerNotificationGraphicController extends ManagerGraphicController implements Observer {
 
 
     @FXML
@@ -27,6 +27,7 @@ public class ManagerNotificationGraphicController extends GraphicController impl
 
     }
 
+    @Override
     @FXML
     public void onEmployeeListClick(){
         try{
@@ -38,6 +39,7 @@ public class ManagerNotificationGraphicController extends GraphicController impl
         }
     }
 
+    @Override
     @FXML
     public void onWorkScheduleClick(){
         try{
@@ -49,6 +51,7 @@ public class ManagerNotificationGraphicController extends GraphicController impl
         }
     }
 
+    @Override
     @FXML
     public void onViewClick(){
 

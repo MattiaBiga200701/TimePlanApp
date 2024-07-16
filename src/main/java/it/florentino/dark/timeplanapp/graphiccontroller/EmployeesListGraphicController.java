@@ -5,7 +5,6 @@ import it.florentino.dark.timeplanapp.beans.EmployeeBean;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
-import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
 
-public class EmployeesListGraphicController extends GraphicController {
+public class EmployeesListGraphicController extends ManagerGraphicController {
 
     @FXML
     private ChoiceBox<String> contractChoiceBox;
@@ -87,15 +86,7 @@ public class EmployeesListGraphicController extends GraphicController {
 
     }
 
-    @FXML
-    public void onWorkScheduleClick(){
 
-        try{
-            this.getScenePlayer().showWorkSchedulePage("GUI/WorkSchedulePage.fxml", this.getLoggedUser());
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-    }
 
     @FXML
     public void onRemoveClick(){
@@ -138,31 +129,6 @@ public class EmployeesListGraphicController extends GraphicController {
         }
     }
 
-    @FXML
-    public void onViewClick(){
-
-        try{
-
-            this.getScenePlayer().showSchedulingViewPage("GUI/SchedulingViewPage.fxml", this.getLoggedUser());
-
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
-
-    @FXML
-    public void onNotificationsClick(){
-
-        try{
-
-            this.getScenePlayer().showSchedulingViewPage("GUI/EmployeeNotificationsPage.fxml", this.getLoggedUser());
-
-        }catch(SetSceneException e){
-            Printer.perror(e.getMessage());
-        }
-
-    }
 
     public Label getErrorLabel(){
         return this.errorLabel;

@@ -155,4 +155,21 @@ public class ScenePlayerSingleton {
         }
     }
 
+    public void showManagerNotificationsPage(String fxmlPath, UserBean loggedUser) throws SetSceneException{
+
+        try{
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
+            Parent root = fxmlLoader.load();
+            ManagerNotificationGraphicController controller = fxmlLoader.getController();
+            controller.setAttribute(loggedUser);
+            Scene scene  = new Scene(root);
+            instance.stage.setScene(scene);
+        }catch(IOException e){
+
+            throw new SetSceneException(e.getMessage());
+
+        }
+    }
+
 }
