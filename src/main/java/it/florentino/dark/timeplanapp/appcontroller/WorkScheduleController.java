@@ -13,6 +13,7 @@ import it.florentino.dark.timeplanapp.model.dao.WorkShiftDao;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
 import it.florentino.dark.timeplanapp.model.entities.Notification;
 import it.florentino.dark.timeplanapp.model.entities.User;
+import it.florentino.dark.timeplanapp.observer.MessageSubject;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.model.entities.WorkShift;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
@@ -210,7 +211,7 @@ public class WorkScheduleController {
         return notificationsBean;
     }
 
-    public NotificationBean insertMessage(NotificationBean newNotificationBean) throws ServiceException, InvalidInputException {
+    public NotificationBean insertMessage(NotificationBean newNotificationBean, UserBean sender) throws ServiceException, InvalidInputException {
 
         String message = newNotificationBean.getMessage();
         Role role = newNotificationBean.getRole();
@@ -222,16 +223,24 @@ public class WorkScheduleController {
 
             NotificationDao dao = new NotificationDao();
             newNotification = dao.insertNotification(newNotification);
+            this.notifyEmployees(sender);
 
         }catch(DAOException e){
             throw new ServiceException(e.getMessage());
         }
+
+
 
         message = newNotification.getMessage();
         role = newNotificationBean.getRole();
         managerID = newNotificationBean.getManagerID();
 
         return new NotificationBean(message, role, managerID);
+    }
+
+    private void notifyEmployees(UserBean sender){
+        MessageSubject spreader = MessageSubject.getInstance();
+        spreader.setSender(sender);
     }
 
 }

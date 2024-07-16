@@ -37,7 +37,7 @@ public class NotificationDao {
 
             this.cs = this.conn.prepareCall("{call insert_notification(?, ?, ?)}");
             this.cs.setString(1, message);
-            this.cs.setInt(1, role.getId());
+            this.cs.setInt(2, role.getId());
             this.cs.setInt(3, managerID);
             this.cs.executeQuery();
 

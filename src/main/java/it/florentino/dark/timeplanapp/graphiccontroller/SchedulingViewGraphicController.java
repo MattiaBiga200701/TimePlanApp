@@ -1,6 +1,7 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
 import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
+import it.florentino.dark.timeplanapp.beans.NotificationBean;
 import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
@@ -96,7 +97,33 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
     }
 
     @FXML
-    public void onNotifyClick(ActionEvent event){}
+    public void onNotifyClick(ActionEvent event){
+
+        LocalDate schedulingDate = this.shiftDatePicker.getValue();
+
+        try{
+
+            String schedulingDateStr = schedulingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String newMessage = "New scheduling written for the date: " + schedulingDateStr;
+            NotificationBean newNotificationBean = new NotificationBean(newMessage, this.getLoggedUser().getRole(), this.getLoggedUser().getManagerID());
+            newNotificationBean = this.controller.insertMessage(newNotificationBean, this.getLoggedUser());
+
+            if(newNotificationBean == null){
+                Printer.perror("Notify error");
+            }
+
+            this.removeButton.setOnAction(this::onPreviousClick);
+
+            this.notifyButton.setOnAction(this::onPreviousClick);
+
+            this.showError("Employees notified");
+
+        }catch(InvalidInputException e){
+            this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+        }
+    }
 
     @FXML
     public void onPreviousClick(ActionEvent event){

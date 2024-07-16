@@ -133,6 +133,8 @@ public class WorkScheduleGraphicController extends ManagerGraphicController{
                 throw new ServiceException("Instatiation error");
             }
 
+            this.showError("Shift Added Correctly");
+
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
 
@@ -140,7 +142,7 @@ public class WorkScheduleGraphicController extends ManagerGraphicController{
             Printer.perror(e.getMessage());
         }
 
-        this.showError("Shift Added Correctly");
+
     }
 
 
