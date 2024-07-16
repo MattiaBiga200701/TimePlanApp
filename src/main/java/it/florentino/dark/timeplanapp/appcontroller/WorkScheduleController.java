@@ -1,14 +1,17 @@
 package it.florentino.dark.timeplanapp.appcontroller;
 
 import it.florentino.dark.timeplanapp.beans.EmployeeBean;
+import it.florentino.dark.timeplanapp.beans.NotificationBean;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.DAOException;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.model.dao.EmployeeDao;
+import it.florentino.dark.timeplanapp.model.dao.NotificationDao;
 import it.florentino.dark.timeplanapp.model.dao.WorkShiftDao;
 import it.florentino.dark.timeplanapp.model.entities.Employee;
+import it.florentino.dark.timeplanapp.model.entities.Notification;
 import it.florentino.dark.timeplanapp.model.entities.User;
 import it.florentino.dark.timeplanapp.utils.enumaration.ContractTypes;
 import it.florentino.dark.timeplanapp.model.entities.WorkShift;
@@ -166,6 +169,69 @@ public class WorkScheduleController {
         Employee employee = new Employee(employeeName, employeeSurname,employeeContract, employeeEmail, managerID);
 
         return  new WorkShift(workShiftBean.getShiftTime(), workShiftBean.getShiftDate(), employee);
+    }
+
+    public List<NotificationBean> readMessages(UserBean readerBean) throws ServiceException, InvalidInputException {
+
+        Role readerRole = readerBean.getRole();
+        int readerManagerID = readerBean.getManagerID();
+
+        User reader = new User(readerRole, readerManagerID);
+
+        List<Notification> notifications;
+
+        List<NotificationBean> notificationsBean = new ArrayList<>();
+
+        try{
+
+            NotificationDao dao = new NotificationDao();
+            notifications = dao.readNotifications(reader);
+
+            if(notifications == null){
+                throw new InvalidInputException("You have no Notification");
+            }
+
+            for(Notification notificationRead : notifications){
+
+                String message = notificationRead.getMessage();
+                Role role = notificationRead.getRole();
+                int managerID = notificationRead.getManagerID();
+
+                NotificationBean notificationBeanRead = new NotificationBean(message, role, managerID);
+
+                notificationsBean.add(notificationBeanRead);
+
+            }
+
+        }catch(DAOException e){
+            throw new ServiceException(e.getMessage());
+        }
+
+        return notificationsBean;
+    }
+
+    public NotificationBean insertMessage(NotificationBean newNotificationBean) throws ServiceException, InvalidInputException {
+
+        String message = newNotificationBean.getMessage();
+        Role role = newNotificationBean.getRole();
+        int managerID = newNotificationBean.getManagerID();
+
+        Notification newNotification = new Notification(message, role, managerID);
+
+        try{
+
+            NotificationDao dao = new NotificationDao();
+            newNotification = dao.insertNotification(newNotification);
+
+        }catch(DAOException e){
+            throw new ServiceException(e.getMessage());
+        }
+
+        message = newNotification.getMessage();
+        role = newNotificationBean.getRole();
+        managerID = newNotificationBean.getManagerID();
+
+        return new NotificationBean(message, role, managerID);
     }
 
 }

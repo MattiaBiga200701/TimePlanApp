@@ -33,6 +33,11 @@ public class User {
         this.setEmail(email);
     }
 
+    public User(Role role, int managerID){
+        this.setRole(role);
+        this.setManagerID(managerID);
+    }
+
     public User(int managerID){
         this.setManagerID(managerID);
     }

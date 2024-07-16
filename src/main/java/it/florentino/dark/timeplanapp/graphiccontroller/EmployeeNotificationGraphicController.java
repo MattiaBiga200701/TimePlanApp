@@ -58,6 +58,7 @@ public class EmployeeNotificationGraphicController extends GraphicController imp
     @FXML
     public void onRefreshClick(){
 
+
     }
 
     public void update(UserBean sender){
