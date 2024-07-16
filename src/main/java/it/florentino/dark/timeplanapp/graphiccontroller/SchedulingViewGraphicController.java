@@ -42,6 +42,8 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
 
     private WorkScheduleController controller;
 
+    private final String DATE_FORMAT = "yyyy-MM-dd";
+
 
     @FXML
     public void initialize(){
@@ -70,7 +72,7 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
                 throw new InvalidInputException("Select a date");
             }
 
-            shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
 
             workShiftsToRead = new WorkShiftBean(shiftDate, this.getLoggedUser().getManagerID());
             this.workShiftBeanList = this.controller.workShiftReader(workShiftsToRead, this.getLoggedUser());
@@ -103,7 +105,7 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
 
         try{
 
-            String schedulingDateStr = schedulingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String schedulingDateStr = schedulingDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
             String newMessage = "New scheduling written for the date: " + schedulingDateStr;
             NotificationBean newNotificationBean = new NotificationBean(newMessage, this.getLoggedUser().getRole(), this.getLoggedUser().getManagerID());
             newNotificationBean = this.controller.insertMessage(newNotificationBean, this.getLoggedUser());
@@ -137,7 +139,7 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
         int selectedIdx = this.workShiftListView.getSelectionModel().getSelectedIndex();
 
         LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
-        String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
 
         if(selectedIdx != -1){
 
