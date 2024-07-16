@@ -3,14 +3,16 @@ package it.florentino.dark.timeplanapp.observer;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public abstract class Subject {
 
-    private final Vector<Observer> observers;
+    private final List<Observer> observers;
 
     protected Subject(){
-        this.observers = new Vector<>();
+        this.observers = new ArrayList<>();
     }
 
     public void attach(Observer observer){
