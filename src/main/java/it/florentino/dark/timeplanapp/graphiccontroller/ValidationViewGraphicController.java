@@ -108,11 +108,11 @@ public class ValidationViewGraphicController extends GraphicController{
     @FXML
     public void onDeclineClick(ActionEvent event){
 
-        LocalDate schedulingDate = this.schedulingDate.getValue();
+        LocalDate schedulingDatePicker = this.schedulingDate.getValue();
 
         try{
 
-            String schedulingDateStr = schedulingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String schedulingDateStr = schedulingDatePicker.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String newMessage = "Scheduling declined at date: " + schedulingDateStr;
             NotificationBean newNotificationBean = new NotificationBean(newMessage, this.getLoggedUser().getRole(), this.getLoggedUser().getManagerID());
             newNotificationBean = this.controller.insertMessage(newNotificationBean, this.getLoggedUser());
