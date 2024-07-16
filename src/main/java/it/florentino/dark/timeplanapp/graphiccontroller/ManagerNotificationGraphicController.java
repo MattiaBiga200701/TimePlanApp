@@ -19,7 +19,6 @@ public class ManagerNotificationGraphicController extends GraphicController{
     public void initialize(){
 
 
-
         this.message = MessageSubject.getInstance();
 
     }
