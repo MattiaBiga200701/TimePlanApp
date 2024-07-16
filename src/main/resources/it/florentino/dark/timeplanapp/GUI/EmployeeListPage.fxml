@@ -50,6 +50,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button mnemonicParsing="false" onAction="#onNotificationsClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0, 0);" text="Notifications">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </HBox>
       <Line endX="1241.0" endY="-6.999992370605469" layoutX="199.0" layoutY="67.0" startX="-199.0" startY="-6.999992370605469" strokeWidth="2.0" />

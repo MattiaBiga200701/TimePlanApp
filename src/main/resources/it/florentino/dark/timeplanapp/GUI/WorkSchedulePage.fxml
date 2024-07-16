@@ -154,6 +154,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button mnemonicParsing="false" onAction="#onNotificationsClick" prefWidth="281.0" style="-fx-background-color: rgba(0, 0, 0, 0);" text="Notifications">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </HBox>
       <Label alignment="CENTER" layoutX="43.0" layoutY="78.0" prefHeight="40.0" prefWidth="402.0" style="-fx-background-color: rgba(0, 137, 123, 0.7);" text="Employees View" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="61.0">

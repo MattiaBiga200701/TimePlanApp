@@ -167,6 +167,19 @@ public class WorkScheduleGraphicController extends GraphicController{
 
     }
 
+    @FXML
+    public void onNotificationsClick(){
+
+        try{
+
+            this.getScenePlayer().showSchedulingViewPage("GUI/EmployeeNotificationsPage.fxml", this.getLoggedUser());
+
+        }catch(SetSceneException e){
+            Printer.perror(e.getMessage());
+        }
+
+    }
+
 
     public Label getErrorLabel(){ return this.errorLabel; }
 }
