@@ -52,7 +52,7 @@ public class NotificationBean {
     }
 
     private boolean isValidMessage(String message){
-        String messageFormat = "^\\S+(\\s+\\S+)*\\s+\\d{4}-\\d{2}-\\d{2}$";
+        String messageFormat = "^\\S+(?:\\s+[^ ]+)*\\s+\\d{4}-\\d{2}-\\d{2}$";
         Pattern pattern = Pattern.compile(messageFormat);
         Matcher matcher = pattern.matcher(message);
         return matcher.matches();
