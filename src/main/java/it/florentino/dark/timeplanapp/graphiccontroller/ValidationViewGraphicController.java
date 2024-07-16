@@ -1,12 +1,14 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
 import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
+import it.florentino.dark.timeplanapp.beans.NotificationBean;
 import it.florentino.dark.timeplanapp.beans.WorkShiftBean;
 import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
 import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -47,6 +49,10 @@ public class ValidationViewGraphicController extends GraphicController{
 
         this.workShiftBeanList = new ArrayList<>();
 
+        this.declineButton.setOnAction(this::onPreviousClick);
+
+        this.approveButton.setOnAction(this::onPreviousClick);
+
 
 
     }
@@ -57,8 +63,7 @@ public class ValidationViewGraphicController extends GraphicController{
         WorkShiftBean workShiftToRead;
         String schedulingDateStr;
         ObservableList<String> items = FXCollections.observableArrayList();
-        this.declineButton.setDisable(true);
-        this.approveButton.setDisable(true);
+
 
         try{
 
@@ -66,8 +71,6 @@ public class ValidationViewGraphicController extends GraphicController{
                 throw new InvalidInputException("Select a date");
             }
 
-            this.declineButton.setDisable(false);
-            this.approveButton.setDisable(false);
 
             schedulingDateStr = schedulingDatePicker.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
@@ -81,6 +84,10 @@ public class ValidationViewGraphicController extends GraphicController{
                 this.workShiftListView.setItems(items);
             }
 
+            this.declineButton.setOnAction(this::onDeclineClick);
+
+            this.approveButton.setOnAction(this::onApproveClick);
+
 
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
@@ -88,20 +95,51 @@ public class ValidationViewGraphicController extends GraphicController{
             Printer.perror(e.getMessage());
         }
 
-        this.schedulingDate.setValue(null);
-    }
-
-
-    @FXML
-    public void onDeclineClick(){
-
-
 
     }
 
     @FXML
-    public void onApproveClick(){
+    public void onPreviousClick(ActionEvent event){
 
+        this.showError("Search Schedulation!");
+    }
+
+
+    @FXML
+    public void onDeclineClick(ActionEvent event){
+
+        LocalDate schedulingDate = this.schedulingDate.getValue();
+
+        try{
+
+            String schedulingDateStr = schedulingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String newMessage = "Scheduling declined at date: " + schedulingDateStr;
+            NotificationBean newNotificationBean = new NotificationBean(newMessage, this.getLoggedUser().getRole(), this.getLoggedUser().getManagerID());
+            newNotificationBean = this.controller.insertMessage(newNotificationBean, this.getLoggedUser());
+
+            if(newNotificationBean == null){
+                Printer.perror("Notify error");
+            }
+
+            this.declineButton.setOnAction(this::onPreviousClick);
+
+            this.approveButton.setOnAction(this::onPreviousClick);
+
+            this.showError("Manager notified");
+
+        }catch(InvalidInputException e){
+            this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+        }
+
+
+    }
+
+    @FXML
+    public void onApproveClick(ActionEvent event){
+
+        this.showError("Scheduling Approved");
     }
 
     @FXML
