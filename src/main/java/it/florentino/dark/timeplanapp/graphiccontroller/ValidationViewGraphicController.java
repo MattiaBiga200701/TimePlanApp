@@ -140,6 +140,10 @@ public class ValidationViewGraphicController extends GraphicController{
     public void onApproveClick(ActionEvent event){
 
         this.showError("Scheduling Approved");
+
+        this.declineButton.setOnAction(this::onPreviousClick);
+
+        this.approveButton.setOnAction(this::onPreviousClick);
     }
 
     @FXML
