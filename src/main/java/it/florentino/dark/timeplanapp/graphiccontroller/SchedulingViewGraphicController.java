@@ -42,7 +42,7 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
 
     private WorkScheduleController controller;
 
-    private static final String dateFormat = "yyyy-MM-dd";
+    private static final String DateFormat = "yyyy-MM-dd";
 
 
     @FXML
@@ -72,7 +72,7 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
                 throw new InvalidInputException("Select a date");
             }
 
-            shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern(dateFormat));
+            shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern(DateFormat));
 
             workShiftsToRead = new WorkShiftBean(shiftDate, this.getLoggedUser().getManagerID());
             this.workShiftBeanList = this.controller.workShiftReader(workShiftsToRead, this.getLoggedUser());
@@ -105,7 +105,7 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
 
         try{
 
-            String schedulingDateStr = schedulingDate.format(DateTimeFormatter.ofPattern(dateFormat));
+            String schedulingDateStr = schedulingDate.format(DateTimeFormatter.ofPattern(DateFormat));
             String newMessage = "New scheduling written for the date: " + schedulingDateStr;
             NotificationBean newNotificationBean = new NotificationBean(newMessage, this.getLoggedUser().getRole(), this.getLoggedUser().getManagerID());
             newNotificationBean = this.controller.insertMessage(newNotificationBean, this.getLoggedUser());
@@ -139,7 +139,7 @@ public class SchedulingViewGraphicController extends ManagerGraphicController {
         int selectedIdx = this.workShiftListView.getSelectionModel().getSelectedIndex();
 
         LocalDate shiftDatePickerValue = this.shiftDatePicker.getValue();
-        String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern(dateFormat));
+        String shiftDate = shiftDatePickerValue.format(DateTimeFormatter.ofPattern(DateFormat));
 
         if(selectedIdx != -1){
 
