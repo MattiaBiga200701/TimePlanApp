@@ -70,8 +70,8 @@ public class EmployeeNotificationGraphicController extends GraphicController imp
         List<NotificationBean> notifications = this.controller.readMessages(this.getLoggedUser());
 
         for(NotificationBean notification : notifications){
-            String message = notification.getMessage();
-            messages.add(message);
+            String messageRead = notification.getMessage();
+            messages.add(messageRead);
         }
 
         return messages;
