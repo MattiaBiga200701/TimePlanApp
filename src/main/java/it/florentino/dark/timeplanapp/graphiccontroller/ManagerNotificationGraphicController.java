@@ -57,6 +57,7 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
                 String message = notification.getMessage();
                 items.add(message);
                 this.notificationsListView.setItems(items);
+
             }
 
 
