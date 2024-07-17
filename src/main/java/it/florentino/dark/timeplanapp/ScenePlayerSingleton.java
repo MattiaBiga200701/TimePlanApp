@@ -40,9 +40,6 @@ public class ScenePlayerSingleton {
         this.stage.setResizable(false);
     }
 
-    public Stage getStage(){
-        return this.stage;
-    }
 
 
 
