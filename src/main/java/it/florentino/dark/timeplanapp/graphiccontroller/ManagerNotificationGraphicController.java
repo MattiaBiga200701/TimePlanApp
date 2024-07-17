@@ -127,6 +127,7 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
         this.messageLabel.setVisible(false);
 
         try{
+
             this.readMessage(this.getLoggedUser());
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
