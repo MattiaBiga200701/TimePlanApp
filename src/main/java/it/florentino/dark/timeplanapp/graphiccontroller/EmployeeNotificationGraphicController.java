@@ -1,6 +1,9 @@
 package it.florentino.dark.timeplanapp.graphiccontroller;
 
 
+import it.florentino.dark.timeplanapp.beans.NotificationBean;
+import it.florentino.dark.timeplanapp.exceptions.InvalidInputException;
+import it.florentino.dark.timeplanapp.exceptions.ServiceException;
 import it.florentino.dark.timeplanapp.observer.MessageSubject;
 import it.florentino.dark.timeplanapp.observer.Observer;
 import it.florentino.dark.timeplanapp.appcontroller.WorkScheduleController;
@@ -8,9 +11,13 @@ import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+
+import java.util.List;
 
 public class EmployeeNotificationGraphicController extends GraphicController implements Observer {
 
@@ -22,14 +29,18 @@ public class EmployeeNotificationGraphicController extends GraphicController imp
     @FXML
     private ListView<String> notificationsListView;
 
+    private ObservableList<String> items;
+
     private WorkScheduleController controller;
 
     private MessageSubject message;
 
     @FXML
-    public void initialize(){
+    public void initialize(UserBean loggedUser){
 
         this.controller = new WorkScheduleController();
+
+        this.setAttribute(loggedUser);
 
         this.message = MessageSubject.getInstance();
 
@@ -37,9 +48,36 @@ public class EmployeeNotificationGraphicController extends GraphicController imp
 
         this.messageLabel.setVisible(false);
 
+        this.items = FXCollections.observableArrayList();
+        try {
+
+            this.items = this.readMessages();
+            this.notificationsListView.setItems(items);
+
+        }catch(InvalidInputException e){
+            this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+        }
 
 
     }
+
+    private ObservableList<String>  readMessages() throws InvalidInputException, ServiceException {
+
+        ObservableList<String> messages = FXCollections.observableArrayList();
+
+        List<NotificationBean> notifications = this.controller.readMessages(this.getLoggedUser());
+
+        for(NotificationBean notification : notifications){
+            String message = notification.getMessage();
+            messages.add(message);
+        }
+
+        return messages;
+
+    }
+
 
 
     @FXML
@@ -58,6 +96,17 @@ public class EmployeeNotificationGraphicController extends GraphicController imp
     @FXML
     public void onRefreshClick(){
 
+        this.messageLabel.setVisible(false);
+        try{
+
+            this.items = this.readMessages();
+            this.notificationsListView.setItems(items);
+
+        }catch(InvalidInputException e){
+            this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+        }
 
     }
 
