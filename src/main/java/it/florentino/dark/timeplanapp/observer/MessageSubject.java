@@ -4,7 +4,7 @@ import it.florentino.dark.timeplanapp.beans.UserBean;
 
 public class MessageSubject extends Subject{
 
-    private static MessageSubject instance = null;
+    private static MessageSubject instance;
 
     private UserBean sender;
 
