@@ -6,8 +6,7 @@ public class MessageSubject extends Subject{
 
     private static MessageSubject instance = null;
 
-
-
+    private UserBean sender;
 
     private MessageSubject(){}
 
@@ -19,8 +18,25 @@ public class MessageSubject extends Subject{
     }
 
 
-    public void setSender(UserBean sender) {
-        this.notifyObserver(sender);
+    public synchronized void setState(UserBean sender){
+
+        this.setSender(sender);
+        this.notifyObserver();
+
+
+    }
+
+    public synchronized UserBean getState(){
+        return this.getSender();
+    }
+
+
+    private  void setSender(UserBean sender) {
+        this.sender = sender;
+    }
+
+    private UserBean getSender() {
+        return this.sender;
     }
 
 }

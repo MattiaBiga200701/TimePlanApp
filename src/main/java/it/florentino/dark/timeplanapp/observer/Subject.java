@@ -1,6 +1,5 @@
 package it.florentino.dark.timeplanapp.observer;
 
-import it.florentino.dark.timeplanapp.beans.UserBean;
 
 
 import java.util.ArrayList;
@@ -27,11 +26,11 @@ public abstract class Subject {
 
     }
 
-    protected void notifyObserver(UserBean sender){
+    protected void notifyObserver(){
 
         for(Observer observer : this.observers){
 
-            observer.update(sender);
+            observer.update();
 
         }
     }

@@ -240,7 +240,7 @@ public class WorkScheduleController {
 
     private void notifyEmployees(UserBean sender){
         MessageSubject spreader = MessageSubject.getInstance();
-        spreader.setSender(sender);
+        spreader.setState(sender);
     }
 
 }

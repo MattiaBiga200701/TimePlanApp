@@ -61,8 +61,8 @@ public class EmployeeNotificationGraphicController extends GraphicController imp
 
     }
 
-    public void update(UserBean sender){
-
+    public void update(){
+        UserBean sender = this.message.getState();
         if(sender.getRole() == Role.MANAGER && sender.getManagerID() == this.getLoggedUser().getManagerID()){
             this.messageLabel.setVisible(true);
         }

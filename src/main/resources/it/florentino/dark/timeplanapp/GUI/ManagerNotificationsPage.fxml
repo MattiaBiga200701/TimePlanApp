@@ -72,6 +72,7 @@
             </HBox>
          </children>
       </VBox>
-      <Label fx:id="messageLabel1" layoutX="76.0" layoutY="108.0" prefHeight="45.0" prefWidth="388.0" style="-fx-text-fill: rgba(0, 137, 123, 0.7);" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="86.0" />
+      <Label fx:id="messageLabel" layoutX="76.0" layoutY="108.0" prefHeight="45.0" prefWidth="388.0" style="-fx-text-fill: rgba(0, 137, 123, 0.7);" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="86.0" />
+      <Label fx:id="errorLabel" layoutX="26.0" layoutY="140.0" prefHeight="45.0" prefWidth="388.0" style="-fx-text-fill: rgba(0, 137, 123, 0.7);" />
    </children>
 </AnchorPane>

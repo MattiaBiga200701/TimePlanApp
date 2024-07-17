@@ -4,6 +4,7 @@ import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.observer.MessageSubject;
 import it.florentino.dark.timeplanapp.exceptions.SetSceneException;
 import it.florentino.dark.timeplanapp.observer.Observer;
+import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 import it.florentino.dark.timeplanapp.utils.printer.Printer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,6 +14,8 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
 
     @FXML
     private Label errorLabel;
+    @FXML
+    private Label messageLabel;
 
     private MessageSubject message;
 
@@ -24,6 +27,8 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
         this.message = MessageSubject.getInstance();
 
         this.message.attach(this);
+
+        this.messageLabel.setVisible(false);
 
     }
 
@@ -65,8 +70,11 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
 
     }
 
-    public void update(UserBean sender){
-
+    public void update(){
+        UserBean sender = this.message.getState();
+        if(sender.getRole() == Role.EMPLOYEE && sender.getManagerID() == this.getLoggedUser().getManagerID()){
+            this.messageLabel.setVisible(true);
+        }
     }
 
     @FXML
