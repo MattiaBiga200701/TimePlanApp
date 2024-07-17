@@ -48,24 +48,31 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
 
         this.messageLabel.setVisible(false);
 
-        ObservableList<String> items = FXCollections.observableArrayList();
-
-        try {
-            List<NotificationBean> notifications = this.controller.readMessages(this.getLoggedUser());
-
-            for(NotificationBean notification : notifications){
-                String message = notification.getMessage();
-                items.add(message);
-                this.notificationsListView.setItems(items);
-
-            }
-
-
-        }catch(InvalidInputException e ){
+        try{
+            this.readMessage(this.getLoggedUser());
+        }catch(InvalidInputException e){
             this.showError(e.getMessage());
         }catch(ServiceException e){
             Printer.perror(e.getMessage());
         }
+
+
+    }
+
+    private void readMessage(UserBean loggedUser) throws InvalidInputException, ServiceException{
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+
+
+        List<NotificationBean> notifications = this.controller.readMessages(loggedUser);
+
+        for(NotificationBean notification : notifications){
+            String messageRead = notification.getMessage();
+            items.add(messageRead);
+            this.notificationsListView.setItems(items);
+        }
+
+
     }
 
 
@@ -116,6 +123,16 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
 
     @FXML
     public void onRefreshClick(){
+
+        this.messageLabel.setVisible(false);
+
+        try{
+            this.readMessage(this.getLoggedUser());
+        }catch(InvalidInputException e){
+            this.showError(e.getMessage());
+        }catch(ServiceException e){
+            Printer.perror(e.getMessage());
+        }
 
 
     }
