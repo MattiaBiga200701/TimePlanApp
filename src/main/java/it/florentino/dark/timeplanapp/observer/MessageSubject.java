@@ -10,7 +10,7 @@ public class MessageSubject extends Subject{
 
     private MessageSubject(){}
 
-    public static MessageSubject getInstance(){
+    public synchronized static MessageSubject getInstance(){
         if(MessageSubject.instance == null){
             MessageSubject.instance = new MessageSubject();
         }
