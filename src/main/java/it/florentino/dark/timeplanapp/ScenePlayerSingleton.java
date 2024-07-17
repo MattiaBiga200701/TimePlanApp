@@ -162,7 +162,7 @@ public class ScenePlayerSingleton {
             FXMLLoader fxmlLoader = new FXMLLoader(ScenePlayerSingleton.class.getResource(fxmlPath));
             Parent root = fxmlLoader.load();
             ManagerNotificationGraphicController controller = fxmlLoader.getController();
-            controller.setAttribute(loggedUser);
+            controller.initialize(loggedUser);
             Scene scene  = new Scene(root);
             instance.stage.setScene(scene);
         }catch(IOException e){
