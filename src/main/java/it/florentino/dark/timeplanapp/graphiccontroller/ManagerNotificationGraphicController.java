@@ -93,7 +93,7 @@ public class ManagerNotificationGraphicController extends ManagerGraphicControll
     public void onWorkScheduleClick(){
         try{
             this.message.detach(this);
-            this.getScenePlayer().showEmployeeListPage("GUI/WorkSchedulePage.fxml", this.getLoggedUser());
+            this.getScenePlayer().showWorkSchedulePage("GUI/WorkSchedulePage.fxml", this.getLoggedUser());
 
         }catch(SetSceneException e){
             Printer.perror(e.getMessage());
