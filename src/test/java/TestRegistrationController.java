@@ -6,7 +6,7 @@ import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TestRegistrationController {
+class TestRegistrationController {
 
     //Test have to fail with wrong ManagerID
     @Test

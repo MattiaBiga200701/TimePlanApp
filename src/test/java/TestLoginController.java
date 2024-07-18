@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 
 
-public class TestLoginController {
+class TestLoginController {
 
     //Test have to fail with wrong credential;
     @Test

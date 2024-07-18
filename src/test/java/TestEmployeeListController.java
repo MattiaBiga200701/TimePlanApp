@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 
 
-public class TestEmployeeListController {
+class TestEmployeeListController {
 
     @Test
     void testInsertEmployeeByEmployeeNotRegistered(){
