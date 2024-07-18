@@ -1,3 +1,5 @@
+package it.florentino.dark.timeplaapp;
+
 import it.florentino.dark.timeplanapp.appcontroller.RegistrationController;
 import it.florentino.dark.timeplanapp.beans.UserBean;
 import it.florentino.dark.timeplanapp.exceptions.CredentialException;
