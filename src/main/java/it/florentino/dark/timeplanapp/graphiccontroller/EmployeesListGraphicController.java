@@ -75,13 +75,14 @@ public class EmployeesListGraphicController extends ManagerGraphicController {
             this.emailField.clear();
             this.contractChoiceBox.setValue(null);
 
+            this.showError("Employee Added");
         }catch(InvalidInputException e){
             this.showError(e.getMessage());
         }catch(ServiceException e){
             Printer.perror(e.getMessage());
         }
 
-        this.showError("Employee Added");
+
 
 
     }
