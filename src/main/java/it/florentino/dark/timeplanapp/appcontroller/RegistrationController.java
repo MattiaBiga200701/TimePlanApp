@@ -14,12 +14,14 @@ import it.florentino.dark.timeplanapp.utils.enumaration.Role;
 
 public class RegistrationController {
 
-    User user = null;
+    private User user = null;
+
+    private static final String DAOTYPE = "MySQL";
     public void insertUser(UserBean newUser) throws ServiceException {
 
         this.createUserFromBean(newUser);
         UserDao dao;
-        DaoSetter.setDao("MySQL");
+        DaoSetter.setDao(DAOTYPE);
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {
@@ -40,7 +42,7 @@ public class RegistrationController {
         User managerAssociated;
         this.createUserFromBean(user);
         UserDao dao;
-        DaoSetter.setDao("MySQL");
+        DaoSetter.setDao(DAOTYPE);
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {
@@ -63,7 +65,7 @@ public class RegistrationController {
     public UserBean createManagerID(UserBean newUser) throws ServiceException, CredentialException{
 
         UserDao dao;
-        DaoSetter.setDao("MySQL");
+        DaoSetter.setDao(DAOTYPE);
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {
@@ -88,7 +90,7 @@ public class RegistrationController {
         User newUser = new User(email);
         boolean check;
         UserDao dao;
-        DaoSetter.setDao("MySQL");
+        DaoSetter.setDao(DAOTYPE);
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {
