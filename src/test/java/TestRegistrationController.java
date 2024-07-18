@@ -10,7 +10,7 @@ public class TestRegistrationController {
 
     //Test have to fail with wrong ManagerID
     @Test
-    public void testCheckManagerIdByWrongId(){
+    void testCheckManagerIdByWrongId(){
         int wrongManagerId = 100000;
         RegistrationController testController = new RegistrationController();
         UserBean bean = null;

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class TestEmployeeListController {
 
     @Test
-    public void testInsertEmployeeByEmployeeNotRegistered(){
+    void testInsertEmployeeByEmployeeNotRegistered(){
 
         EmployeeBean notRegisteredEmployee = null;
         EmployeeListController testController = new EmployeeListController();

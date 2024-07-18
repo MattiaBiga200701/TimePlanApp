@@ -13,7 +13,7 @@ public class TestLoginController {
 
     //Test have to fail with wrong credential;
     @Test
-    public void  TestAuthenticateByWrongCredentials(){
+    void  TestAuthenticateByWrongCredentials(){
         LoginController testLogin = new LoginController();
         LoginBean bean = null;
 
