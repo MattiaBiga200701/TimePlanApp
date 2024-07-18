@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class TestLoginController {
 
-    //Test have to fail with wrong credential;
+    //Test have to fail with wrong credential
     @Test
     void  TestAuthenticateByWrongCredentials(){
         LoginController testLogin = new LoginController();
