@@ -19,6 +19,7 @@ public class RegistrationController {
 
         this.createUserFromBean(newUser);
         UserDao dao;
+        DaoSetter.setDao("MySQL");
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {
@@ -39,6 +40,7 @@ public class RegistrationController {
         User managerAssociated;
         this.createUserFromBean(user);
         UserDao dao;
+        DaoSetter.setDao("MySQL");
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {
@@ -61,6 +63,7 @@ public class RegistrationController {
     public UserBean createManagerID(UserBean newUser) throws ServiceException, CredentialException{
 
         UserDao dao;
+        DaoSetter.setDao("MySQL");
         try{
 
             if(DaoSetter.getDao().equals("CSV")) {
